@@ -1,0 +1,51 @@
+﻿@{
+    var id = ViewBag.UserId;
+}
+<div ng-controller="ContactInfoController">
+
+    <form ng-submit="addContact()">
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Address: {{contactInfo.Address}}</label>
+                <input ng-model="contactInfo.Address" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>City: {{contactInfo.City}}</label>
+                <input ng-model="contactInfo.City" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Firstname: {{contactInfo.Firstname}}</label>
+                <input ng-model="contactInfo.Firstname" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Lastname: {{contactInfo.Lastname}}</label>
+                <input ng-model="contactInfo.Lastname" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Phone: {{contactInfo.Phone}}</label>
+                <input ng-model="contactInfo.Phone" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Zip code: {{contactInfo.ZipCode}}</label>
+                <input ng-model="contactInfo.ZipCode" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <button type="submit">Submit</button>
+            </div>
+        </div>
+      {{contactInfo.ApplicationUser.Id = id}};
+    </form>
+    {{scope.status}}
+</div>
