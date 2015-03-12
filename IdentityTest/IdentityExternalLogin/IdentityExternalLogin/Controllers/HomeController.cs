@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace IdentityExternalLogin.Controllers
 {
     [RequireHttps]
-    //[Authorize]
+    [Authorize(Roles = "customer")]
     public class HomeController : Controller
     {
         public ActionResult Index()

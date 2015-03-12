@@ -104,6 +104,30 @@ namespace IdentityExternalLogin.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string Address { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string City { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string Firstname { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string Lastname { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string Phone { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string ZipCode { get; set; }
     }
 
     public class ResetPasswordViewModel

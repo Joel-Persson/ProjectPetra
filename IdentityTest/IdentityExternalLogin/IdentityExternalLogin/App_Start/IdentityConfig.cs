@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -11,6 +15,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using IdentityExternalLogin.Models;
+using SendGrid;
 
 namespace IdentityExternalLogin
 {
@@ -18,8 +23,77 @@ namespace IdentityExternalLogin
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            //var sendGridUserName = "joelpe";
+            //var sentFrom = "DoNotReply@ExternalLogin.com";
+            //var sendGridPassword = "Hejhej_1";
+           
+            //// Configure the client:
+            //var client =
+            //    new System.Net.Mail.SmtpClient("smtp.sendgrid.net", Convert.ToInt32(465));
+
+            //var test = new SendGrid.
+            //client.Port = 465;
+            //client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+            //client.UseDefaultCredentials = false;
+
+            //// Creatte the credentials:
+            //System.Net.NetworkCredential credentials =
+            //    new System.Net.NetworkCredential(sendGridUserName, sendGridPassword);
+
+            //client.EnableSsl = true;
+            //client.Credentials = credentials;
+
+            //// Create the message:
+            //var mail =
+            //    new System.Net.Mail.MailMessage(sentFrom, message.Destination);
+
+            //mail.Subject = message.Subject;
+            //mail.Body = message.Body;
+
+            //// Send:
+            //return client.SendMailAsync(mail);
+
+            return ConfigSendGridasync(message);
+
+            //MailMessage msg = new MailMessage();
+            //msg.From = new MailAddress("joe@contoso.com");
+            //msg.To.Add(new MailAddress(message.Destination));
+            //msg.Subject = message.Subject;
+
+            //SmtpClient smtpClient = new SmtpClient("smtp.sendgrid.net", Convert.ToInt32(465));
+            //System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("joe@contoso.com", "XXXXXX");
+            //smtpClient.Credentials = credentials;
+            //smtpClient.EnableSsl = true;
+            //smtpClient.Send(msg);
+        }
+
+        private Task ConfigSendGridasync(IdentityMessage message)
+        {
+            var myMessage = new SendGridMessage();
+            myMessage.AddTo(message.Destination);
+            myMessage.From = new System.Net.Mail.MailAddress(
+                                "DoNotReply@ExternalLogin.com", "Joe S.");
+            myMessage.Subject = message.Subject;
+            myMessage.Text = message.Body;
+            myMessage.Html = message.Body;
+
+            var credentials = new NetworkCredential(
+                       ConfigurationManager.AppSettings["joelpe"],
+                       ConfigurationManager.AppSettings["Hejhej_1"]
+                       );
+
+            // Create a Web transport for sending email.
+            var transportWeb = new Web(credentials);
+
+            // Send the email.
+            if (transportWeb != null)
+            {
+                return transportWeb.DeliverAsync(myMessage);
+            }
+            else
+            {
+                return Task.FromResult(0);
+            }
         }
     }
 

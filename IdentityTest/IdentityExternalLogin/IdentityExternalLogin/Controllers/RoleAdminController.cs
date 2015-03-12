@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace IdentityExternalLogin.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class RoleAdminController : Controller
     {
         private ApplicationUserManager UserManager

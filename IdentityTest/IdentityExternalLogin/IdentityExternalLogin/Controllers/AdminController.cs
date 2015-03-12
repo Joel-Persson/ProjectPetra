@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace IdentityExternalLogin.Controllers
 {
+     //[Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
         // GET: Admin
