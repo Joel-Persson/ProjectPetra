@@ -154,7 +154,7 @@ namespace IdentityExternalLogin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Firstname = model.Firstname, Lastname = model.Lastname, Address = model.Address, City = model.City, ZipCode = model.ZipCode, Phone = model.Phone };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -370,7 +370,7 @@ namespace IdentityExternalLogin.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Firstname = model.Firstname, Lastname = model.Lastname, Address = model.Address, City = model.City, ZipCode = model.ZipCode, Phone = model.Phone};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

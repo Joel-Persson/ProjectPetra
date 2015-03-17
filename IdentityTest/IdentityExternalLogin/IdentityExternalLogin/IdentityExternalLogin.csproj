@@ -200,6 +200,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\ApplicationDbInitializer.cs" />
     <Compile Include="Infrastructure\IdentityHelpers.cs" />
     <Compile Include="Migrations\201503110801140_InitialCreate.cs" />
     <Compile Include="Migrations\201503110801140_InitialCreate.Designer.cs">
@@ -232,6 +233,10 @@
     <Compile Include="Migrations\201503120853058_update7.cs" />
     <Compile Include="Migrations\201503120853058_update7.Designer.cs">
       <DependentUpon>201503120853058_update7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503131018175_update10.cs" />
+    <Compile Include="Migrations\201503131018175_update10.Designer.cs">
+      <DependentUpon>201503131018175_update10.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -360,6 +365,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503120853058_update7.resx">
       <DependentUpon>201503120853058_update7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503131018175_update10.resx">
+      <DependentUpon>201503131018175_update10.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

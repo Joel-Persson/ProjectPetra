@@ -9,7 +9,7 @@ namespace IdentityExternalLogin.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "IdentityExternalLogin.Models.ApplicationDbContext";
         }
 

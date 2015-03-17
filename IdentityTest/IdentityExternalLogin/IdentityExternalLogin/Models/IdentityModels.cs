@@ -60,6 +60,40 @@ namespace IdentityExternalLogin.Models
     
     }
 
+    //public class CustomInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    //{
+    //    protected override void Seed(ApplicationDbContext context)
+    //    {
+    //        var userManager = new UserManager<ApplicationUser>(new
+    //            UserStore<ApplicationUser>(context));
+
+    //        var roleManager = new RoleManager<IdentityRole>(new
+    //            RoleStore<IdentityRole>(context));
+
+    //        string name = "Admin";
+    //        string password = "123456";
+
+
+    //        //Create Role Admin if it does not exist
+    //        if (!roleManager.RoleExists(name))
+    //        {
+    //            IdentityResult roleresult = roleManager.Create(new IdentityRole(name));
+    //        }
+
+    //        //Create User=Admin with password=123456
+    //        var user = new ApplicationUser();
+    //        user.UserName = name;
+    //        IdentityResult adminresult = userManager.Create(user, password);
+
+    //        //Add User Admin to Role Admin
+    //        if (adminresult.Succeeded)
+    //        {
+    //            IdentityResult result = userManager.AddToRole(user.Id, name);
+    //        }
+    //        base.Seed(context);
+    //    }
+    //}
+
     public class ApplicationRole : IdentityRole
     {
         public ApplicationRole() : base() { }

@@ -26,10 +26,6 @@ namespace IdentityExternalLogin.Models
         public string Lastname { get; set; }
 
         [Required]
-        [MaxLength(50)]
-        public string Phone { get; set; }
-
-        [Required]
         [MaxLength(20)]
         public string ZipCode { get; set; }
     }
