@@ -1,8 +1,12 @@
 ﻿body {
-    
-    padding-bottom: 20px;
+     font-family: Roboto-Thin;
+    padding-bottom: 20px; 
+ 
 }
-
+@font-face {
+    font-family: 'Roboto-Thin';
+    src: url('Font/Roboto-Thin.ttf') format('truetype');
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;

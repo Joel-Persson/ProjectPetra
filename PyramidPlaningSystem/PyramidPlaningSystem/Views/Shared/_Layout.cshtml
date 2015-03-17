@@ -9,16 +9,16 @@
 
 </head>
     <body>
-        @*<div ng-controller="mainLayoutController">
+        <div ng-controller="mainLayoutController">
             <md-toolbar layout="row">
                 <button ng-click="toggleSidenav('left')" class="menuBtn" hide-gt-md>
                     <span class="visually-hidden">Menu</span>
                 </button>
                 <h1>Pyramid Planeringsystem test {{ 2+3}}</h1>
             </md-toolbar>
-        </div>*@
+        </div>
         
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        @*<div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -37,14 +37,14 @@
                     @Html.Partial("_LoginPartial")
                 </div>
             </div>
-        </div>
-        @*<div class="container body-content">*@
+        </div>*@
+        <div class="container body-content">
             @RenderBody()
             @*<hr />
             <footer>
                 <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
             </footer>*@
-        @*</div>*@
+        </div>
 
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")

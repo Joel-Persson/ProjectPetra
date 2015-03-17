@@ -207,6 +207,10 @@
     <Compile Include="Migrations\201503130946017_update4.Designer.cs">
       <DependentUpon>201503130946017_update4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503171217419_updateContacyKey.cs" />
+    <Compile Include="Migrations\201503171217419_updateContacyKey.Designer.cs">
+      <DependentUpon>201503171217419_updateContacyKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Contact.cs" />
@@ -331,6 +335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503130946017_update4.resx">
       <DependentUpon>201503130946017_update4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503171217419_updateContacyKey.resx">
+      <DependentUpon>201503171217419_updateContacyKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
