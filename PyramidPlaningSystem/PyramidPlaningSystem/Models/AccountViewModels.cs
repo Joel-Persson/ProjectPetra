@@ -23,7 +23,7 @@ namespace PyramidPlaningSystem.Models
         [MaxLength(50)]
         public string City { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Firstname is required")]
         [MaxLength(50)]
         public string Firstname { get; set; }
 
