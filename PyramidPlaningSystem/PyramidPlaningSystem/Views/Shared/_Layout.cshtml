@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>Pyramid Planeringssystem</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -18,8 +18,8 @@
                     <span class="visually-hidden">Menu</span>
                 </button>
             }
-            <h1 hide-sm>Pyramid Planeringsystem {{ deskopeSize}}</h1>
-            <h1 hide-gt-sm>PP {{ deskopeSize}} </h1>
+            <h1 hide-sm>Pyramid Planeringsystem</h1>
+            <h1 hide-gt-sm style="font-size: 16pt">Pyramid Planeringsystem</h1>
         </md-toolbar>
     </div>
 
@@ -45,10 +45,10 @@
         </div>*@
     <div class="container body-content">
         @RenderBody()
-        @*<hr />
+        <hr />
             <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>*@
+                <p>&copy; @DateTime.Now.Year - Pyramid Communications AB</p>
+            </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

@@ -1,21 +1,21 @@
 ﻿@using Microsoft.Owin.Security
 @model PyramidPlaningSystem.Models.ExternalLoginListViewModel
 
-<div layout-align="center center" style="height: 650px">
-    <div class="md-whiteframe-z2 " layout="column" style="height: 60%; margin: 8% auto; max-width: 650px; overflow-y: hidden;">
+<div layout-align="center center" class="outerWrapper">
+    <div class="md-whiteframe-z2 customWhiteFrame " layout="column">
 
-        <md-toolbar >
+        <md-toolbar>
             <h1>
                 Welcome
             </h1>
         </md-toolbar>
 
-        <div layout="column" layout-align="center center" style="height: 70%">
-            
-            <div style="text-align: center">
+        <div layout="column" layout-align="center center" class="innerWrapper">
+
+            <div>
                 <h2>Sign in using your Gmail account.</h2>
             </div>
-            
+
             @{
                 IEnumerable<AuthenticationDescription> loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
                 if (loginProviders.Count() == 0)
@@ -36,7 +36,15 @@
                             <p>
                                 @foreach (AuthenticationDescription p in loginProviders)
                                 {
-                                    <md-button type="submit" class="md-raised md-primary md-hue-2" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">Gmail</md-button>
+                                    <md-button type="submit"
+                                               class="md-raised md-primary md-hue-1"
+                                               id="@p.AuthenticationType"
+                                               name="provider"
+                                               value="@p.AuthenticationType"
+                                               title="Log in using your @p.Caption account">
+                                        Gmail
+                                    </md-button>
+
                                 }
                             </p>
                         </div>

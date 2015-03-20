@@ -18,12 +18,12 @@
 myApp.config(function($mdThemingProvider) {
     $mdThemingProvider.definePalette('amazingPaletteName', {
         '50': '55BA47', //green
-        '100': 'FFD503', // yellow
+        '100': 'E0E0E0', // grey
         '200': 'CF118C',//pink
         '300': '702C91',//purple
         '400': 'ffffff', //white
         '500': 'f44336',
-        '600': 'CF118C',// hover (pink)
+        '600': 'BDBDBD',// hover (darkergrey)
         '700': 'd32f2f',
         '800': 'c62828',
         '900': 'b71c1c',
@@ -49,6 +49,7 @@ myApp.config(function($mdThemingProvider) {
 
 
 myApp.controller('mainLayoutController', function ($scope, $mdSidenav, $window) {
+
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
     }
