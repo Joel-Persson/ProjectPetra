@@ -1,6 +1,7 @@
 ﻿body {
     font-family: Roboto-Regular;
-    padding-bottom: 20px;
+    height: 100%;
+    padding: 0;
     /*overflow-y: hidden;*/
 }
 
@@ -114,6 +115,13 @@ h1 {
     height: 70%;
 }
 
-.innerWrapper h2 {
-    text-align: center;
+    .innerWrapper h2 {
+        text-align: center;
+    }
+
+footer {
+    -webkit-box-shadow: 0px -4px 5px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow: 0px -4px 5px 0px rgba(50, 50, 50, 0.75);
+    -ms-box-shadow: 0px -4px 5px 0px rgba(50, 50, 50, 0.75);
+    box-shadow: 0px -4px 5px 0px rgba(50, 50, 50, 0.75);
 }
