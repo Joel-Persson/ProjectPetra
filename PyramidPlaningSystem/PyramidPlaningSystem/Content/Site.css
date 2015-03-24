@@ -1,4 +1,8 @@
-﻿body {
+﻿html {
+    height: 100%;
+}
+
+body {
     font-family: Roboto-Regular;
     height: 100%;
     padding: 0;
@@ -49,7 +53,7 @@ textarea {
 }
 
 md-toolbar h1 {
-    font-size: 1.250em;
+    /*font-size: 1.250em;*/
     font-weight: 400;
     margin: auto;
 }
@@ -100,6 +104,7 @@ h1 {
 }
 
 /*externalLoginListPartial*/
+
 .outerWrapper {
     height: 650px;
 }
@@ -115,13 +120,31 @@ h1 {
     height: 70%;
 }
 
-    .innerWrapper h2 {
-        text-align: center;
+.innerWrapper h2 {
+    text-align: center;
+}
+
+/*shared*/
+
+.main-container {
+    margin-bottom: -60px;
+    min-height: 100%;
+}
+
+    .main-container:after {
+        content: "";
+        display: block;
     }
 
 footer {
-    -webkit-box-shadow: 0px -4px 5px 0px rgba(50, 50, 50, 0.75);
-    -moz-box-shadow: 0px -4px 5px 0px rgba(50, 50, 50, 0.75);
-    -ms-box-shadow: 0px -4px 5px 0px rgba(50, 50, 50, 0.75);
-    box-shadow: 0px -4px 5px 0px rgba(50, 50, 50, 0.75);
+    background-color: lightgrey;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    -webkit-box-shadow: 2px -4px 5px 0px rgba(50, 50, 50, 0.75);
+    -ms-box-shadow: 2px -4px 5px 0px rgba(50, 50, 50, 0.75);
+    box-shadow: 2px -4px 5px 0px rgba(50, 50, 50, 0.75);
+}
+
+footer, .main-container:after {
+    height: 60px;
 }

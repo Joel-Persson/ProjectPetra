@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html ng-app="myApp">
 <head>
     <meta charset="utf-8" />
@@ -8,9 +9,9 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body layout="column">
+<body>
 
-    <div ng-controller="mainLayoutController" style="height: 100%">
+    <div class=" main-container" ng-controller="mainLayoutController">
 
         <md-toolbar layout="row" ng-class="{'md-tall': windowWidth >= 600}">
 
@@ -21,12 +22,20 @@
                 </button>
             }
             <h1 hide-sm>Pyramid Planeringsystem</h1>
+
+           <div hide-md hide-sm layout="row" layout-align="center center">
+
+                @Html.Partial("_LoginPartial")
+
+            </div>
+
+
         </md-toolbar>
 
-        <div layout="row" flex style="height: 80%">
+        <div layout="row" flex style="min-height: 800px">
             @if (Request.IsAuthenticated)
             {
-                <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+                <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" >
 
                     <md-toolbar hide-gt-md ng-controller="leftController">
                         <md-button ng-click="close()" class="md-toolbar-tools">
@@ -34,43 +43,72 @@
                         </md-button>
                     </md-toolbar>
 
-                    <md-content class="md-padding">
-                        <ul layout="column" style="list-style-type: none;">
+                    <md-content class="md-padding" flex role="navigation">
+
+                        <ul style="list-style-type: none; padding: 0;" class="nav nav-pills nav-stacked">
                             <li>
-                                <md-button class="md-primary">
-                                    @Html.ActionLink("Admin", "Index", "Admin")
-                                </md-button>
+                                <a href="../Home/Index" class="md-button md-raised">Home</a>
                             </li>
                             <li>
-                                <md-button class="md-primary">
-                                    @Html.ActionLink("Role Admin", "Index", "RoleAdmin")
-                                </md-button>
+                                <a class="md-button md-raised" ng-href="#">Test</a>
                             </li>
+                            @if (User.IsInRole("Administrator"))
+                            {
+                                <li>
+                                    <a style="padding-left: 30px" class="md-button md-raised" ng-click="toggle(showAndHideBool)"> Admin <span ng-class="{'glyphicon glyphicon-menu-up': showAndHideBool == true, 'glyphicon glyphicon-menu-down': showAndHideBool ==false }" style="float: right"></span></a>
+                                </li>
+                                <li ng-show="showAndHideBool">
+                                    @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "md-button md-raised" })
+                                </li>
+                                <li ng-show="showAndHideBool">
+                                    @Html.ActionLink("Role Admin", "Index", "RoleAdmin", null, new { @class = "md-button md-raised" })
+                                </li>
+                            }
+                            <md-divider style="margin-top: 30px"></md-divider>
+
+
+                            @if (Request.IsAuthenticated)
+                            {
+                                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <li hide-gt-md>
+
+                                        <a href="javascript:document.getElementById('logoutForm').submit()">Sign out <span class="glyphicon glyphicon-log-out"></span></a>
+
+                                    </li>
+                                }
+                            }
+
                             @*<li>
-                                    <md-button ng-href="#" class="md-primary md-hue-3">
-                                        Test
-                                    </md-button>
+                                    @{
+                                        @Html.AntiForgeryToken()
+                                        @Html.ActionLink("Sign out", "LogOff", "Account", null, new { @class = "md-button md-raised" })
+                                    }
+
                                 </li>*@
+
                         </ul>
 
                     </md-content>
                 </md-sidenav>
 
             }
-
             <md-content layout="column" flex class="md-padding">
                 @RenderBody()
-
-
             </md-content>
-
         </div>
-        <footer style="height: 7% ; background-color: lightgray;">
-            <md-divider></md-divider>
-            <p>&copy; @DateTime.Now.Year - Pyramid Communications AB</p>
-        </footer>
     </div>
+    @*<md-toolbar layout layout-align="center center">
+        <h6>&copy; @DateTime.Now.Year - Pyramid Communications AB</h6>
+    </md-toolbar>*@
+    
+    <footer layout="row" layout-align="center center">
+       
+            <h4>&copy; @DateTime.Now.Year - Pyramid Communications AB</h4>
 
+    </footer>
 
 
     @Scripts.Render("~/bundles/jquery")
@@ -78,6 +116,7 @@
     @Scripts.Render("~/bundles/angular")
 
     @RenderSection("scripts", false)
+    
 
 </body>
 </html>

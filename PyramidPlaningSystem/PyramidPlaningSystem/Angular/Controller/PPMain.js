@@ -1,15 +1,15 @@
-﻿var myApp = angular.module("myApp", ['ngMaterial']);
+﻿var myApp = angular.module("myApp", ['ngMaterial', 'ngAnimate']);
 
 
 myApp.config(function($mdThemingProvider) {
     $mdThemingProvider.definePalette('amazingPaletteName', {
         '50': '55BA47', //green
-        '100': 'E0E0E0', // grey
+        '100': 'b0c4de', // grey
         '200': 'CF118C',//pink
         '300': '702C91',//purple
         '400': 'ffffff', //white
         '500': 'f44336',
-        '600': 'BDBDBD',// hover (darkergrey)
+        '600': '9eb6d3',// hover (darkergrey)
         '700': 'd32f2f',
         '800': 'c62828',
         '900': 'b71c1c',
@@ -50,12 +50,35 @@ myApp.controller('mainLayoutController', function ($scope, $mdSidenav, $window) 
     window.onresize = function () {
         $scope.$apply();
     }
+
+    $scope.showAndHideBool = false;
+    $scope.showAndHideButtonName = "Show";
+
+    $scope.toggle = function (showAndHideBool) {
+
+        if (showAndHideBool === false) {
+            $scope.showAndHideBool = true;
+            $scope.showAndHideButtonName = "Close";
+        } else {
+            $scope.showAndHideBool = false;
+            $scope.showAndHideButtonName = "Show";
+        }
+        //$scope.showAndHideBool === true ? true : false;
+        //$scope.showAndHideButtonName === "Close" ? "Close" : "Show";
+    }
+
+
+
 });
 
 
 myApp.controller('leftController', function($scope, $mdSidenav) {
-    $scope.close = function() {
+
+    $scope.close = function () {
         $mdSidenav('left').close();
     }
+
+    
+
 });
 
