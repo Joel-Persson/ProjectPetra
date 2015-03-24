@@ -35,9 +35,9 @@
                         }
                     </td>
                     <td>
-                        @using (Html.BeginForm("Delete", "RoleAdmin", new { id = applicationRole.Id }))
+                        @using (Html.BeginForm("Delete", "RoleAdmin", new {id = applicationRole.Id}))
                         {
-                            @Html.ActionLink("Edit", "Edit", new { id = applicationRole.Id }, new { @class = "btn btn-primary btn-xs" })
+                            @Html.ActionLink("Edit", "Edit", new {id = applicationRole.Id}, new {@class = "btn btn-primary btn-xs"})
                             <button class="btn btn-danger btn-xs" type="submit">Delete</button>
                         }
                     </td>
@@ -45,9 +45,13 @@
             }
         }
     </table>
+ 
+</div>
+
+<div class="panel-default">
+    @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary" })
 </div>
 
 
-@Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary" })
 
 @Html.Action("UserWithoutRoles", "Admin")
