@@ -382,7 +382,7 @@ namespace PyramidPlaningSystem.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return View("pendingApproval");
+                        return View("PendingApproval");
                     }
                 }
                 AddErrors(result);
@@ -412,6 +412,12 @@ namespace PyramidPlaningSystem.Controllers
 
         [AllowAnonymous]
         public ActionResult AccessDenied()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult PendingApproval()
         {
             return View();
         }

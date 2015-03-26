@@ -1,11 +1,13 @@
 ﻿@using Microsoft.Owin.Security
 @model PyramidPlaningSystem.Models.ExternalLoginListViewModel
 
-<div  layout-align="center center" class="outerWrapper">
+
+
+<div layout-align="center center" class="outerWrapper">
     <div class="md-whiteframe-z2 customWhiteFrame " layout="column">
 
         <md-toolbar>
-            <h1 class="ieLoginHeaderText">
+            <h1 class="welcomeHeader ieLoginHeaderText">
                 Welcome
             </h1>
         </md-toolbar>
@@ -13,7 +15,7 @@
         <div layout="column" layout-align="center center" class="innerWrapper">
 
             <div>
-                <h2 class="ieLoginTextMessage">Sign in using your Gmail account</h2>
+                <h2 class="ieLoginTextMessage">Sign in</h2>
             </div>
 
             @{
@@ -34,19 +36,25 @@
                         @Html.AntiForgeryToken()
                         <div id="socialLoginList">
                             <p>
-                                @foreach (AuthenticationDescription p in loginProviders)
-                                {
-                                    <md-button type="submit"
-                                               class="md-raised md-primary md-hue-1"
-                                               id="@p.AuthenticationType"
-                                               name="provider"
-                                               value="@p.AuthenticationType"
-                                               title="Log in using your @p.Caption account">
-                                        Gmail
-                                    </md-button>
-
-                                }
+                                <button type="submit"
+                                        class="customBtn"
+                                        id="@loginProviders.Last().AuthenticationType"
+                                        name="provider"
+                                        value="@loginProviders.Last().AuthenticationType"
+                                        title="Log in using your @loginProviders.Last().Caption account">
+                                    <span class="icon"></span>
+                                    <span class="buttonText">Sign in with Google</span>
+                                </button>
                             </p>
+                            <p>
+                                <button type="submit"
+                                        class=" customLinkedInBtn linkedInSpan"
+                                        id="@loginProviders.First().AuthenticationType"
+                                        name="provider"
+                                        value="@loginProviders.First().AuthenticationType"
+                                        title="Log in using your @loginProviders.First().Caption account"></button>
+                            </p>
+                       
                         </div>
                     }
                 }

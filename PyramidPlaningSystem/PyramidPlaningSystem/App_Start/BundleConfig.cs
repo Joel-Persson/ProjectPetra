@@ -26,7 +26,8 @@ namespace PyramidPlaningSystem
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/angular-material/angular-material.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/ExternalLoginProvider.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                    "~/Scripts/angular.js",

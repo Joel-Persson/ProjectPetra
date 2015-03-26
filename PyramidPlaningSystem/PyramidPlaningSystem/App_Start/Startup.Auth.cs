@@ -5,6 +5,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
+using Owin.Security.Providers.LinkedIn;
 using PyramidPlaningSystem.Models;
 
 namespace PyramidPlaningSystem
@@ -65,6 +66,8 @@ namespace PyramidPlaningSystem
                 ClientId = "835903902994-aehdjk8jl03humehrol5dinsnchnc712.apps.googleusercontent.com",
                 ClientSecret = "dug2_HtYERuL9Mi4uBP_O-GS"
             });
+
+            app.UseLinkedInAuthentication("779hpqm1gbfup7", "UStH5E8ojS568nUE");
         }
     }
 }

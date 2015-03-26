@@ -44,40 +44,42 @@
                     </md-toolbar>
 
                     <md-content class="md-padding" flex role="navigation">
-
-                        <ul style="list-style-type: none; padding: 0;" class="nav nav-pills nav-stacked">
-                            <li>
-                                <a href="../Home/Index" class="md-button md-raised">Home</a>
-                            </li>
-                            <li>
-                                <a class="md-button md-raised" ng-href="#">Test</a>
-                            </li>
-                            @if (User.IsInRole("Administrator"))
+                        @if (User.IsInRole("Production") || User.IsInRole("Administrator"))
                             {
-                                <li>
-                                    <a style="padding-left: 30px" class="md-button md-raised firefoxAdminButton" ng-click="toggle(showAndHideBool)"> Admin <span class="firefoxAdminSpanSymbol" ng-class="{'glyphicon glyphicon-menu-up': showAndHideBool == true, 'glyphicon glyphicon-menu-down': showAndHideBool ==false }" style="float: right"></span></a>
-                                </li>
-                                <li ng-show="showAndHideBool">
-                                    @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "md-button md-raised" })
-                                </li>
-                                <li ng-show="showAndHideBool">
-                                    @Html.ActionLink("Role Admin", "Index", "RoleAdmin", null, new { @class = "md-button md-raised" })
-                                </li>
-                            }
-                            <md-divider style="margin-bottom: 30px; margin-top: 30px;"></md-divider>
-
-                            @if (Request.IsAuthenticated)
-                            {
-                                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                                {
-                                    @Html.AntiForgeryToken()
-
-                                    <li hide-gt-md>
-                                        <a href="javascript:document.getElementById('logoutForm').submit()">Sign out <span class="glyphicon glyphicon-log-out"></span></a>
+                                <ul style="list-style-type: none; padding: 0;" class="nav nav-pills nav-stacked">
+                                    <li>
+                                        <a href="../Home/Index" class="md-button md-raised">Home</a>
                                     </li>
-                                }
+                                    <li>
+                                        <a class="md-button md-raised" ng-href="#">Test</a>
+                                    </li>
+                                    @if (User.IsInRole("Administrator"))
+                                    {
+                                        <li>
+                                            <a style="padding-left: 30px" class="md-button md-raised firefoxAdminButton" ng-click="toggle(showAndHideBool)"> Admin <span class="firefoxAdminSpanSymbol" ng-class="{'glyphicon glyphicon-menu-up': showAndHideBool == true, 'glyphicon glyphicon-menu-down': showAndHideBool ==false }" style="float: right"></span></a>
+                                        </li>
+                                        <li ng-show="showAndHideBool">
+                                            @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "md-button md-raised" })
+                                        </li>
+                                        <li ng-show="showAndHideBool">
+                                            @Html.ActionLink("Role Admin", "Index", "RoleAdmin", null, new { @class = "md-button md-raised" })
+                                        </li>
+                                    }
+                                    <md-divider style="margin-bottom: 30px; margin-top: 30px;"></md-divider>
+
+                                    @if (Request.IsAuthenticated)
+                                    {
+                                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+
+                                            <li hide-gt-md>
+                                                <a href="javascript:document.getElementById('logoutForm').submit()">Sign out <span class="glyphicon glyphicon-log-out"></span></a>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
                             }
-                        </ul>
                     </md-content>
                 </md-sidenav>
             }
