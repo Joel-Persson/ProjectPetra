@@ -113,6 +113,10 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -122,6 +126,14 @@
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -174,11 +186,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\ToDoController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Authorize\CustomAuthorize.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -214,6 +228,18 @@
     <Compile Include="Migrations\201503171217419_updateContacyKey.Designer.cs">
       <DependentUpon>201503171217419_updateContacyKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503261255218_setToDoTitleRequired.cs" />
+    <Compile Include="Migrations\201503261255218_setToDoTitleRequired.Designer.cs">
+      <DependentUpon>201503261255218_setToDoTitleRequired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503261355491_updateToDoId.cs" />
+    <Compile Include="Migrations\201503261355491_updateToDoId.Designer.cs">
+      <DependentUpon>201503261355491_updateToDoId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503261406383_guidKeyTodo.cs" />
+    <Compile Include="Migrations\201503261406383_guidKeyTodo.Designer.cs">
+      <DependentUpon>201503261406383_guidKeyTodo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -221,12 +247,16 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
+    <Compile Include="Models\ToDo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Angular\ColorTheming\colorTheming.js" />
     <Content Include="Angular\Controller\PPMain.js" />
+    <Content Include="Angular\HtmlTemplates\AddToDo.html" />
+    <Content Include="Angular\Route\Route.js" />
+    <Content Include="Angular\Services\ToDoFactory.js" />
     <Content Include="Content\angular-material\angular-material.css" />
     <Content Include="Content\angular-material\angular-material.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -255,9 +285,6 @@
     <Content Include="Scripts\angular-aria.min.js" />
     <Content Include="Scripts\angular-material.js" />
     <Content Include="Scripts\angular-material.min.js" />
-    <Content Include="Scripts\angular.js" />
-    <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Content\Font\Roboto-Black.ttf" />
@@ -278,6 +305,12 @@
     <Content Include="Content\Font\RobotoCondensed-Light.ttf" />
     <Content Include="Content\Font\RobotoCondensed-LightItalic.ttf" />
     <Content Include="Content\Font\RobotoCondensed-Regular.ttf" />
+    <Content Include="Scripts\angular-route.js" />
+    <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular-route.min.js.map" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -367,6 +400,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503171217419_updateContacyKey.resx">
       <DependentUpon>201503171217419_updateContacyKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503261255218_setToDoTitleRequired.resx">
+      <DependentUpon>201503261255218_setToDoTitleRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503261355491_updateToDoId.resx">
+      <DependentUpon>201503261355491_updateToDoId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503261406383_guidKeyTodo.resx">
+      <DependentUpon>201503261406383_guidKeyTodo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

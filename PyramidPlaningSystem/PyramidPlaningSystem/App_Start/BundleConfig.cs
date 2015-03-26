@@ -34,8 +34,11 @@ namespace PyramidPlaningSystem
                    "~/Scripts/angular-material.js",
                    "~/Scripts/angular-animate.js",
                    "~/Scripts/angular-aria.js",
+                   "~/Scripts/angular-route.js",
                    "~/Angular/Controller/PPMain.js",
-                   "~/Angular/ColorTheming/colorTheming.js"
+                   "~/Angular/ColorTheming/colorTheming.js",
+                   "~/Angular/Route/Route.js",
+                   "~/Angular/Services/ToDoFactory.js"
                    ));
 
             // Set EnableOptimizations to false for debugging. For more information,

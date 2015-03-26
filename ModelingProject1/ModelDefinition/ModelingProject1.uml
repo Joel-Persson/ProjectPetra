@@ -407,7 +407,7 @@
             isComposite="false" />
           <property
             Id="775d74b1-41d7-4801-8a3f-7be58ec74f4f"
-            name="EstimatedEffort"
+            name="Effort"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -450,8 +450,19 @@
             aggregation="None"
             isComposite="false" />
           <property
-            Id="58f874a0-104a-4a19-ae11-2d8d68b03051"
-            name="Finished"
+            Id="c0268363-f968-4796-add6-9144f6a967b1"
+            name="Title"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="af8c023a-0c74-4872-8354-ea4a77773269"
+            name="ParentID"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"

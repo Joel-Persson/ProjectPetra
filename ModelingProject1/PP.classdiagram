@@ -84,7 +84,7 @@
           <property Id="5edce147-923b-4c99-8ed9-be0328879e22" name="Description" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="fb307503-8f51-4c57-9065-f4c28e3a6e30" />
           </property>
-          <property Id="6c0b0870-f458-466c-b71a-e0cbd068ded1" name="EstimatedEffort" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="6c0b0870-f458-466c-b71a-e0cbd068ded1" name="Effort" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="775d74b1-41d7-4801-8a3f-7be58ec74f4f" />
           </property>
           <property Id="2a90946b-5796-48ec-b981-06fbfb9fc9d7" name="Priority" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -96,8 +96,11 @@
           <property Id="2cbfae11-28d1-4b3b-984b-dc95c601ab90" name="Started" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="ea857ed5-60bb-4b53-bc67-4c16e5551040" />
           </property>
-          <property Id="be1d0f85-4b02-4d80-bb3f-c33ce6c7bfb0" name="Finished" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-            <elementDefinition Id="58f874a0-104a-4a19-ae11-2d8d68b03051" />
+          <property Id="5629e10d-f776-4679-aa46-8e17088faf12" name="Title" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="c0268363-f968-4796-add6-9144f6a967b1" />
+          </property>
+          <property Id="5df867f9-4985-46af-9cb5-bf167bf1eb5c" name="ParentID" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="af8c023a-0c74-4872-8354-ea4a77773269" />
           </property>
         </ownedAttributesInternal>
       </class>

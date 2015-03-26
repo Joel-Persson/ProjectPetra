@@ -1,4 +1,4 @@
-﻿var myApp = angular.module("myApp", ['ngMaterial', 'ngAnimate']);
+﻿var myApp = angular.module("myApp", ['ngMaterial', 'ngAnimate', 'ngRoute']);
 
 myApp.controller('mainLayoutController', function ($scope, $mdSidenav, $window) {
 
@@ -37,6 +37,20 @@ myApp.controller('leftController', function($scope, $mdSidenav) {
 
     $scope.close = function () {
         $mdSidenav('left').close();
+    }
+
+});
+
+
+myApp.controller('addToDoController', function($scope, toDoFactory) {
+
+    $scope.add = function () {
+        toDoFactory.addToDo(this.toDo).success(function() {
+                $scope.success = "Yes";
+            })
+            .error(function() {
+                $scope.success = "No";
+            });
     }
 
 });

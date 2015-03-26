@@ -17,7 +17,8 @@ namespace PyramidPlaningSystem.Models
             return new ApplicationDbContext();
         }
 
-        public DbSet<Contact> Contacts { get; set; } 
+        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<ToDo> ToDos { get; set; }
 
     }
 }
