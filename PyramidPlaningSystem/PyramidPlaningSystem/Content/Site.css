@@ -120,9 +120,9 @@ h1 {
     height: 70%;
 }
 
-.innerWrapper h2 {
-    text-align: center;
-}
+    .innerWrapper h2 {
+        text-align: center;
+    }
 
 /*shared*/
 
@@ -151,4 +151,45 @@ footer, .main-container:after {
 
 .test {
     margin-top: 45px;
+}
+
+
+/*only for Internet Explorer*/
+
+@media all and (-ms-high-contrast:none) {
+
+    .ieHeaderText {
+        height: 45px;
+    }
+
+    .ieLoginHeaderText {
+        width: 150px;
+    }
+
+    .ieLogo {
+        height: 50px;
+        margin-top: 7.5px;
+    }
+
+    .ieFooterText {
+        font-size: 0.8em;
+    }
+
+    .ieLoginTextMessage {
+        font-size: 1.2em;
+    }
+
+    .ieSideNav {
+        height: 800px;
+    }
+}
+
+/*only for firefox*/
+@-moz-document url-prefix() {
+    .firefoxAdminButton {
+        max-height: 40px;
+    }
+    .firefoxAdminSpanSymbol {
+        top: -17px;
+    }
 }
