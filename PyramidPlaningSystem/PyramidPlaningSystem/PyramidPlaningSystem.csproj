@@ -222,6 +222,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Angular\ColorTheming\colorTheming.js" />
     <Content Include="Angular\Controller\PPMain.js" />
     <Content Include="Content\angular-material\angular-material.css" />
     <Content Include="Content\angular-material\angular-material.min.css" />
@@ -239,6 +240,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Images\logo_pyramid.svg" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />

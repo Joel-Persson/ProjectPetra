@@ -140,11 +140,15 @@ footer {
     background-color: lightgrey;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    -webkit-box-shadow: 2px -4px 5px 0px rgba(50, 50, 50, 0.75);
+    /*-webkit-box-shadow: 2px -4px 5px 0px rgba(50, 50, 50, 0.75);
     -ms-box-shadow: 2px -4px 5px 0px rgba(50, 50, 50, 0.75);
-    box-shadow: 2px -4px 5px 0px rgba(50, 50, 50, 0.75);
+    box-shadow: 2px -4px 5px 0px rgba(50, 50, 50, 0.75);*/
 }
 
 footer, .main-container:after {
     height: 60px;
+}
+
+.test {
+    margin-top: 45px;
 }

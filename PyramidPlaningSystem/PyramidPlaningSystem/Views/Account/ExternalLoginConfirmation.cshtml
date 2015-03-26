@@ -5,10 +5,10 @@
     ViewBag.Title = "Register";
 }
 
-
 <md-toolbar style="margin-top: 8%">
     <h1>Registration</h1>
 </md-toolbar>
+
 @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
 {
     @Html.AntiForgeryToken()

@@ -32,8 +32,6 @@ namespace PyramidPlaningSystem.DAL
                 ZipCode = model.ZipCode
             };
 
-            //context.Contacts.Add(contact);
-            //context.SaveChanges();
             return contact;
         }
     }
