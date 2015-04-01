@@ -6,5 +6,10 @@
         return $http.post(urlBase, toDo);
     }
 
+    toDoFactory.getSingleToDo = function(id) {
+        return $http.get(urlBase + "/" + id);
+    }
+
     return toDoFactory;
 })
+

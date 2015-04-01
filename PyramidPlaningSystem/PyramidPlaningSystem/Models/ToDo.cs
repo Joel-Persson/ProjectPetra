@@ -17,7 +17,7 @@ namespace PyramidPlaningSystem.Models
         [Required]
         public string Title { get; set; }
         public string Description { get; set; }
-        public TimeSpan? Effort { get; set; }
+        public int? Effort { get; set; }
         public DateTime? Created { get; set; }
         public Guid? ParentId { get; set; }
 

@@ -1,4 +1,4 @@
-﻿var myApp = angular.module("myApp", ['ngMaterial', 'ngAnimate', 'ngRoute']);
+﻿var myApp = angular.module("myApp", ['ngMaterial', 'ngAnimate', 'ngRoute', 'ngMessages']);
 
 myApp.controller('mainLayoutController', function ($scope, $mdSidenav, $window) {
 
@@ -33,7 +33,7 @@ myApp.controller('mainLayoutController', function ($scope, $mdSidenav, $window) 
 });
 
 
-myApp.controller('leftController', function($scope, $mdSidenav) {
+myApp.controller('leftController', function ($scope, $mdSidenav) {
 
     $scope.close = function () {
         $mdSidenav('left').close();
@@ -42,16 +42,43 @@ myApp.controller('leftController', function($scope, $mdSidenav) {
 });
 
 
-myApp.controller('addToDoController', function($scope, toDoFactory) {
-
+myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog) {
+    $scope.time = "";
+    $scope.TodoList = [];
     $scope.add = function () {
-        toDoFactory.addToDo(this.toDo).success(function() {
-                $scope.success = "Yes";
-            })
-            .error(function() {
+
+
+        if ($scope.time == "days") {
+            this.toDo.effort = this.toDo.effort * 8;
+        }
+
+        toDoFactory.addToDo(this.toDo).success(function () {
+            $scope.success = "Yes";
+        })
+            .error(function () {
                 $scope.success = "No";
             });
     }
 
+    $scope.ShowAddSubToDo = function (ev) {
+        $mdDialog.show({
+            controller: DialogController,
+            templateUrl: '/Angular/HtmlTemplates/addSubToDo.html',
+            targetEvent: ev,
+
+        }).then(function(subItem) {
+            $scope.TodoList.push(subItem);
+           
+        });
+    }
+    function DialogController($scope, $mdDialog) {
+ 
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+        $scope.addSubItem = function (subItem) {
+            $mdDialog.hide(subItem);
+        };
+    };
 });
 

@@ -1,63 +1,110 @@
 ﻿{{ success }}
-<div layout="column">
-    <md-content class="md-padding">
-        <form ng-submit="add()">
-            <md-content md-theme="docs-dark" class="md-padding" layout="row" layout-sm="column" style="font-size:1.2em">
-                      <md-input-container>
-                          <label>Title</label>
-                          <input ng-model="toDo.title">
-                      </md-input-container>
-                      <!--<md-input-container>
-                              <label>Email</label>
-                              <input ng-model="user.email" type="email">
-                          </md-input-container>-->
-                  </md-content>
-            <div layout layout-sm="column">
-                <md-input-container flex>
-                    <label>Effort</label>
-                    <input ng-model="toDo.Effort">
-                </md-input-container>
-                <md-input-container flex>
-                    <label>Submission Date</label>
-                    <input type="date" ng-model="toDo.Created">
-                </md-input-container>
-            </div>
-            <!--<div layout layout-sm="column">
-                    <md-input-container flex>
-                        <label>First Name</label>
-                        <input ng-model="user.firstName" placeholder="Placeholder text">
-                    </md-input-container>
-                    <md-input-container flex>
-                        <label>Last Name</label>
-                        <input ng-model="theMax">
-                    </md-input-container>
-                </div>-->
-            <!--<md-input-container flex>
-                <label>Address</label>
-                <input ng-model="user.address">
-            </md-input-container>-->
-            <!--<div layout layout-sm="column">
-                    <md-input-container flex>
-                        <label>City</label>
-                        <input ng-model="user.city">
-                    </md-input-container>
-                    <md-input-container flex>
-                        <label>State</label>
-                        <input ng-model="user.state">
-                    </md-input-container>
-                    <md-input-container flex>
-                        <label>Postal Code</label>
-                        <input ng-model="user.postalCode">
-                    </md-input-container>
-                </div>-->
-            <md-input-container flex>
-                <label>Description</label>
-                <textarea md-minlength="10" ng-model="toDo.Description" columns="1" md-maxlength="150"></textarea>
-            </md-input-container>
 
-            <md-content class="md-padding">
-                <md-button type="submit" class="md-raised md-primary">Add</md-button>
-            </md-content>
-        </form>
-    </md-content>
+
+<md-content class="md-padding">
+    <md-card flex-md flex-gt-md>
+        <md-card-content>
+
+            <form name="toDoSubmit" ng-submit="add()">
+
+                <div layout layout-sm="column">
+
+                    <md-input-container flex>
+                        <label for="title">Title</label>
+                        <input ng-model="toDo.title"
+                               required
+                               ng-maxlength="100"
+                               ng-minlength="1"
+                               name="title"
+                               ng-model="todo.title"
+                               autofocus
+                               tabindex="1" />
+                    </md-input-container>
+
+                    <md-input-container flex>
+                        <label for="estimatedTime">Estimated time</label>
+                        <input type="number"
+                               required
+                               min="0"
+                               name="estimatedTime"
+                               ng-model="toDo.effort"
+                               tabindex="2" />
+
+                        <div ng-messages="toDoSubmit.estimatedTime.$error">
+                            <div ng-message="number">
+                                This value must be a number
+                            </div>
+                        </div>
+
+
+                    </md-input-container>
+
+                    <p class="radiobuttonInfo" hide-gt-sm>Choose in days or in hours:</p>
+                    <md-radio-group layout-sm="column" required ng-model="time" layout="row" tabindex="3">
+
+                        <md-radio-button class="radioButtonEffort" name="days" value="days">Days</md-radio-button>
+                        <md-radio-button class="radioButtonEffort" name="hours" value=" hours"> Hours </md-radio-button>
+                    </md-radio-group>
+
+                </div>
+
+                <md-input-container flex>
+                    <label>Description</label>
+                    <textarea ng-model="toDo.description"
+                              ng-maxlength="800"
+                              required
+                              md-maxlength="800"
+                              ng-minlength="10"
+                              tabindex="3"></textarea>
+                </md-input-container>
+
+                <md-content flex>
+                    <md-button tabindex="4" class="md-primary md-hue-1 md-raised" type="submit" ng-disabled="toDoSubmit.$invalid">Submit</md-button>
+                </md-content>
+
+            </form>
+            <div layout-align="end center" layout="row">
+                <md-button class="md-fab md-mini" ng-click="ShowAddSubToDo($event)">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <md-tooltip md-direction="left">
+                        Add subToDo
+                    </md-tooltip>
+                </md-button>
+            </div>
+        </md-card-content>
+    </md-card>
+</md-content>
+<md-content class="md-padding" ng-hide="TodoList.lenght">
+
+    <md-card>
+        <md-toolbar>
+            <h1 class="md-toolbar-tools">
+                <span>Sub Items</span>
+            </h1>
+        </md-toolbar>
+        <md-card-content>
+
+            <md-list>
+                <md-item ng-repeat="subItem in TodoList">
+                    <md-item-content>
+                        <div class="md-tile-left">
+                            <span style="color: #bdbdbd; font-size: 15px" class="glyphicon glyphicon-star"></span>
+                        </div>
+                        <div class="md-tile-content">
+                            <h3>{{subItem.title}}</h3>
+                            <!--<h4>{{item.who}}</h4>
+                                <p>
+                                    {{item.notes}}
+                                </p>-->
+                        </div>
+                    </md-item-content>
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-item>
+            </md-list>
+        </md-card-content>
+    </md-card>
+</md-content>
+<div ng-repeat="subItem in TodoList">
+    <label>Title: {{ subItem.title }}</label>
+    <label>Effort: {{ subItem.effort }}</label>
 </div>

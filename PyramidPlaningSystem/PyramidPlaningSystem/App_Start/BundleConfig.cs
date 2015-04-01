@@ -35,6 +35,7 @@ namespace PyramidPlaningSystem
                    "~/Scripts/angular-animate.js",
                    "~/Scripts/angular-aria.js",
                    "~/Scripts/angular-route.js",
+                   "~/Scripts/angular-messages.js",
                    "~/Angular/Controller/PPMain.js",
                    "~/Angular/ColorTheming/colorTheming.js",
                    "~/Angular/Route/Route.js",

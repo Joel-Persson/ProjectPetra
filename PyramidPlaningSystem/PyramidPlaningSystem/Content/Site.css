@@ -193,3 +193,22 @@ footer, .main-container:after {
         top: -17px;
     }
 }
+
+input, textarea {
+    max-width: none;
+}
+
+md-radio-group {
+    border: none;
+}
+
+
+/*AddToDo.html*/
+
+.radiobuttonInfo {
+  color: #bdbdbd;  
+}
+
+.radioButtonEffort {
+    margin-top: 25px;
+}

@@ -5,7 +5,7 @@
         '200': 'CF118C',//pink
         '300': '702C91',//purple
         '400': 'ffffff', //white
-        '500': 'f44336',
+        '500': '3f51b5', //blue field validation
         '600': '9eb6d3',// hover (darkergrey)
         '700': 'd32f2f',
         '800': 'c62828',
