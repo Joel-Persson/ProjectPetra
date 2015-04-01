@@ -50,29 +50,25 @@ namespace PyramidPlaningSystem.API
             }
         }
 
-       
-        //public HttpResponseMessage Post(ToDo toDo, IEnumerable<ToDo> subToDoList)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        toDo.Created = DateTime.Now;
-        //        db.ToDos.Add(toDo);
+        [Route("addSubToDo")]
+        public HttpResponseMessage Post(ToDo toDo, IEnumerable<ToDo> subToDoList)
+        {
+            if (ModelState.IsValid)
+            {
+                toDo.Created = DateTime.Now;
+                db.ToDos.Add(toDo);
 
+                db.SaveChanges();
 
-        //        db.SaveChanges();
-
-
-
-
-        //        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, toDo);
-        //        response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = toDo.ToDoId }));
-        //        return response;
-        //    }
-        //    else
-        //    {
-        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-        //    }
-        //}
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, toDo);
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = toDo.ToDoId }));
+                return response;
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+        }
 
 
         public HttpResponseMessage Put(Guid id, ToDo toDo)
