@@ -44,20 +44,29 @@ myApp.controller('leftController', function ($scope, $mdSidenav) {
 
 myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog) {
     $scope.time = "";
-    $scope.TodoList = [];
-    $scope.add = function () {
 
+    $scope.ToDoModel = {
+        ParentToDo: {},
+        ChildToDos: []
+    };
 
-        if ($scope.time == "days") {
-            this.toDo.effort = this.toDo.effort * 8;
+    $scope.add = function (ToDoModel) {
+
+        if (ToDoModel.ParentToDo.time == "days") {
+            ToDoModel.ParentToDo.effort = ToDoModel.ParentToDo.effort * 8;
         }
-
-        toDoFactory.addToDo(this.toDo).success(function () {
+        for (var i = 0; i < ToDoModel.ChildToDos.length; i++) {
+            if (ToDoModel.ChildToDos[i].time == "days") {
+                ToDoModel.ChildToDos[i].effort = ToDoModel.ChildToDos[i].effort * 8;
+            }
+        }
+        toDoFactory.addToDo(ToDoModel).success(function () {
             $scope.success = "Yes";
         })
             .error(function () {
                 $scope.success = "No";
             });
+
     }
 
     $scope.ShowAddSubToDo = function (ev) {
@@ -66,19 +75,34 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog) 
             templateUrl: '/Angular/HtmlTemplates/addSubToDo.html',
             targetEvent: ev,
 
-        }).then(function(subItem) {
-            $scope.TodoList.push(subItem);
-           
+        }).then(function (subItem) {
+            $scope.ToDoModel.ChildToDos.push(subItem);
+
         });
     }
+
     function DialogController($scope, $mdDialog) {
- 
+
         $scope.cancel = function () {
             $mdDialog.cancel();
         };
         $scope.addSubItem = function (subItem) {
             $mdDialog.hide(subItem);
         };
+    };
+
+    $scope.showConfirm = function (ev, $index) {
+        var confirm = $mdDialog.confirm()
+          .title('Confirm')
+          .content('Are you sure you want to delete the sub task?')
+          .ok('Yes')
+          .cancel('No')
+          .targetEvent(ev);
+        $mdDialog.show(confirm).then(function () {
+            $scope.ToDoModel.ChildToDos.splice($index, 1);
+        }, function () {
+            $mdDialog.cancel();
+        });
     };
 });
 

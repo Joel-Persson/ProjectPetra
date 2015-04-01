@@ -7,12 +7,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using PyramidPlaningSystem.Models;
+using PyramidPlaningSystem.ViewModels;
 
 namespace PyramidPlaningSystem.API
 {
     public class ToDoController : ApiController
     {
-         private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         [HttpGet]
         public IEnumerable<ToDo> Get()
@@ -32,16 +33,28 @@ namespace PyramidPlaningSystem.API
         }
 
 
-        public HttpResponseMessage Post(ToDo toDo)
+        [HttpPost]
+        public HttpResponseMessage Post(ToDoModel toDoModel)
         {
             if (ModelState.IsValid)
             {
-                toDo.Created = DateTime.Now;
-                db.ToDos.Add(toDo);
+                toDoModel.ParentToDo.Created = DateTime.Now;
+                db.ToDos.Add(toDoModel.ParentToDo);
                 db.SaveChanges();
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, toDo);
-                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = toDo.ToDoId}));
+                if (toDoModel.ChildToDos.Any())
+                {
+                    foreach (var childToDo in toDoModel.ChildToDos)
+                    {
+                        childToDo.ParentId = toDoModel.ParentToDo.ToDoId;
+                        childToDo.Created = DateTime.Now;
+                        db.ToDos.Add(childToDo);
+                        db.SaveChanges();
+                    }
+                }
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, toDoModel.ParentToDo);
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = toDoModel.ParentToDo.ToDoId }));
                 return response;
             }
             else
@@ -49,27 +62,6 @@ namespace PyramidPlaningSystem.API
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
         }
-
-        [Route("addSubToDo")]
-        public HttpResponseMessage Post(ToDo toDo, IEnumerable<ToDo> subToDoList)
-        {
-            if (ModelState.IsValid)
-            {
-                toDo.Created = DateTime.Now;
-                db.ToDos.Add(toDo);
-
-                db.SaveChanges();
-
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, toDo);
-                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = toDo.ToDoId }));
-                return response;
-            }
-            else
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
-        }
-
 
         public HttpResponseMessage Put(Guid id, ToDo toDo)
         {
@@ -123,7 +115,7 @@ namespace PyramidPlaningSystem.API
         {
             db.Dispose();
             base.Dispose(disposing);
-        } 
-    
+        }
+
     }
 }

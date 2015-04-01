@@ -2,7 +2,7 @@
     <md-content class="sticky-container">
         <md-subheader class="md-sticky-no-effect">Add Sub Item</md-subheader>
         <div class="dialog-content">
-            <form name="toDoSubmit">
+            <form name="SubToDoSubmit">
 
                 <div layout layout-sm="column">
 
@@ -10,12 +10,10 @@
                         <label for="title">Title</label>
                         <input ng-model="subItem.title"
                                required
-                               ng-maxlength="100"
+                               ng-maxlength="250"
                                ng-minlength="1"
                                name="title"
-                               ng-model="todo.title"
-                               autofocus
-                               tabindex="1" />
+                               autofocus/>
 
                     </md-input-container>
 
@@ -24,11 +22,11 @@
                         <input type="number"
                                required
                                min="0"
+                               max="1000"
                                name="estimatedTime"
-                               ng-model="subItem.effort"
-                               tabindex="2" />
+                               ng-model="subItem.effort" />
 
-                        <div ng-messages="toDoSubmit.estimatedTime.$error">
+                        <div ng-messages="SubToDoSubmit.estimatedTime.$error">
                             <div ng-message="number">
                                 This value must be a number
                             </div>
@@ -38,7 +36,7 @@
                     </md-input-container>
 
                     <p style="color: #bdbdbd;" hide-gt-sm>Choose in days or in hours:</p>
-                    <md-radio-group layout-sm="column" required ng-model="time" layout="row" tabindex="3">
+                    <md-radio-group layout-sm="column" required ng-model="subItem.time" layout="row">
 
                         <md-radio-button style="margin-top: 25px;" name="days" value="days">Days</md-radio-button>
                         <md-radio-button style="margin-top: 25px;" name="hours" value=" hours"> Hours </md-radio-button>
@@ -52,12 +50,11 @@
                               ng-maxlength="800"
                               required
                               md-maxlength="800"
-                              ng-minlength="10"
-                              tabindex="3"></textarea>
+                              ng-minlength="10"></textarea>
                 </md-input-container>
 
                 <div class="md-actions" layout="row">
-                    <md-button ng-click="addSubItem(subItem)" class="md-primary">
+                    <md-button ng-click="addSubItem(subItem)" class="md-primary" ng-disabled="SubToDoSubmit.$invalid">
                         Add
                     </md-button>
                     <md-button ng-click="cancel()">
