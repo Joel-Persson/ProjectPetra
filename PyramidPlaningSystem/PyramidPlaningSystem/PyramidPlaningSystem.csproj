@@ -258,7 +258,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Angular\ColorTheming\colorTheming.js" />
-    <Content Include="Angular\Controller\PPMain.js" />
+    <Content Include="Angular\Controller\addToDoController.js" />
+    <Content Include="Angular\Directives\subItems.html" />
+    <Content Include="Angular\Shared\app.js" />
+    <Content Include="Angular\Controller\mainLayoutController.js" />
     <Content Include="Angular\HtmlTemplates\addSubToDo.html" />
     <Content Include="Angular\HtmlTemplates\AddToDo.html" />
     <Content Include="Angular\Route\Route.js" />

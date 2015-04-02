@@ -1,50 +1,6 @@
-﻿var myApp = angular.module("myApp", ['ngMaterial', 'ngAnimate', 'ngRoute', 'ngMessages']);
-
-myApp.controller('mainLayoutController', function ($scope, $mdSidenav, $window) {
-
-    $scope.toggleSidenav = function (menuId) {
-        $mdSidenav(menuId).toggle();
-    }
-
-    $scope.getWidth = function () {
-        return $(window).width();
-    };
-    $scope.$watch($scope.getWidth, function (newValue, oldValue) {
-        $scope.windowWidth = newValue;
-
-    });
-    window.onresize = function () {
-        $scope.$apply();
-    }
-
-    $scope.showAndHideBool = false;
-    $scope.showAndHideButtonName = "Show";
-
-    $scope.toggle = function (showAndHideBool) {
-
-        if (showAndHideBool === false) {
-            $scope.showAndHideBool = true;
-            $scope.showAndHideButtonName = "Close";
-        } else {
-            $scope.showAndHideBool = false;
-            $scope.showAndHideButtonName = "Show";
-        }
-    }
-});
-
-
-myApp.controller('leftController', function ($scope, $mdSidenav) {
-
-    $scope.close = function () {
-        $mdSidenav('left').close();
-    }
-
-});
-
-
+﻿
 myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog) {
     $scope.time = "";
-
     $scope.ToDoModel = {
         ParentToDo: {},
         ChildToDos: []
@@ -81,16 +37,6 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog) 
         });
     }
 
-    function DialogController($scope, $mdDialog) {
-
-        $scope.cancel = function () {
-            $mdDialog.cancel();
-        };
-        $scope.addSubItem = function (subItem) {
-            $mdDialog.hide(subItem);
-        };
-    };
-
     $scope.showConfirm = function (ev, $index) {
         var confirm = $mdDialog.confirm()
           .title('Confirm')
@@ -104,5 +50,16 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog) 
             $mdDialog.cancel();
         });
     };
+
+    function DialogController($scope, $mdDialog) {
+
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+        $scope.addSubItem = function (subItem) {
+            $mdDialog.hide(subItem);
+        };
+    };
+ 
 });
 

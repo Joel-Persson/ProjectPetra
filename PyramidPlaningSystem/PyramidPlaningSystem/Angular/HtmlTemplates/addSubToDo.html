@@ -1,6 +1,6 @@
 ﻿<md-dialog>
     <md-content class="sticky-container">
-        <md-subheader class="md-sticky-no-effect">Add Sub Item</md-subheader>
+        <md-header class="md-sticky-no-effect">Add Sub Item</md-header>
         <div class="dialog-content">
             <form name="SubToDoSubmit">
 
@@ -35,11 +35,11 @@
 
                     </md-input-container>
 
-                    <p style="color: #bdbdbd;" hide-gt-sm>Choose in days or in hours:</p>
+                    <!--<p style="color: #bdbdbd;" hide-gt-sm>Choose in days or in hours:</p>-->
                     <md-radio-group layout-sm="column" required ng-model="subItem.time" layout="row">
 
-                        <md-radio-button style="margin-top: 25px;" name="days" value="days">Days</md-radio-button>
-                        <md-radio-button style="margin-top: 25px;" name="hours" value=" hours"> Hours </md-radio-button>
+                        <md-radio-button class="radioButtonPosition" name="days" value="days">Days</md-radio-button>
+                        <md-radio-button class="radioButtonPosition" name="hours" value=" hours"> Hours </md-radio-button>
                     </md-radio-group>
 
                 </div>

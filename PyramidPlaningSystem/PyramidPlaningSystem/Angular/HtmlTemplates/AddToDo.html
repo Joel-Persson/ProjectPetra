@@ -1,6 +1,5 @@
 ﻿{{ success }}
 
-
 <md-content class="md-padding">
     <md-card flex-md flex-gt-md>
         <md-card-content>
@@ -26,7 +25,7 @@
                                min="0"
                                max="1000"
                                name="estimatedTime"
-                               ng-model="ToDoModel.ParentToDo.effort"/>
+                               ng-model="ToDoModel.ParentToDo.effort" />
 
                         <div ng-messages="toDoSubmit.estimatedTime.$error">
                             <div ng-message="number">
@@ -37,7 +36,7 @@
 
                     </md-input-container>
 
-                    <p class="radiobuttonInfo" hide-gt-sm>Choose in days or in hours:</p>
+                    <p class="radiobuttonInfo" hide-gt-sm>Please choose days or hours:</p>
                     <md-radio-group layout-sm="column" required ng-model="ToDoModel.ParentToDo.time" layout="row">
                         <md-radio-button class="radioButtonEffort" name="days" value="days">Days</md-radio-button>
                         <md-radio-button class="radioButtonEffort" name="hours" value=" hours"> Hours </md-radio-button>
@@ -61,10 +60,10 @@
             </form>
 
             <div layout-align="end center" layout="row">
-                <md-button class="md-fab md-mini" ng-click="ShowAddSubToDo($event)">
+                <md-button aria-label="addToDo" class="md-fab md-mini" ng-click="ShowAddSubToDo($event)">
                     <span class="glyphicon glyphicon-plus"></span>
                     <md-tooltip md-direction="left">
-                        Add subToDo
+                        Add subitem
                     </md-tooltip>
                 </md-button>
             </div>
@@ -84,17 +83,7 @@
         <md-card-content>
 
             <md-list>
-                <md-item ng-repeat="subItem in ToDoModel.ChildToDos">
-                    <md-item-content>
-                        <div class="md-tile-left">
-                            <span style="color: #bdbdbd; font-size: 15px" class="glyphicon glyphicon-star"></span>
-                        </div>
-                        <div class="md-tile-content">
-                            <h3>{{subItem.title}}</h3>
-                        </div>
-                        <div class="md-tile-right"><md-button class="md-fab md-mini md-primary md-hue-1" ng-click="showConfirm($event, $index)"><md-icon layout="row" layout-align="center center" class="glyphicon glyphicon-remove"></md-icon></md-button></div>
-                    </md-item-content>
-                    <md-divider ng-if="!$last"></md-divider>
+                <md-item ng-repeat="subItem in ToDoModel.ChildToDos" subitems>
                 </md-item>
             </md-list>
         </md-card-content>

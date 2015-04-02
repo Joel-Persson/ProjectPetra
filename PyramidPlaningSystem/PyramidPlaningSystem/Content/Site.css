@@ -189,6 +189,7 @@ footer, .main-container:after {
     .firefoxAdminButton {
         max-height: 40px;
     }
+
     .firefoxAdminSpanSymbol {
         top: -17px;
     }
@@ -206,9 +207,49 @@ md-radio-group {
 /*AddToDo.html*/
 
 .radiobuttonInfo {
-  color: #bdbdbd;  
+    color: #bdbdbd;
 }
 
 .radioButtonEffort {
     margin-top: 25px;
+}
+
+.starSpan {
+    color: #bdbdbd;
+    font-size: 15px;
+}
+
+/*addSubToDo.Html*/
+
+.radioButtonPosition {
+    margin-top: 25px;
+}
+
+/*layout.cshtml*/
+
+.pyramidLogoDiv {
+    margin: auto;
+    width: 50px;
+}
+
+.sidenavCard {
+    min-height: 800px;
+}
+
+.sidenavList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.adminLink {
+    padding-left: 30px;
+}
+
+    .adminLink span {
+        float: right;
+    }
+
+.sidenavDivider {
+    margin-bottom: 30px;
+    margin-top: 30px;
 }

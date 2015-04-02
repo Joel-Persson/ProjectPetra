@@ -1,52 +1,52 @@
 ﻿<!DOCTYPE html>
 <html ng-app="myApp">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pyramid Planeringssystem</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pyramid Planeringssystem</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
 
-    <!--[if IE]>
-    <link href="~/Content/IEOnly.css" rel="stylesheet" />
+        <!--[if IE]>
+            <link href="~/Content/IEOnly.css" rel="stylesheet" />
         <![endif]-->
 
 
-</head>
-<body>
+    </head>
+    <body>
 
-    <div class=" main-container" ng-controller="mainLayoutController">
-        <md-toolbar layout="row" ng-class="{'md-tall': windowWidth >= 600}">
-            @if (Request.IsAuthenticated)
-            {
-                <button ng-click="toggleSidenav('left')" class="menuBtn" hide-gt-md ng-class="{'test': windowWidth >= 600}">
-                    <span class="visually-hidden">Menu</span>
-                </button>
-            }
-            <h1 class="ieHeaderText" hide-sm>Pyramid Planeringsystem</h1>
-            <div hide-gt-md hide-md style="margin: auto; width: 50px" >
-                <img src="../../Images/logo_pyramid.svg" alt="" class="ieLogo" />
-            </div>
-            <div hide-md hide-sm layout="row" layout-align="center center">
-                @Html.Partial("_LoginPartial")
-            </div>
-        </md-toolbar>
+        <div class=" main-container" ng-controller="mainLayoutController">
+            <md-toolbar layout="row" ng-class="{'md-tall': windowWidth >= 600}">
+                @if (Request.IsAuthenticated)
+                {
+                    <button ng-click="toggleSidenav('left')" class="menuBtn" hide-gt-md ng-class="{'test': windowWidth >= 600}">
+                        <span class="visually-hidden">Menu</span>
+                    </button>
+                }
+                <h1 class="ieHeaderText" hide-sm>Pyramid Planeringsystem</h1>
+                <div hide-gt-md hide-md class="pyramidLogoDiv">
+                    <img src="../../Images/logo_pyramid.svg" alt="" class="ieLogo" />
+                </div>
+                <div hide-md hide-sm layout="row" layout-align="center center">
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </md-toolbar>
 
-        <div layout="row" flex style="min-height: 800px">
-            @if (Request.IsAuthenticated)
-            {
-                <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2 ieSideNav" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+            <div layout="row" flex class="sidenavCard">
+                @if (Request.IsAuthenticated)
+                {
+                    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2 ieSideNav" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
 
-                    <md-toolbar hide-gt-md ng-controller="leftController">
-                        <md-button ng-click="close()" class="md-toolbar-tools">
-                            <h1>Close <span class="glyphicon glyphicon-remove"></span></h1>
-                        </md-button>
-                    </md-toolbar>
+                        <md-toolbar hide-gt-md ng-controller="leftController">
+                            <md-button ng-click="close()" class="md-toolbar-tools">
+                                <h1>Close <span class="glyphicon glyphicon-remove"></span></h1>
+                            </md-button>
+                        </md-toolbar>
 
-                    <md-content class="md-padding" flex role="navigation">
-                        @if (User.IsInRole("Production") || User.IsInRole("Administrator"))
+                        <md-content class="md-padding" flex role="navigation">
+                            @if (User.IsInRole("Production") || User.IsInRole("Administrator"))
                             {
-                                <ul style="list-style-type: none; padding: 0;" class="nav nav-pills nav-stacked">
+                                <ul class="nav nav-pills nav-stacked sidenavList">
                                     <li>
                                         <a href="../Home/Index" class="md-button md-raised">Home</a>
                                     </li>
@@ -56,20 +56,20 @@
                                     @if (User.IsInRole("Administrator"))
                                     {
                                         <li>
-                                            <a style="padding-left: 30px" class="md-button md-raised firefoxAdminButton" ng-click="toggle(showAndHideBool)"> Admin <span class="firefoxAdminSpanSymbol" ng-class="{'glyphicon glyphicon-menu-up': showAndHideBool == true, 'glyphicon glyphicon-menu-down': showAndHideBool ==false }" style="float: right"></span></a>
+                                            <a class="md-button md-raised firefoxAdminButton adminLink" ng-click="toggle(showAndHideBool)"> Admin <span class="firefoxAdminSpanSymbol" ng-class="{'glyphicon glyphicon-menu-up': showAndHideBool == true, 'glyphicon glyphicon-menu-down': showAndHideBool ==false }"></span></a>
                                         </li>
                                         <li ng-show="showAndHideBool">
-                                            @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "md-button md-raised" })
+                                            @Html.ActionLink("Admin", "Index", "Admin", null, new {@class = "md-button md-raised"})
                                         </li>
                                         <li ng-show="showAndHideBool">
-                                            @Html.ActionLink("Role Admin", "Index", "RoleAdmin", null, new { @class = "md-button md-raised" })
+                                            @Html.ActionLink("Role Admin", "Index", "RoleAdmin", null, new {@class = "md-button md-raised"})
                                         </li>
                                     }
-                                    <md-divider style="margin-bottom: 30px; margin-top: 30px;"></md-divider>
+                                    <md-divider class="sidenavDivider"></md-divider>
 
                                     @if (Request.IsAuthenticated)
                                     {
-                                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "logoutForm"}))
                                         {
                                             @Html.AntiForgeryToken()
 
@@ -80,20 +80,22 @@
                                     }
                                 </ul>
                             }
-                    </md-content>
-                </md-sidenav>
-            }
-            <md-content layout="column" flex class="md-padding">
-                @RenderBody()
-            </md-content>
+                        </md-content>
+                    </md-sidenav>
+                }
+                <md-content layout="column" flex class="md-padding">
+                    @RenderBody()
+                </md-content>
+            </div>
         </div>
-    </div>
-    <footer layout="row" layout-align="center center">
-        <h4 class="ieFooterText">&copy; @DateTime.Now.Year - Pyramid Communications AB</h4>
-    </footer>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/angular")
-    @RenderSection("scripts", false)
-</body>
+        <footer layout="row" layout-align="center center">
+            <h4 class="ieFooterText">&copy; @DateTime.Now.Year - Pyramid Communications AB</h4>
+        </footer>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/angular")
+        @*@Scripts.Render("~/bundles/custom")*@
+        @RenderSection("scripts", false)
+
+    </body>
 </html>
