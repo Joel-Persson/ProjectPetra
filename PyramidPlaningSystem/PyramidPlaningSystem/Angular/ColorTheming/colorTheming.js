@@ -1,6 +1,6 @@
 ﻿myApp.config(function ($mdThemingProvider) {
     $mdThemingProvider.definePalette('amazingPaletteName', {
-        '50': '55BA47', //green
+        '50': '4A1070', //green
         '100': 'b0c4de', // grey
         '200': 'CF118C',//pink
         '300': '702C91',//purple

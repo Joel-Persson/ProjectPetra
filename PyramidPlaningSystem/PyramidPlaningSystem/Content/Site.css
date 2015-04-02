@@ -23,6 +23,7 @@ body {
     font-family: 'Roboto-Regular';
     src: url('Font/Roboto-Regular.ttf') format('truetype');
 }
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -53,9 +54,10 @@ textarea {
 }
 
 md-toolbar h1 {
-    /*font-size: 1.250em;*/
-    font-weight: 400;
+    font-size: 3em;
+    /*font-weight: 200;*/
     margin: auto;
+    text-transform: uppercase;
 }
 
 md-list .md-button {
@@ -74,6 +76,11 @@ md-list .md-button {
     padding: 0;
     position: absolute;
     width: 1px;
+}
+
+.buttonStyle a{
+    background-color: #404040;
+    color: white;
 }
 
 /* Using Data-URI converted from svg until <md-icon> becomes available 
@@ -214,10 +221,7 @@ md-radio-group {
     margin-top: 25px;
 }
 
-.starSpan {
-    color: #bdbdbd;
-    font-size: 15px;
-}
+
 
 /*addSubToDo.Html*/
 
@@ -252,4 +256,28 @@ md-radio-group {
 .sidenavDivider {
     margin-bottom: 30px;
     margin-top: 30px;
+}
+
+
+/*subItems.html*/
+
+.listItemheaders {
+    font-weight: 900; 
+}
+
+.listSpan {
+    font-weight: 100;
+}
+
+.md-tile-content h3 {
+    font-weight: 800;
+}
+
+.md-tile-content h4 {
+    font-weight: 800;
+}
+
+.starSpan {
+    color: #bdbdbd;
+    font-size: 30px;
 }
