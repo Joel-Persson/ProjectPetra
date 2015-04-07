@@ -63,3 +63,41 @@
 
 });
 
+myApp.controller('listAllToDosController', function ($scope, toDoFactory, $mdDialog, $location) {
+    $scope.toDoList = [];
+    getTodos();
+    function getTodos() {
+        toDoFactory.getToDoList().success(function (data) {
+            $scope.toDoList = data;
+        });
+    }
+
+    $scope.deleteConfirm = function (ev, $index, ToDoId) {
+        var confirm = $mdDialog.confirm()
+          .title('Confirm')
+          .content('Are you sure you want to delete the ToDo?')
+          .ok('Yes')
+          .cancel('No')
+          .targetEvent(ev);
+        $mdDialog.show(confirm).then(function () {
+            $scope.toDoList.splice($index, 1);
+            $scope.deleteToDo(ToDoId);
+        }, function () {
+            $mdDialog.cancel();
+        });
+    };
+
+    $scope.deleteToDo = function(toDoId) {
+        toDoFactory.deleteToDo(toDoId).success(function () {
+            $scope.status = "Deleted";
+        }).error(function() {
+            $scope.status = "Error";
+        });
+    };
+
+});
+
+//myApp.controller('deleteToDoController', function ($scope, toDoFactory) {
+
+//});
+

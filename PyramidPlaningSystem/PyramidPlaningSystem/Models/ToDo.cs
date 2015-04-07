@@ -21,6 +21,16 @@ namespace PyramidPlaningSystem.Models
         public DateTime? Created { get; set; }
         public Guid? ParentId { get; set; }
 
+        public Priority? Priority { get; set; }
+
 
     }
+
+    public enum Priority
+    {
+        High = 1, 
+        Medium, 
+        Low
+    }
+
 }

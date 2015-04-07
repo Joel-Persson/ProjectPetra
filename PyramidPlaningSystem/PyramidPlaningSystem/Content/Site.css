@@ -84,13 +84,15 @@ md-list .md-button {
     margin-bottom: 5px;
 }
 
-a:focus {
-    background-color: #404040;
-}
 
 .nav>li>a:focus {
      background-color: #404040;
 }
+
+.nav>li>a:hover {
+     color: black;
+}
+
 
 /* Using Data-URI converted from svg until <md-icon> becomes available 
 https://github.com/google/material-design-icons
