@@ -17,7 +17,7 @@
         $scope.$apply();
     }
 
-    $scope.showAndHideBool = false;
+    $scope.showAndHideBool = true;
     $scope.showAndHideButtonName = "Show";
 
     $scope.toggle = function (showAndHideBool) {

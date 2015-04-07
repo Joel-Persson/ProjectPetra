@@ -5,6 +5,11 @@
             controller: 'addToDoController',
             templateUrl: '/Angular/HtmlTemplates/AddToDo.html'
         })
+              .when('/toDos',
+        {
+            controller: 'addToDoController',
+            templateUrl: '/Angular/HtmlTemplates/toDos.html'
+        })
         .otherwise({
             redirectTo: '/'
         });

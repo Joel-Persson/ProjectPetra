@@ -260,6 +260,7 @@
     <Content Include="Angular\ColorTheming\colorTheming.js" />
     <Content Include="Angular\Controller\addToDoController.js" />
     <Content Include="Angular\Directives\subItems.html" />
+    <Content Include="Angular\HtmlTemplates\toDos.html" />
     <Content Include="Angular\Shared\app.js" />
     <Content Include="Angular\Controller\mainLayoutController.js" />
     <Content Include="Angular\HtmlTemplates\addSubToDo.html" />
@@ -353,8 +354,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />

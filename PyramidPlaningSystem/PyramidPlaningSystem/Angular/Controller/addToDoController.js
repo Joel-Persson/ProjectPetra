@@ -1,5 +1,4 @@
-﻿
-myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog) {
+﻿myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, $location) {
     $scope.time = "";
     $scope.ToDoModel = {
         ParentToDo: {},
@@ -18,6 +17,7 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog) 
         }
         toDoFactory.addToDo(ToDoModel).success(function () {
             $scope.success = "Yes";
+            $location.path('/toDos');
         })
             .error(function () {
                 $scope.success = "No";
@@ -60,6 +60,6 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog) 
             $mdDialog.hide(subItem);
         };
     };
- 
+
 });
 
