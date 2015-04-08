@@ -1,9 +1,11 @@
 ﻿myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, $location) {
+
     $scope.time = "";
     $scope.ToDoModel = {
         ParentToDo: {},
         ChildToDos: []
     };
+
 
     $scope.add = function (ToDoModel) {
 
@@ -15,6 +17,7 @@
                 ToDoModel.ChildToDos[i].effort = ToDoModel.ChildToDos[i].effort * 8;
             }
         }
+
         toDoFactory.addToDo(ToDoModel).success(function () {
             $scope.success = "Yes";
             $location.path('/toDos');
@@ -23,7 +26,7 @@
                 $scope.success = "No";
             });
 
-    }
+    };
 
     $scope.ShowAddSubToDo = function (ev) {
         $mdDialog.show({
@@ -35,9 +38,9 @@
             $scope.ToDoModel.ChildToDos.push(subItem);
 
         });
-    }
+    };
 
-    $scope.showConfirm = function (ev, $index) {
+    $scope.showConfirm = function (ev, subItem) {
         var confirm = $mdDialog.confirm()
           .title('Confirm')
           .content('Are you sure you want to delete the sub task?')
@@ -45,7 +48,8 @@
           .cancel('No')
           .targetEvent(ev);
         $mdDialog.show(confirm).then(function () {
-            $scope.ToDoModel.ChildToDos.splice($index, 1);
+            $scope.ToDoModel.ChildToDos.splice($scope.ToDoModel.ChildToDos.indexOf($scope.subItem), 1);
+            //$scope.ToDoModel.ChildToDos.splice($index, 1);
         }, function () {
             $mdDialog.cancel();
         });
@@ -63,16 +67,19 @@
 
 });
 
+
+
 myApp.controller('listAllToDosController', function ($scope, toDoFactory, $mdDialog, $location) {
     $scope.toDoList = [];
     getTodos();
+
     function getTodos() {
         toDoFactory.getToDoList().success(function (data) {
             $scope.toDoList = data;
         });
     }
 
-    $scope.deleteConfirm = function (ev, $index, ToDoId) {
+    $scope.deleteConfirm = function (ev, toDo) {
         var confirm = $mdDialog.confirm()
           .title('Confirm')
           .content('Are you sure you want to delete the ToDo?')
@@ -80,24 +87,21 @@ myApp.controller('listAllToDosController', function ($scope, toDoFactory, $mdDia
           .cancel('No')
           .targetEvent(ev);
         $mdDialog.show(confirm).then(function () {
-            $scope.toDoList.splice($index, 1);
-            $scope.deleteToDo(ToDoId);
+            $scope.deleteToDo(toDo.ToDoId);
+            //bästa lösningen för att ta bort ett item i en array
+            $scope.toDoList.splice($scope.toDoList.indexOf($scope.toDo), 1);
+
         }, function () {
             $mdDialog.cancel();
         });
     };
 
-    $scope.deleteToDo = function(toDoId) {
+    $scope.deleteToDo = function (toDoId) {
         toDoFactory.deleteToDo(toDoId).success(function () {
             $scope.status = "Deleted";
-        }).error(function() {
+        }).error(function () {
             $scope.status = "Error";
         });
     };
 
 });
-
-//myApp.controller('deleteToDoController', function ($scope, toDoFactory) {
-
-//});
-

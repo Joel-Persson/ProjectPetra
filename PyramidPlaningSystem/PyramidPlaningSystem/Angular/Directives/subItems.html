@@ -8,11 +8,11 @@
         <h3 class="listItemheaders">Description:<span class="listSpan"> {{subItem.description | limitTo: 100}}...</span></h3>
     </div>
     <div class="md-tile-right">
-        <md-button class="md-fab md-mini" ng-click="showConfirm($event, $index)">
+        <md-button class="md-fab md-mini" ng-click="showConfirm($event,subItem)">
             <md-icon layout="row" layout-align="center center" class="glyphicon glyphicon-remove"></md-icon>
             <md-tooltip md-direction="left">
-    Remove
-</md-tooltip>
+                Remove
+            </md-tooltip>
         </md-button>
     </div>
 </md-item-content>
