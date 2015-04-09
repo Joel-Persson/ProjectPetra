@@ -92,11 +92,22 @@ namespace PyramidPlaningSystem.API
         public HttpResponseMessage Delete(Guid id)
         {
             ToDo toDoModel = db.ToDos.Find(id);
+
+            var toDos = (from b in db.ToDos
+                where b.ParentId == id
+                select b).ToList();
+
             if (toDoModel == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
-
+            if (toDos.Any())
+            {
+                foreach (var toDo in toDos)
+                {
+                    db.ToDos.Remove(toDo);
+                }
+            }
             db.ToDos.Remove(toDoModel);
 
             try

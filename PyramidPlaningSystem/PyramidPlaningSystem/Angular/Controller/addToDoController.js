@@ -48,7 +48,7 @@
           .cancel('No')
           .targetEvent(ev);
         $mdDialog.show(confirm).then(function () {
-            $scope.ToDoModel.ChildToDos.splice($scope.ToDoModel.ChildToDos.indexOf($scope.subItem), 1);
+            $scope.ToDoModel.ChildToDos.splice($scope.ToDoModel.ChildToDos.indexOf(subItem), 1);
             //$scope.ToDoModel.ChildToDos.splice($index, 1);
         }, function () {
             $mdDialog.cancel();
@@ -69,7 +69,7 @@
 
 
 
-myApp.controller('listAllToDosController', function ($scope, toDoFactory, $mdDialog, $location) {
+myApp.controller('listAllToDosController', function ($scope, toDoFactory, $mdDialog) {
     $scope.toDoList = [];
     getTodos();
 
@@ -89,8 +89,12 @@ myApp.controller('listAllToDosController', function ($scope, toDoFactory, $mdDia
         $mdDialog.show(confirm).then(function () {
             $scope.deleteToDo(toDo.ToDoId);
             //bästa lösningen för att ta bort ett item i en array
+            $.each($scope.toDoList, function (i) {
+                if ($scope.toDoList[i].ParentId === toDo.ToDoId) {
+                    $scope.toDoList.splice($scope.toDoList.indexOf($scope.toDoList[i]), 1);
+                }
+            });
             $scope.toDoList.splice($scope.toDoList.indexOf($scope.toDo), 1);
-
         }, function () {
             $mdDialog.cancel();
         });
