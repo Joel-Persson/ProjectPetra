@@ -78,7 +78,7 @@ md-list .md-button {
     width: 1px;
 }
 
-.buttonStyle a{
+.nav>li>a{
     background-color: #404040;
     color: white;
     margin-bottom: 5px;

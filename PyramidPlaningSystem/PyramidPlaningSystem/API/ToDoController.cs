@@ -6,11 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using PyramidPlaningSystem.Authorize;
 using PyramidPlaningSystem.Models;
 using PyramidPlaningSystem.ViewModels;
 
 namespace PyramidPlaningSystem.API
 {
+    [Authorize(Roles = "Administrator")]
+   // [CustomAuthorize(Roles = "Production, Administrator")]
     public class ToDoController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
