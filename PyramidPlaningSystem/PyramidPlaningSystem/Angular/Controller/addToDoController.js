@@ -116,13 +116,13 @@ myApp.controller('editToDoController', function ($scope, $routeParams, toDoFacto
     getSingleToDo();
     function getSingleToDo() {
         toDoFactory.getSingleToDo($routeParams.Id).success(function (data) {
-            $scope.toDo = data;
+            $scope.toDoModel = data;
         })
-
         .error(function () {
             $scope.status = "Something went wrong!";
         });
-    }
+
+    };
 
     $scope.editToDo = function (toDo) {
         toDoFactory.editToDo(toDo).success(function () {

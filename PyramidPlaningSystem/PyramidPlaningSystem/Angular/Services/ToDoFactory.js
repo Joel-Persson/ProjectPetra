@@ -18,6 +18,7 @@
     toDoFactory.editToDo = function (toDo) {
         return $http.put(urlBase + "/" + toDo.ToDoId, toDo);
     }
+   
     return toDoFactory;
 })
 

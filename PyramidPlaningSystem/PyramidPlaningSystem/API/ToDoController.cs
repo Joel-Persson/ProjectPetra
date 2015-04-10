@@ -24,16 +24,31 @@ namespace PyramidPlaningSystem.API
             return db.ToDos.AsEnumerable();
         }
 
-        public ToDo Get(Guid id)
+        public ToDoModel Get(Guid id)
         {
-            ToDo toDoModel = db.ToDos.Find(id);
-            if (toDoModel == null)
+
+            ToDo parentToDoModel = db.ToDos.Find(id);
+
+            if (parentToDoModel == null)
             {
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
             }
 
+            var childTodods = db.ToDos.Where(x => x.ParentId == id).ToList();
+            var toDoModel = new ToDoModel { ParentToDo = parentToDoModel, ChildToDos = childTodods };
             return toDoModel;
-        }
+        } 
+
+        //public ToDo Get(Guid id)
+        //{
+        //    ToDo toDoModel = db.ToDos.Find(id);
+        //    if (toDoModel == null)
+        //    {
+        //        throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
+        //    }
+
+        //    return toDoModel;
+        //}
 
 
         [HttpPost]
