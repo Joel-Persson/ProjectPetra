@@ -109,3 +109,22 @@ myApp.controller('listAllToDosController', function ($scope, toDoFactory, $mdDia
     };
 
 });
+
+myApp.controller('editToDoController', function($scope, $routeParams, toDoFactory, $location) {
+    getSingleToDo();
+    function getSingleToDo() {
+        toDoFactory.getSingleToDo($routeParams.Id).success(function(data) {
+            $scope.toDo = data;
+        })
+
+        .error(function() {
+            $scope.status = "Something went wrong!";
+        });
+    }
+
+    $scope.editToDo = function(toDo) {
+        toDoFactory.editToDo(toDo).success(function() {
+            $location.path('/toDos');
+        });
+    };
+});

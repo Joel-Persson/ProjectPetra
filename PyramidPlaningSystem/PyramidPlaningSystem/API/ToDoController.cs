@@ -24,7 +24,7 @@ namespace PyramidPlaningSystem.API
             return db.ToDos.AsEnumerable();
         }
 
-        public ToDo Get(int id)
+        public ToDo Get(Guid id)
         {
             ToDo toDoModel = db.ToDos.Find(id);
             if (toDoModel == null)

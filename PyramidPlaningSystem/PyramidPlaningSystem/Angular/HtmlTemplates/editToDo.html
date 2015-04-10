@@ -1,2 +1,76 @@
 ﻿
+
 <h3>Edit todo!!</h3>
+<md-content class="md-padding">
+    <md-card flex-md flex-gt-md>
+        <md-card-content>
+
+            <form name="editTodo" ng-submit="editToDo(toDo)">
+
+                <div layout layout-sm="column">
+
+                    <md-input-container flex>
+                        <label for="title">Title</label>
+                        <input ng-model="toDo.Title"
+                               required
+                               ng-maxlength="250"
+                               ng-minlength="1"
+                               name="title"
+                               autofocus />
+                    </md-input-container>
+
+                    <md-input-container flex>
+                        <label for="estimatedTime">Estimated time</label>
+                        <input type="number"
+                               required
+                               min="0"
+                               max="1000"
+                               name="estimatedTime"
+                               ng-model="toDo.Effort"/>
+
+                        <div ng-messages="toDoSubmit.estimatedTime.$error">
+                            <div ng-message="number">
+                                This value must be a number
+                            </div>
+                        </div>
+
+
+                    </md-input-container>
+
+                    <p class="radiobuttonInfo" hide-gt-sm>Please choose days or hours:</p>
+                    <md-radio-group layout-sm="column" required ng-model="toDo.time" layout="row">
+                        <md-radio-button class="radioButtonEffort" name="days" value="days">Days</md-radio-button>
+                        <md-radio-button class="radioButtonEffort" name="hours" value=" hours"> Hours </md-radio-button>
+                    </md-radio-group>
+
+                </div>
+                <div layout layout-sm="row">
+                    <md-input-container flex="66">
+                        <label>Description</label>
+                        <textarea ng-model="toDo.Description"
+                                  ng-maxlength="800"
+                                  required
+                                  md-maxlength="800"
+                                  ng-minlength="10"></textarea>
+                    </md-input-container>
+
+                    <div flex>
+                        <p>Select Priority</p>
+                        <md-select name="prioritySelect" placeholder="Priority" ng-model="someVal" required>
+                            <md-option value="1">One</md-option>
+                            <md-option value="2">Two</md-option>
+                        </md-select>
+                    </div>
+
+                </div>
+
+
+
+                <div layout-align="start end" layout="row">
+                    <md-button class="md-primary md-hue-1 md-raised" type="submit" value="Submit">Save</md-button>
+                </div>
+
+            </form>
+        </md-card-content>
+    </md-card>
+</md-content>
