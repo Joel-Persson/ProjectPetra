@@ -21,7 +21,7 @@
 
             <md-list>
                 <form>
-                    <md-item ng-repeat="toDo in toDoList | filter: query | orderBy: '-Created'">
+                    <md-item ng-repeat="toDo in toDoList | filter: query  | orderBy: '-Created'">
                         <md-item-content>
                             <div class="md-tile-left">
                                 <span class="glyphicon glyphicon-star starSpan"></span>
@@ -41,7 +41,7 @@
 
 
                             <div class="md-tile-right">
-                                <md-button aria-label="delete" class="md-fab md-mini" ng-click="deleteConfirm($event, toDo)">
+                                <md-button aria-label="delete" class="md-fab md-mini" ng-click="deleteConfirm($event,$index, toDo)">
                                     <md-icon layout="row" layout-align="center center" class="glyphicon glyphicon-remove"></md-icon>
                                 </md-button>
                             </div>
@@ -54,4 +54,4 @@
         </md-card-content>
     </md-card>
 </md-content>
-
+{{index}}

@@ -1,48 +1,49 @@
 ﻿
-    <md-dialog flex="60">
-        <md-content class="sticky-container" >
-            <md-header class="md-sticky-no-effect">Add Sub Item</md-header>
-            <div class="dialog-content">
-                <form name="SubToDoSubmit" novalidate>
+<md-dialog flex="60">
+    <md-content class="sticky-container">
+        <md-header class="md-sticky-no-effect">Add Sub Item</md-header>
+        <div class="dialog-content">
+            <form name="SubToDoSubmit" novalidate>
 
-                    <div layout layout-sm="column">
+                <div layout layout-sm="column">
 
-                        <md-input-container flex>
-                            <label for="title">Title</label>
-                            <input ng-model="subItem.title"
-                                   required
-                                   ng-maxlength="250"
-                                   ng-minlength="1"
-                                   name="title"/>
-                        </md-input-container>
+                    <md-input-container flex>
+                        <label for="title">Title</label>
+                        <input ng-model="subItem.title"
+                               required
+                               ng-maxlength="250"
+                               ng-minlength="1"
+                               name="title" />
+                    </md-input-container>
 
-                        <md-input-container flex>
-                            <label for="estimatedTime">Estimated time</label>
-                            <input type="number"
-                                   required
-                                   min="0"
-                                   max="1000"
-                                   name="estimatedTime"
-                                   ng-model="subItem.effort" />
+                    <md-input-container flex>
+                        <label for="estimatedTime">Estimated time</label>
+                        <input type="number"
+                               required
+                               min="0"
+                               max="1000"
+                               name="estimatedTime"
+                               ng-model="subItem.effort" />
 
-                            <div ng-messages="SubToDoSubmit.estimatedTime.$error">
-                                <div ng-message="number">
-                                    This value must be a number
-                                </div>
+                        <div ng-messages="SubToDoSubmit.estimatedTime.$error">
+                            <div ng-message="number">
+                                This value must be a number
                             </div>
+                        </div>
 
 
-                        </md-input-container>
+                    </md-input-container>
 
-                        <!--<p style="color: #bdbdbd;" hide-gt-sm>Choose in days or in hours:</p>-->
-                        <md-radio-group layout-sm="column" required ng-model="subItem.time" layout="row">
+                    <!--<p style="color: #bdbdbd;" hide-gt-sm>Choose in days or in hours:</p>-->
+                    <md-radio-group layout-sm="column" required ng-model="subItem.time" layout="row">
 
-                            <md-radio-button class="radioButtonPosition" name="days" value="days">Days</md-radio-button>
-                            <md-radio-button class="radioButtonPosition" name="hours" value=" hours"> Hours </md-radio-button>
-                        </md-radio-group>
+                        <md-radio-button class="radioButtonPosition" name="days" value="days">Days</md-radio-button>
+                        <md-radio-button class="radioButtonPosition" name="hours" value=" hours"> Hours </md-radio-button>
+                    </md-radio-group>
 
-                    </div>
 
+                </div>
+                <div layout layout-sm="row">
                     <md-input-container flex>
                         <label>Description</label>
                         <textarea ng-model="subItem.description"
@@ -52,17 +53,34 @@
                                   ng-minlength="10"></textarea>
                     </md-input-container>
 
-                    <div class="md-actions" layout="row">
-                        <md-button ng-click="addSubItem(subItem)" class="md-primary" ng-disabled="SubToDoSubmit.$invalid">
-                            Add
-                        </md-button>
-                        <md-button ng-click="cancel()">
-                            Cancel
-                        </md-button>
 
-                    </div>
-                </form>
-            </div>
-        </md-content>
+                    <md-select class="customSelect" name="prioritySelect" placeholder="Priority" ng-model="subItem.priority" required>
+                        <md-optgroup label="Priority">
+                            <md-option value="100">100</md-option>
+                            <md-option value="200">200</md-option>
+                            <md-option value="300">300</md-option>
+                            <md-option value="400">400</md-option>
+                            <md-option value="500">500</md-option>
+                            <md-option value="600">600</md-option>
+                            <md-option value="700">700</md-option>
+                            <md-option value="800">800</md-option>
+                            <md-option value="900">900</md-option>
+                            <md-option value="1000">1000</md-option>
+                        </md-optgroup>
+                    </md-select>
+                </div>
 
-    </md-dialog>
+                <div class="md-actions" layout="row">
+                    <md-button ng-click="addSubItem(subItem)" class="md-primary" ng-disabled="SubToDoSubmit.$invalid">
+                        Add
+                    </md-button>
+                    <md-button ng-click="cancel()">
+                        Cancel
+                    </md-button>
+
+                </div>
+            </form>
+        </div>
+    </md-content>
+
+</md-dialog>

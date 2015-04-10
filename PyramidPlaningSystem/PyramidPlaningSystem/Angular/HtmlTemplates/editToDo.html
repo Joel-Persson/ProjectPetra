@@ -54,13 +54,20 @@
                                   ng-minlength="10"></textarea>
                     </md-input-container>
 
-                    <div flex>
-                        <p>Select Priority</p>
-                        <md-select name="prioritySelect" placeholder="Priority" ng-model="someVal" required>
-                            <md-option value="1">One</md-option>
-                            <md-option value="2">Two</md-option>
-                        </md-select>
-                    </div>
+                    <md-select class="customSelect" name="prioritySelect" placeholder="Priority" ng-model="toDo.priority" required>
+                        <md-optgroup label="Priority">
+                            <md-option value="100">100</md-option>
+                            <md-option value="200">200</md-option>
+                            <md-option value="300">300</md-option>
+                            <md-option value="400">400</md-option>
+                            <md-option value="500">500</md-option>
+                            <md-option value="600">600</md-option>
+                            <md-option value="700">700</md-option>
+                            <md-option value="800">800</md-option>
+                            <md-option value="900">900</md-option>
+                            <md-option value="1000">1000</md-option>
+                        </md-optgroup>
+                    </md-select>
 
                 </div>
 
