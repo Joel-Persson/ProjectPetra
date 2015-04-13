@@ -1,7 +1,7 @@
 ﻿
 myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, $location) {
     $scope.PageHeader = "Add Todo";
-    $scope.time = "";
+    $scope.Time = "";
     $scope.ToDoModel = {
         ParentToDo: {},
         ChildToDos: []
@@ -10,12 +10,12 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
 
     $scope.add = function (ToDoModel) {
 
-        if (ToDoModel.ParentToDo.time == "days") {
-            ToDoModel.ParentToDo.effort = ToDoModel.ParentToDo.effort * 8;
+        if (ToDoModel.ParentToDo.Time == "days") {
+            ToDoModel.ParentToDo.Effort = ToDoModel.ParentToDo.Effort * 8;
         }
         for (var i = 0; i < ToDoModel.ChildToDos.length; i++) {
-            if (ToDoModel.ChildToDos[i].time == "days") {
-                ToDoModel.ChildToDos[i].effort = ToDoModel.ChildToDos[i].effort * 8;
+            if (ToDoModel.ChildToDos[i].Time == "days") {
+                ToDoModel.ChildToDos[i].Effort = ToDoModel.ChildToDos[i].Effort * 8;
             }
         }
 

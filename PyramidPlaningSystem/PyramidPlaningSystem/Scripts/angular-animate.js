@@ -86,7 +86,7 @@
  * layout changes in the application will trigger animations as normal.
  *
  * In addition, upon bootstrap, if the routing system or any directives or load remote data (via $http) then Angular
- * will automatically extend the wait time to enable animations once **all** of the outbound HTTP requests
+ * will automatically extend the wait Time to enable animations once **all** of the outbound HTTP requests
  * are complete.
  *
  * ## CSS-defined Animations
@@ -1592,7 +1592,7 @@ angular.module('ngAnimate', ['ng'])
       // If unprefixed events are not supported but webkit-prefixed are, use the latter.
       // Otherwise, just use W3C names, browsers not supporting them at all will just ignore them.
       // Note: Chrome implements `window.onwebkitanimationend` and doesn't implement `window.onanimationend`
-      // but at the same time dispatches the `animationend` event and not `webkitAnimationEnd`.
+      // but at the same Time dispatches the `animationend` event and not `webkitAnimationEnd`.
       // Register both events in case `window.onanimationend` is not supported because of that,
       // do the same for `transitionend` as Safari is likely to exhibit similar behavior.
       // Also, the only modern browser that uses vendor prefixes for transitions/keyframes is webkit

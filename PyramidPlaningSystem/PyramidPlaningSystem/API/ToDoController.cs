@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Microsoft.Ajax.Utilities;
 using PyramidPlaningSystem.Authorize;
 using PyramidPlaningSystem.Models;
 using PyramidPlaningSystem.ViewModels;
@@ -13,7 +14,7 @@ using PyramidPlaningSystem.ViewModels;
 namespace PyramidPlaningSystem.API
 {
     [Authorize(Roles = "Administrator")]
-   // [CustomAuthorize(Roles = "Production, Administrator")]
+    // [CustomAuthorize(Roles = "Production, Administrator")]
     public class ToDoController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -37,7 +38,7 @@ namespace PyramidPlaningSystem.API
             var childTodods = db.ToDos.Where(x => x.ParentId == id).ToList();
             var toDoModel = new ToDoModel { ParentToDo = parentToDoModel, ChildToDos = childTodods };
             return toDoModel;
-        } 
+        }
 
         //public ToDo Get(Guid id)
         //{
@@ -56,18 +57,26 @@ namespace PyramidPlaningSystem.API
         {
             if (ModelState.IsValid)
             {
-                toDoModel.ParentToDo.Created = DateTime.Now;
-                db.ToDos.Add(toDoModel.ParentToDo);
-                db.SaveChanges();
+                if (toDoModel.ParentToDo.ToDoId == Guid.Empty)
+                {
+                    toDoModel.ParentToDo.Created = DateTime.Now;
+                    db.ToDos.Add(toDoModel.ParentToDo);
+                    db.SaveChanges();
+                }
+
 
                 if (toDoModel.ChildToDos.Any())
                 {
                     foreach (var childToDo in toDoModel.ChildToDos)
                     {
-                        childToDo.ParentId = toDoModel.ParentToDo.ToDoId;
-                        childToDo.Created = DateTime.Now;
-                        db.ToDos.Add(childToDo);
-                        db.SaveChanges();
+                        if (childToDo.ToDoId == Guid.Empty)
+                        {
+                            childToDo.ParentId = toDoModel.ParentToDo.ToDoId;
+                            childToDo.Created = DateTime.Now;
+                            db.ToDos.Add(childToDo);
+                            db.SaveChanges();
+                        }
+
                     }
                 }
 
@@ -112,8 +121,8 @@ namespace PyramidPlaningSystem.API
             ToDo toDoModel = db.ToDos.Find(id);
 
             var toDos = (from b in db.ToDos
-                where b.ParentId == id
-                select b).ToList();
+                         where b.ParentId == id
+                         select b).ToList();
 
             if (toDoModel == null)
             {

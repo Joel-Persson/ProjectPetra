@@ -222,7 +222,7 @@ window.Modernizr = (function( window, document, undefined ) {
     })(),
     /*>>hasevent*/
 
-    // TODO :: Add flag for hasownprop ? didn't last time
+    // TODO :: Add flag for hasownprop ? didn't last Time
 
     // hasOwnProperty shim by kangax needed for Safari 2.0 support
     _hasOwnProperty = ({}).hasOwnProperty, hasOwnProp;
@@ -233,7 +233,7 @@ window.Modernizr = (function( window, document, undefined ) {
       };
     }
     else {
-      hasOwnProp = function (object, property) { /* yes, this can give false positives/negatives, but most of the time we don't care about those */
+      hasOwnProp = function (object, property) { /* yes, this can give false positives/negatives, but most of the Time we don't care about those */
         return ((property in object) && is(object.constructor.prototype[property], 'undefined'));
       };
     }
@@ -518,7 +518,7 @@ window.Modernizr = (function( window, document, undefined ) {
     };
 
     // FF3.6 was EOL'ed on 4/24/12, but the ESR version of FF10
-    // will be supported until FF19 (2/12/13), at which time, ESR becomes FF17.
+    // will be supported until FF19 (2/12/13), at which Time, ESR becomes FF17.
     // FF10 still uses prefixes, so check for it until then.
     // for more ESR info, see: mozilla.org/en-US/firefox/organizations/faq/
     tests['websockets'] = function() {
@@ -604,7 +604,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
 
     // Note, Android < 4 will pass this test, but can only animate
-    //   a single property at a time
+    //   a single property at a Time
     //   goo.gl/v3V4Gp
     tests['cssanimations'] = function() {
         return testPropsAll('animationName');
@@ -927,7 +927,7 @@ window.Modernizr = (function( window, document, undefined ) {
                 inputs[ props[i] ] = !!bool;
             }
             return inputs;
-        })('search tel url email datetime date month week time datetime-local number range color'.split(' '));
+        })('search tel url email datetime date month week Time datetime-local number range color'.split(' '));
         /*>>inputtypes*/
     }
     /*>>webforms*/
@@ -1250,7 +1250,7 @@ window.Modernizr = (function( window, document, undefined ) {
            * @memberOf html5
            * @type Array|String
            */
-          'elements': options.elements || 'abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video',
+          'elements': options.elements || 'abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template Time video',
 
           /**
            * current version of html5shiv

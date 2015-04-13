@@ -20,7 +20,7 @@
                     </md-input-container>
 
                     <md-input-container flex>
-                        <label for="estimatedTime">Estimated time</label>
+                        <label for="estimatedTime">Estimated Time</label>
                         <input type="number"
                                required
                                min="0"
@@ -107,8 +107,9 @@
                             </div>
                             <div class="md-tile-content">
                                 <h3>Title: <span class="listSpan">{{toDo.Title | limitTo: 50}}</span></h3>
-                                <h3 class="listItemheaders">Estimated time: <span class="listSpan">{{toDo.Effort}}</span> </h3>
+                                <h3 class="listItemheaders">Estimated Time: <span class="listSpan">{{toDo.Effort}}</span> </h3>
                                 <h3 class="listItemheaders">Description:<span class="listSpan"> {{toDo.Description | limitTo: 90}}...</span></h3>
+                                <h3 class="listItemheaders">Priority:<span class="listSpan"> {{toDo.Priority}}</span></h3>
                             </div>
 
                             <md-button aria-label="edit" class="md-fab md-mini" ng-href="#/editToDo/{{toDo.ToDoId}}">
@@ -120,7 +121,7 @@
 
 
                             <div class="md-tile-right">
-                                <md-button aria-label="delete" class="md-fab md-mini" ng-click="deleteConfirm($event,$index, toDo)">
+                                <md-button aria-label="delete" class="md-fab md-mini" ng-click="deleteConfirm($event, toDo)">
                                     <md-icon layout="row" layout-align="center center" class="glyphicon glyphicon-remove"></md-icon>
                                 </md-button>
                             </div>

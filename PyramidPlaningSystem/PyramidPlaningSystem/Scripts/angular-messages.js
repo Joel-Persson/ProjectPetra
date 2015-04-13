@@ -52,7 +52,7 @@
  * Therefore, instead of having custom JavaScript code determine the priority of what errors are
  * present before others, the presentation of the errors are handled within the template.
  *
- * By default, ngMessages will only display one error at a time. However, if you wish to display all
+ * By default, ngMessages will only display one error at a Time. However, if you wish to display all
  * messages then the `ng-messages-multiple` attribute flag can be used on the element containing the
  * ngMessages directive to make this happen.
  *
@@ -175,7 +175,7 @@ angular.module('ngMessages', [])
     * `ngMessages` manages the state of internal messages within its container element. The internal
     * messages use the `ngMessage` directive and will be inserted/removed from the page depending
     * on if they're present within the key/value object. By default, only one message will be displayed
-    * at a time and this depends on the prioritization of the messages within the template. (This can
+    * at a Time and this depends on the prioritization of the messages within the template. (This can
     * be changed by using the ng-messages-multiple on the directive container.)
     *
     * A remote template can also be used to promote message reusability and messages can also be

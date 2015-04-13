@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license AngularJS v1.3.15
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
@@ -4675,7 +4675,7 @@ var $AnimateProvider = ['$provide', function($provide) {
        * @kind function
        * @description Inserts the element into the DOM either after the `after` element or
        * as the first child within the `parent` element. When the function is called a promise
-       * is returned that will be resolved at a later time.
+       * is returned that will be resolved at a later Time.
        * @param {DOMElement} element the element which will be inserted into the DOM
        * @param {DOMElement} parent the parent element which will append the element as
        *   a child (if the after element is not present)
@@ -4697,7 +4697,7 @@ var $AnimateProvider = ['$provide', function($provide) {
        * @name $animate#leave
        * @kind function
        * @description Removes the element from the DOM. When the function is called a promise
-       * is returned that will be resolved at a later time.
+       * is returned that will be resolved at a later Time.
        * @param {DOMElement} element the element which will be removed from the DOM
        * @param {object=} options an optional collection of options that will be applied to the element.
        * @return {Promise} the animation callback promise
@@ -4715,7 +4715,7 @@ var $AnimateProvider = ['$provide', function($provide) {
        * @kind function
        * @description Moves the position of the provided element within the DOM to be placed
        * either after the `after` element or inside of the `parent` element. When the function
-       * is called a promise is returned that will be resolved at a later time.
+       * is called a promise is returned that will be resolved at a later Time.
        *
        * @param {DOMElement} element the element which will be moved around within the
        *   DOM
@@ -4738,7 +4738,7 @@ var $AnimateProvider = ['$provide', function($provide) {
        * @name $animate#addClass
        * @kind function
        * @description Adds the provided className CSS class value to the provided element.
-       * When the function is called a promise is returned that will be resolved at a later time.
+       * When the function is called a promise is returned that will be resolved at a later Time.
        * @param {DOMElement} element the element which will have the className value
        *   added to it
        * @param {string} className the CSS class which will be added to the element
@@ -4767,7 +4767,7 @@ var $AnimateProvider = ['$provide', function($provide) {
        * @name $animate#removeClass
        * @kind function
        * @description Removes the provided className CSS class value from the provided element.
-       * When the function is called a promise is returned that will be resolved at a later time.
+       * When the function is called a promise is returned that will be resolved at a later Time.
        * @param {DOMElement} element the element which will have the className value
        *   removed from it
        * @param {string} className the CSS class which will be removed from the element
@@ -4796,7 +4796,7 @@ var $AnimateProvider = ['$provide', function($provide) {
        * @name $animate#setClass
        * @kind function
        * @description Adds and/or removes the given CSS classes to and from the element.
-       * When the function is called a promise is returned that will be resolved at a later time.
+       * When the function is called a promise is returned that will be resolved at a later Time.
        * @param {DOMElement} element the element which will have its CSS classes changed
        *   removed from it
        * @param {string} add the CSS classes which will be added to the element
@@ -4949,7 +4949,7 @@ function Browser(window, document, $log, $sniffer) {
    */
   self.notifyWhenNoOutstandingRequests = function(callback) {
     // force browser to execute all pollFns - this is needed so that cookies and other pollers fire
-    // at some deterministic time in respect to the test runner's actions. Leaving things up to the
+    // at some deterministic Time in respect to the test runner's actions. Leaving things up to the
     // regular poller would result in flaky tests.
     forEach(pollFns, function(pollFn) { pollFn(); });
 
@@ -5701,7 +5701,7 @@ function $CacheFactoryProvider() {
  * @name $templateCache
  *
  * @description
- * The first time a template is used, it is loaded in the template cache for quick retrieval. You
+ * The first Time a template is used, it is loaded in the template cache for quick retrieval. You
  * can load templates directly into the cache in a `script` tag, or by consuming the
  * `$templateCache` service directly.
  *
@@ -6299,7 +6299,7 @@ function $TemplateCacheProvider() {
  * * *Observing interpolated attributes:* Use `$observe` to observe the value changes of attributes
  *   that contain interpolation (e.g. `src="{{bar}}"`). Not only is this very efficient but it's also
  *   the only way to easily get the actual value because during the linking phase the interpolation
- *   hasn't been evaluated yet and so the value is at this time set to `undefined`.
+ *   hasn't been evaluated yet and so the value is at this Time set to `undefined`.
  *
  * ```js
  * function linkingFn(scope, elm, attrs, ctrl) {
@@ -8231,7 +8231,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
         // element. However, we cannot just cache the non-patched version and use it here as
         // that would break if another library patches the method after Angular does (one
         // example is jQuery UI). Instead, set a flag indicating scope destroying should be
-        // skipped this one time.
+        // skipped this one Time.
         skipDestroyOnNextJQueryCleanData = true;
         jQuery.cleanData([firstElementToRemove]);
       }
@@ -8441,7 +8441,7 @@ function $ControllerProvider() {
      */
     return function(expression, locals, later, ident) {
       // PRIVATE API:
-      //   param `later` --- indicates that the controller's constructor is invoked at a later time.
+      //   param `later` --- indicates that the controller's constructor is invoked at a later Time.
       //                     If true, $controller will allocate the object with the correct
       //                     prototype chain, but will not invoke the controller until a returned
       //                     callback is invoked.
@@ -8776,14 +8776,14 @@ function $HttpProvider() {
    * @description
    *
    * Configure $http service to combine processing of multiple http responses received at around
-   * the same time via {@link ng.$rootScope.Scope#$applyAsync $rootScope.$applyAsync}. This can result in
+   * the same Time via {@link ng.$rootScope.Scope#$applyAsync $rootScope.$applyAsync}. This can result in
    * significant performance improvement for bigger applications that make many HTTP requests
    * concurrently (common during application bootstrap).
    *
    * Defaults to false. If no value is specifed, returns the current configured value.
    *
    * @param {boolean=} value If true, when requests are loaded, they will schedule a deferred
-   *    "apply" on the next tick, giving time for subsequent requests in a roughly ~10ms window
+   *    "apply" on the next tick, giving Time for subsequent requests in a roughly ~10ms window
    *    to load and share the same digest cycle.
    *
    * @returns {boolean|Object} If a value is specified, returns the $httpProvider for chaining.
@@ -9042,7 +9042,7 @@ function $HttpProvider() {
      * To enable caching, set the request configuration `cache` property to `true` (to use default
      * cache) or to a custom cache object (built with {@link ng.$cacheFactory `$cacheFactory`}).
      * When the cache is enabled, `$http` stores the response from the server in the specified
-     * cache. The next time the same request is made, the response is served from the cache without
+     * cache. The next Time the same request is made, the response is served from the cache without
      * sending a request to the server.
      *
      * Note that even if the response is served from cache, delivery of the data is asynchronous in
@@ -9198,7 +9198,7 @@ function $HttpProvider() {
      * for added security.
      *
      * The name of the headers can be specified using the xsrfHeaderName and xsrfCookieName
-     * properties of either $httpProvider.defaults at config-time, $http.defaults at run-time,
+     * properties of either $httpProvider.defaults at config-Time, $http.defaults at run-Time,
      * or the per-request config object.
      *
      *
@@ -10296,7 +10296,7 @@ function $IntervalProvider() {
       *
       * In tests you can use {@link ngMock.$interval#flush `$interval.flush(millis)`} to
       * move forward by `millis` milliseconds and trigger any functions scheduled to run in that
-      * time.
+      * Time.
       *
       * <div class="alert alert-warning">
       * **Note**: Intervals created by this service must be explicitly destroyed when you are finished
@@ -10364,7 +10364,7 @@ function $IntervalProvider() {
       *           // return the directive link function. (compile function not needed)
       *           return function(scope, element, attrs) {
       *             var format,  // date format
-      *                 stopTime; // so that we can cancel the time updates
+      *                 stopTime; // so that we can cancel the Time updates
       *
       *             // used to update the UI
       *             function updateTime() {
@@ -10380,7 +10380,7 @@ function $IntervalProvider() {
       *             stopTime = $interval(updateTime, 1000);
       *
       *             // listen on DOM destroy (removal) event, and cancel the next UI update
-      *             // to prevent updating time after the DOM element was removed.
+      *             // to prevent updating Time after the DOM element was removed.
       *             element.on('$destroy', function() {
       *               $interval.cancel(stopTime);
       *             });
@@ -10391,7 +10391,7 @@ function $IntervalProvider() {
       *   <div>
       *     <div ng-controller="ExampleController">
       *       Date format: <input ng-model="format"> <hr/>
-      *       Current time is: <span my-current-time="format"></span>
+      *       Current Time is: <span my-current-Time="format"></span>
       *       <hr/>
       *       Blood 1 : <font color='red'>{{blood_1}}</font>
       *       Blood 2 : <font color='red'>{{blood_2}}</font>
@@ -12990,7 +12990,7 @@ function $ParseProvider() {
  *
  * [The CommonJS Promise proposal](http://wiki.commonjs.org/wiki/Promises) describes a promise as an
  * interface for interacting with an object that represents the result of an action that is
- * performed asynchronously, and may or may not be finished at any given point in time.
+ * performed asynchronously, and may or may not be finished at any given point in Time.
  *
  * From the perspective of dealing with error handling, deferred and promise APIs are to
  * asynchronous programming what `try`, `catch` and `throw` keywords are to synchronous programming.
@@ -13536,8 +13536,8 @@ function $$RAFProvider() { //rAF
  *
  * The design decisions behind the scope are heavily favored for speed and memory consumption.
  *
- * The typical use of scope is to watch the expressions, which most of the time return the same
- * value as last time so we optimize the operation.
+ * The typical use of scope is to watch the expressions, which most of the Time return the same
+ * value as last Time so we optimize the operation.
  *
  * Closures construction is expensive in terms of speed as well as memory:
  *   - No closures, instead use prototypical inheritance for API
@@ -14091,7 +14091,7 @@ function $RootScopeProvider() {
           newValue = _value;
           var newLength, key, bothNaN, newItem, oldItem;
 
-          // If the new value is undefined, then return undefined as the watch may be a one-time watch
+          // If the new value is undefined, then return undefined as the watch may be a one-Time watch
           if (isUndefined(newValue)) return;
 
           if (!isObject(newValue)) { // if primitive
@@ -14175,7 +14175,7 @@ function $RootScopeProvider() {
             listener(newValue, veryOldValue, self);
           }
 
-          // make a copy for the next time a collection is changed
+          // make a copy for the next Time a collection is changed
           if (trackVeryOldValue) {
             if (!isObject(newValue)) {
               //primitive
@@ -14472,7 +14472,7 @@ function $RootScopeProvider() {
        * @kind function
        *
        * @description
-       * Executes the expression on the current scope at a later point in time.
+       * Executes the expression on the current scope at a later point in Time.
        *
        * The `$evalAsync` makes no guarantees as to when the `expression` will be executed, only
        * that:
@@ -14497,7 +14497,7 @@ function $RootScopeProvider() {
        * @param {(object)=} locals Local variables object, useful for overriding values in scope.
        */
       $evalAsync: function(expr, locals) {
-        // if we are outside of an $digest loop and this is the first time we are scheduling async
+        // if we are outside of an $digest loop and this is the first Time we are scheduling async
         // task also schedule async auto-flush
         if (!$rootScope.$$phase && !asyncQueue.length) {
           $browser.defer(function() {
@@ -14582,7 +14582,7 @@ function $RootScopeProvider() {
        * @kind function
        *
        * @description
-       * Schedule the invocation of $apply to occur at a later time. The actual time difference
+       * Schedule the invocation of $apply to occur at a later Time. The actual Time difference
        * varies across browsers, but is typically around ~10 milliseconds.
        *
        * This can be used to queue up multiple expressions which need to be evaluated in the same
@@ -15581,7 +15581,7 @@ function $SceDelegateProvider() {
  * for little coding overhead.  It will be much harder to take an SCE disabled application and
  * either secure it on your own or enable SCE at a later stage.  It might make sense to disable SCE
  * for cases where you have a lot of existing code that was written before SCE was introduced and
- * you're migrating them a module at a time.
+ * you're migrating them a module at a Time.
  *
  * That said, here's how you can completely disable SCE:
  *
@@ -15644,7 +15644,7 @@ function $SceProvider() {
    * instance, an implementation could maintain a registry of all trusted objects by context.  In
    * such a case, trustAs() would return the same object that was passed in.  getTrusted() would
    * return the same object passed in if it was found in the registry under a compatible context or
-   * throw an exception otherwise.  An implementation might only wrap values some of the time based
+   * throw an exception otherwise.  An implementation might only wrap values some of the Time based
    * on some criteria.  getTrusted() might return a value and not throw an exception for special
    * constants or objects even if not wrapped.  All such implementations fulfill this contract.
    *
@@ -15683,7 +15683,7 @@ function $SceProvider() {
      * @kind function
      *
      * @return {Boolean} true if SCE is enabled, false otherwise.  If you want to set the value, you
-     * have to do it at module config time on {@link ng.$sceProvider $sceProvider}.
+     * have to do it at module config Time on {@link ng.$sceProvider $sceProvider}.
      *
      * @description
      * Returns a boolean indicating if SCE is enabled.
@@ -17259,7 +17259,7 @@ var DATE_FORMATS_SPLIT = /((?:[^yMdHhmsaZEwG']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|
  * @param {(Date|number|string)} date Date to format either as Date object, milliseconds (string or
  *    number) or various ISO 8601 datetime string formats (e.g. yyyy-MM-ddTHH:mm:ss.sssZ and its
  *    shorter versions like yyyy-MM-ddTHH:mmZ, yyyy-MM-dd or yyyyMMddTHHmmssZ). If no timezone is
- *    specified in the string input, the time is considered to be in the local timezone.
+ *    specified in the string input, the Time is considered to be in the local timezone.
  * @param {string=} format Formatting rules (see Description). If not specified,
  *    `mediumDate` is used.
  * @param {string=} timezone Timezone to be used for formatting. Right now, only `'UTC'` is supported.
@@ -18295,7 +18295,7 @@ function nullFormRenameControl(control, name) {
  *  - `url`
  *  - `date`
  *  - `datetimelocal`
- *  - `time`
+ *  - `Time`
  *  - `week`
  *  - `month`
  *
@@ -19070,12 +19070,12 @@ var inputType = {
 
   /**
    * @ngdoc input
-   * @name input[time]
+   * @name input[Time]
    *
    * @description
-   * Input with time validation and transformation. In browsers that do not yet support
+   * Input with Time validation and transformation. In browsers that do not yet support
    * the HTML5 date input, a text element will be used. In that case, the text must be entered in a valid ISO-8601
-   * local time format (HH:mm:ss), for example: `14:57:00`. Model must be a Date object. This binding will always output a
+   * local Time format (HH:mm:ss), for example: `14:57:00`. Model must be a Date object. This binding will always output a
    * Date object to the model of January 1, 1970, or local date `new Date(1970, 0, 1, HH, mm, ss)`.
    *
    * The model must always be a Date object, otherwise Angular will throw an error.
@@ -19087,9 +19087,9 @@ var inputType = {
    * @param {string} ngModel Assignable angular expression to data-bind to.
    * @param {string=} name Property name of the form under which the control is published.
    * @param {string=} min Sets the `min` validation error key if the value entered is less than `min`. This must be a
-   * valid ISO time format (HH:mm:ss).
+   * valid ISO Time format (HH:mm:ss).
    * @param {string=} max Sets the `max` validation error key if the value entered is greater than `max`. This must be a
-   * valid ISO time format (HH:mm:ss).
+   * valid ISO Time format (HH:mm:ss).
    * @param {string=} required Sets `required` validation error key if the value is not entered.
    * @param {string=} ngRequired Adds `required` attribute and `required` validation constraint to
    *    the element when the ngRequired expression evaluates to true. Use `ngRequired` instead of
@@ -19098,7 +19098,7 @@ var inputType = {
    *    interaction with the input element.
    *
    * @example
-   <example name="time-input-directive" module="timeExample">
+   <example name="Time-input-directive" module="timeExample">
    <file name="index.html">
      <script>
       angular.module('timeExample', [])
@@ -19110,11 +19110,11 @@ var inputType = {
      </script>
      <form name="myForm" ng-controller="DateController as dateCtrl">
         Pick a between 8am and 5pm:
-        <input type="time" id="exampleInput" name="input" ng-model="example.value"
+        <input type="Time" id="exampleInput" name="input" ng-model="example.value"
             placeholder="HH:mm:ss" min="08:00:00" max="17:00:00" required />
         <span class="error" ng-show="myForm.input.$error.required">
             Required!</span>
-        <span class="error" ng-show="myForm.input.$error.time">
+        <span class="error" ng-show="myForm.input.$error.Time">
             Not a valid date!</span>
         <tt>value = {{example.value | date: "HH:mm:ss"}}</tt><br/>
         <tt>myForm.input.$valid = {{myForm.input.$valid}}</tt><br/>
@@ -19158,7 +19158,7 @@ var inputType = {
    </file>
    </example>
    */
-  'time': createDateInputType('time', TIME_REGEXP,
+  'time': createDateInputType('Time', TIME_REGEXP,
       createDateParser(TIME_REGEXP, ['HH', 'mm', 'ss', 'sss']),
      'HH:mm:ss.sss'),
 
@@ -22259,7 +22259,7 @@ var ngIfDirective = ['$animate', function($animate) {
  * @name ngInclude#$includeContentRequested
  * @eventType emit on the scope ngInclude was declared in
  * @description
- * Emitted every time the ngInclude content is requested.
+ * Emitted every Time the ngInclude content is requested.
  *
  * @param {Object} angularEvent Synthetic event object.
  * @param {String} src URL of content to load.
@@ -22271,7 +22271,7 @@ var ngIfDirective = ['$animate', function($animate) {
  * @name ngInclude#$includeContentLoaded
  * @eventType emit on the current ngInclude scope
  * @description
- * Emitted every time the ngInclude content is reloaded.
+ * Emitted every Time the ngInclude content is reloaded.
  *
  * @param {Object} angularEvent Synthetic event object.
  * @param {String} src URL of content to load.
@@ -22883,7 +22883,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    * * `$rollbackViewValue()` is called.  If we are rolling back the view value to the last
    *   committed value then `$render()` is called to update the input control.
    * * The value referenced by `ng-model` is changed programmatically and both the `$modelValue` and
-   *   the `$viewValue` are different to last time.
+   *   the `$viewValue` are different to last Time.
    *
    * Since `ng-model` does not do a deep watch, `$render()` is only invoked if the values of
    * `$modelValue` and `$viewValue` are actually different to their previous value. If `$modelValue`
@@ -23471,7 +23471,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
  *    - {@link input[url] url}
  *    - {@link input[date] date}
  *    - {@link input[datetime-local] datetime-local}
- *    - {@link input[time] time}
+ *    - {@link input[Time] Time}
  *    - {@link input[month] month}
  *    - {@link input[week] week}
  *  - {@link ng.directive:select select}
@@ -23690,7 +23690,7 @@ var DEFAULT_REGEXP = /(\s+|^)default(\s+|$)/;
  *   - `getterSetter`: boolean value which determines whether or not to treat functions bound to
        `ngModel` as getters/setters.
  *   - `timezone`: Defines the timezone to be used to read/write the `Date` instance in the model for
- *     `<input type="date">`, `<input type="time">`, ... . Right now, the only supported value is `'UTC'`,
+ *     `<input type="date">`, `<input type="Time">`, ... . Right now, the only supported value is `'UTC'`,
  *     otherwise the default timezone of the browser will be used.
  *
  * @example
@@ -24763,7 +24763,7 @@ var NG_HIDE_IN_PROGRESS_CLASS = 'ng-hide-animate';
  * Animations in ngShow/ngHide work with the show and hide events that are triggered when the directive expression
  * is true and false. This system works like the animation system present with ngClass except that
  * you must also include the !important flag to override the display property
- * so that you can perform an animation when the element is hidden during the time of the animation.
+ * so that you can perform an animation when the element is hidden during the Time of the animation.
  *
  * ```css
  * //

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license AngularJS v1.3.15
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
@@ -83,7 +83,7 @@ angular.mock.$Browser = function() {
    * @name $browser#defer.now
    *
    * @description
-   * Current milliseconds mock time.
+   * Current milliseconds mock Time.
    */
   self.defer.now = 0;
 
@@ -450,7 +450,7 @@ angular.mock.$LogProvider = function() {
  *
  * Use {@link ngMock.$interval#flush `$interval.flush(millis)`} to
  * move forward by `millis` milliseconds and trigger any functions scheduled to run in that
- * time.
+ * Time.
  *
  * @param {function()} fn A function that should be called repeatedly.
  * @param {number} delay Number of milliseconds between each function call.
@@ -549,7 +549,7 @@ angular.mock.$IntervalProvider = function() {
      *
      * @param {number=} millis maximum timeout amount to flush up until.
      *
-     * @return {number} The amount of time moved forward.
+     * @return {number} The amount of Time moved forward.
      */
     $interval.flush = function(millis) {
       now += millis;
@@ -623,10 +623,10 @@ function padNumber(num, digits, trim) {
  *
  * The main purpose is to create Date-like instances with timezone fixed to the specified timezone
  * offset, so that we can test code that depends on local timezone settings without dependency on
- * the time zone settings of the machine where the code is running.
+ * the Time zone settings of the machine where the code is running.
  *
  * @param {number} offset Offset of the *desired* timezone in hours (fractions will be honored)
- * @param {(number|string)} timestamp Timestamp representing the desired time in *UTC*
+ * @param {(number|string)} timestamp Timestamp representing the desired Time in *UTC*
  *
  * @example
  * !!!! WARNING !!!!!
@@ -1749,7 +1749,7 @@ angular.mock.$TimeoutDecorator = ['$delegate', '$browser', function($delegate, $
   function formatPendingTasksAsString(tasks) {
     var result = [];
     angular.forEach(tasks, function(task) {
-      result.push('{id: ' + task.id + ', ' + 'time: ' + task.time + '}');
+      result.push('{id: ' + task.id + ', ' + 'Time: ' + task.time + '}');
     });
 
     return result.join(', ');

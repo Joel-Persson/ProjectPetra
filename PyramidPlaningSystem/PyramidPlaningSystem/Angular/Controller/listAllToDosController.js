@@ -16,7 +16,7 @@ myApp.controller('listAllToDosController', function ($scope, toDoFactory, $mdDia
         });
     }
 
-    $scope.deleteConfirm = function (ev, $index, toDo) {
+    $scope.deleteConfirm = function (ev, toDo) {
         var confirm = $mdDialog.confirm()
           .title('Confirm')
           .content('Are you sure you want to delete the ToDo?')
@@ -24,14 +24,7 @@ myApp.controller('listAllToDosController', function ($scope, toDoFactory, $mdDia
           .cancel('No')
           .targetEvent(ev);
         $mdDialog.show(confirm).then(function () {
-            //bästa lösningen för att ta bort ett item i en array
-            $.each($scope.toDoList, function (i) {
-                if ($scope.toDoList[i].ParentId === toDo.ToDoId) {
-                    $scope.toDoList.splice(i, 1);
-                }
-            });
-            $scope.index = $index;
-            $scope.toDoList.splice($index, 1);
+             $scope.ParentToDos.splice($scope.ParentToDos.indexOf(toDo), 1);
             $scope.deleteToDo(toDo.ToDoId);
 
         }, function () {

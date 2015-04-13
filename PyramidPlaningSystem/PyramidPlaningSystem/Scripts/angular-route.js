@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license AngularJS v1.3.15
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
@@ -716,7 +716,7 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
  * # Overview
  * `ngView` is a directive that complements the {@link ngRoute.$route $route} service by
  * including the rendered template of the current route into the main layout (`index.html`) file.
- * Every time the current route changes, the included view changes with it according to the
+ * Every Time the current route changes, the included view changes with it according to the
  * configuration of the `$route` service.
  *
  * Requires the {@link ngRoute `ngRoute`} module to be installed.
@@ -878,7 +878,7 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
  * @name ngView#$viewContentLoaded
  * @eventType emit on the current ngView scope
  * @description
- * Emitted every time the ngView content is reloaded.
+ * Emitted every Time the ngView content is reloaded.
  */
 ngViewFactory.$inject = ['$route', '$anchorScroll', '$animate'];
 function ngViewFactory($route, $anchorScroll, $animate) {

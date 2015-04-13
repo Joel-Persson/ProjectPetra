@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * Angular Material Design
  * https://github.com/angular/material
  * @license MIT
@@ -680,7 +680,7 @@ angular.module('material.core')
      * nextUid, from angular.js.
      * A consistent way of creating unique IDs in angular. The ID is a sequence of alpha numeric
      * characters such as '012ABC'. The reason why we are not using simply a number counter is that
-     * the number string gets longer over time, and it can also overflow, where as the nextId
+     * the number string gets longer over Time, and it can also overflow, where as the nextId
      * will grow much slower, it is a string, and it will never overflow.
      *
      * @returns an unique alpha-numeric string
@@ -1809,7 +1809,7 @@ function InterimElementProvider() {
 
               element = compileData.link(options.scope);
 
-              // Search for parent at insertion time, if not specified
+              // Search for parent at insertion Time, if not specified
               if (angular.isFunction(options.parent)) {
                 options.parent = options.parent(options.scope, element, options);
               } else if (angular.isString(options.parent)) {
@@ -3224,7 +3224,7 @@ function parseRules(theme, colorType, rules) {
   return generatedRules.join('');
 }
 
-// Generate our themes at run time given the state of THEMES and PALETTES
+// Generate our themes at run Time given the state of THEMES and PALETTES
 function generateThemes($injector) {
   var themeCss = $injector.has('$MD_THEME_CSS') ? $injector.get('$MD_THEME_CSS') : '';
 
@@ -7397,7 +7397,7 @@ function SelectMenuDirective($parse, $mdUtil, $mdTheming) {
            values.push(option.value);
          } else {
            // Otherwise, the given hashKey has no associated option, and we got it
-           // from an ngModel value at an earlier time. Push the unhashed value of
+           // from an ngModel value at an earlier Time. Push the unhashed value of
            // this hashKey to the model.
            // This allows the developer to put a value in the model that doesn't yet have
            // an associated option.
@@ -7583,7 +7583,7 @@ function SelectProvider($$interimElementProvider) {
           // Give ourselves two frames for the progress loader to clear out.
           $$rAF(function() {
             $$rAF(function() {
-              // Don't go forward if the select has been removed in this time...
+              // Don't go forward if the select has been removed in this Time...
               if (opts.isRemoved) return;
               animateSelect(scope, element, opts);
             });
@@ -7597,7 +7597,7 @@ function SelectProvider($$interimElementProvider) {
         opts.lastOverflow = opts.disableTarget.css('overflow');
         opts.disableTarget.css('overflow', 'hidden');
       }
-      // Only activate click listeners after a short time to stop accidental double taps/clicks
+      // Only activate click listeners after a short Time to stop accidental double taps/clicks
       // from clicking the wrong item
       $timeout(activateInteraction, 75, false);
 
@@ -10333,7 +10333,7 @@ angular.module('material.components.whiteframe', []);
    *
    * @description
    * `<md-autocomplete>` is a special input component with a drop-down of all possible matches to a custom query.
-   * This component allows you to provide real-time suggestions as the user types in the input area.
+   * This component allows you to provide real-Time suggestions as the user types in the input area.
    *
    * @param {string=} md-search-text A model to bind the search query text to
    * @param {object=} md-selected-item A model to bind the selected item to
@@ -10341,11 +10341,11 @@ angular.module('material.components.whiteframe', []);
    * @param {string=} md-item-text An expression that will convert your object to a single string.
    * @param {string=} placeholder Placeholder text that will be forwarded to the input.
    * @param {boolean=} md-no-cache Disables the internal caching that happens in autocomplete
-   * @param {expression} md-selected-item-change An expression to be run each time a new item is selected
-   * @param {expression} md-search-text-change An expression to be run each time the search text updates
+   * @param {expression} md-selected-item-change An expression to be run each Time a new item is selected
+   * @param {expression} md-search-text-change An expression to be run each Time the search text updates
    * @param {boolean=} ng-disabled Determines whether or not to disable the input field
    * @param {number=} md-min-length Specifies the minimum length of text before autocomplete will make suggestions
-   * @param {number=} md-delay Specifies the amount of time (in milliseconds) to wait before looking for results
+   * @param {number=} md-delay Specifies the amount of Time (in milliseconds) to wait before looking for results
    *
    * @usage
    * <hljs lang="html">

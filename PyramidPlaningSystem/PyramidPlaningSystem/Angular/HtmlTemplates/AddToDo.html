@@ -12,7 +12,7 @@
 
                     <md-input-container flex>
                         <label for="title">Title</label>
-                        <input ng-model="ToDoModel.ParentToDo.title"
+                        <input ng-model="ToDoModel.ParentToDo.Title"
                                required
                                ng-maxlength="250"
                                ng-minlength="1"
@@ -21,13 +21,13 @@
                     </md-input-container>
 
                     <md-input-container flex>
-                        <label for="estimatedTime">Estimated time</label>
+                        <label for="estimatedTime">Estimated Time</label>
                         <input type="number"
                                required
                                min="0"
                                max="1000"
                                name="estimatedTime"
-                               ng-model="ToDoModel.ParentToDo.effort" />
+                               ng-model="ToDoModel.ParentToDo.Effort" />
 
                         <div ng-messages="toDoSubmit.estimatedTime.$error">
                             <div ng-message="number">
@@ -39,7 +39,7 @@
                     </md-input-container>
 
                     <p class="radiobuttonInfo" hide-gt-sm>Please choose days or hours:</p>
-                    <md-radio-group layout-sm="column" required ng-model="ToDoModel.ParentToDo.time" layout="row">
+                    <md-radio-group layout-sm="column" required ng-model="ToDoModel.ParentToDo.Time" layout="row">
                         <md-radio-button class="radioButtonEffort" name="days" value="days">Days</md-radio-button>
                         <md-radio-button class="radioButtonEffort" name="hours" value=" hours"> Hours </md-radio-button>
                     </md-radio-group>
@@ -48,14 +48,14 @@
                 <div layout layout-sm="row">
                     <md-input-container flex="66">
                         <label>Description</label>
-                        <textarea ng-model="ToDoModel.ParentToDo.description"
+                        <textarea ng-model="ToDoModel.ParentToDo.Description"
                                   ng-maxlength="800"
                                   required
                                   md-maxlength="800"
                                   ng-minlength="10"></textarea>
                     </md-input-container>
 
-                    <md-select class="customSelect" name="prioritySelect" placeholder="Priority" ng-model="ToDoModel.ParentToDo.priority" required>
+                    <md-select class="customSelect" name="prioritySelect" placeholder="Priority" ng-model="ToDoModel.ParentToDo.Priority" required>
                         <md-optgroup label="Priority">
                             <md-option value="100">100</md-option>
                             <md-option value="200">200</md-option>

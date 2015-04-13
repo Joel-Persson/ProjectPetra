@@ -3,10 +3,10 @@
         <span class="glyphicon glyphicon-star starSpan"></span>
     </div>
     <div class="md-tile-content">
-        <h3>Title: <span class="listSpan">{{subItem.title}}</span></h3>
-        <h3 class="listItemheaders">Estimated time: <span class="listSpan">{{subItem.effort}}</span> </h3>
-        <h3 class="listItemheaders">Description:<span class="listSpan"> {{subItem.description | limitTo: 100}}...</span></h3>
-        <h3 class="listItemheaders">Priority:<span class="listSpan"> {{subItem.priority}}</span></h3>
+        <h3>Title: <span class="listSpan">{{subItem.Title}}</span></h3>
+        <h3 class="listItemheaders">Estimated Time: <span class="listSpan">{{subItem.Effort}}</span> </h3>
+        <h3 class="listItemheaders">Description:<span class="listSpan"> {{subItem.Description | limitTo: 100}}...</span></h3>
+        <h3 class="listItemheaders">Priority:<span class="listSpan"> {{subItem.Priority}}</span></h3>
     </div>
     <div class="md-tile-right">
         <md-button aria-label="delete" class="md-fab md-mini" ng-click="showConfirm($event,subItem)">
