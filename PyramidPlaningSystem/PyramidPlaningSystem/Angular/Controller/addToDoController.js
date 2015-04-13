@@ -1,5 +1,6 @@
-﻿myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, $location) {
-
+﻿
+myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, $location) {
+    $scope.PageHeader = "Add Todo";
     $scope.time = "";
     $scope.ToDoModel = {
         ParentToDo: {},
@@ -69,64 +70,3 @@
 
 
 
-myApp.controller('listAllToDosController', function ($scope, toDoFactory, $mdDialog) {
-    $scope.toDoList = [];
-    getTodos();
-
-    function getTodos() {
-        toDoFactory.getToDoList().success(function (data) {
-            $scope.toDoList = data;
-        });
-    }
-
-    $scope.deleteConfirm = function (ev, $index, toDo) {
-        var confirm = $mdDialog.confirm()
-          .title('Confirm')
-          .content('Are you sure you want to delete the ToDo?')
-          .ok('Yes')
-          .cancel('No')
-          .targetEvent(ev);
-        $mdDialog.show(confirm).then(function () {
-            //bästa lösningen för att ta bort ett item i en array
-            $.each($scope.toDoList, function (i) {
-                if ($scope.toDoList[i].ParentId === toDo.ToDoId) {
-                    $scope.toDoList.splice(i, 1);
-                }
-            });
-            $scope.index = $index;
-            $scope.toDoList.splice($index, 1);
-            $scope.deleteToDo(toDo.ToDoId);
-
-        }, function () {
-            $mdDialog.cancel();
-        });
-    };
-
-    $scope.deleteToDo = function (toDoId) {
-        toDoFactory.deleteToDo(toDoId).success(function () {
-            $scope.status = "Deleted";
-        }).error(function () {
-            $scope.status = "Error";
-        });
-    };
-
-});
-
-myApp.controller('editToDoController', function ($scope, $routeParams, toDoFactory, $location) {
-    getSingleToDo();
-    function getSingleToDo() {
-        toDoFactory.getSingleToDo($routeParams.Id).success(function (data) {
-            $scope.toDoModel = data;
-        })
-        .error(function () {
-            $scope.status = "Something went wrong!";
-        });
-
-    };
-
-    $scope.editToDo = function (toDo) {
-        toDoFactory.editToDo(toDo).success(function () {
-            $location.path('/toDos');
-        });
-    };
-});

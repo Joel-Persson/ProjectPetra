@@ -1,4 +1,6 @@
-﻿
+﻿<div layout layout-align="start center" class="md-padding">
+    <h1 class="md-padding" style="color: #bdbdbd; margin-bottom: 10px; margin-left: 25px;">{{PageHeader}}</h1>
+</div>
 <md-content class="md-padding">
     <md-card flex-md flex-gt-md>
         <md-card-content>
@@ -76,6 +78,62 @@
                 </div>
 
             </form>
+            <div layout-align="end center" layout="row">
+                <md-button aria-label="addToDo" class="md-fab md-mini" ng-click="ShowAddSubToDo($event)">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <md-tooltip md-direction="left">
+                        Add subitem
+                    </md-tooltip>
+                </md-button>
+            </div>
+
         </md-card-content>
     </md-card>
+
+    <md-card ng-show="toDoModel.ChildToDos.length">
+        <md-toolbar>
+            <h1 class="md-toolbar-tools">
+                <span>Child todos</span>
+            </h1>
+        </md-toolbar>
+        <md-card-content>
+
+            <md-list>
+                <form>
+                    <md-item ng-repeat="toDo in toDoModel.ChildToDos">
+                        <md-item-content>
+                            <div class="md-tile-left">
+                                <span class="glyphicon glyphicon-star starSpan"></span>
+                            </div>
+                            <div class="md-tile-content">
+                                <h3>Title: <span class="listSpan">{{toDo.Title | limitTo: 50}}</span></h3>
+                                <h3 class="listItemheaders">Estimated time: <span class="listSpan">{{toDo.Effort}}</span> </h3>
+                                <h3 class="listItemheaders">Description:<span class="listSpan"> {{toDo.Description | limitTo: 90}}...</span></h3>
+                            </div>
+
+                            <md-button aria-label="edit" class="md-fab md-mini" ng-href="#/editToDo/{{toDo.ToDoId}}">
+                                <md-icon layout="row" layout-align="center center" class="glyphicon glyphicon-edit"></md-icon>
+                                <md-tooltip md-direction="left">
+                                    Edit
+                                </md-tooltip>
+                            </md-button>
+
+
+                            <div class="md-tile-right">
+                                <md-button aria-label="delete" class="md-fab md-mini" ng-click="deleteConfirm($event,$index, toDo)">
+                                    <md-icon layout="row" layout-align="center center" class="glyphicon glyphicon-remove"></md-icon>
+                                </md-button>
+                            </div>
+                        </md-item-content>
+
+                        <md-divider ng-if="!$last"></md-divider>
+                    </md-item>
+                </form>
+            </md-list>
+        </md-card-content>
+    </md-card>
+
 </md-content>
+
+{{status}}
+{{success}}

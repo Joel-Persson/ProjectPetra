@@ -1,9 +1,12 @@
-﻿<md-content class="md-padding" ng-show="!toDoList.length">
+﻿<div layout layout-align="start center" class="md-padding">
+    <h1 class="md-padding" style="color: #bdbdbd; margin-bottom: 10px; margin-left: 25px;">{{PageHeader}}</h1>
+</div>
+<md-content class="md-padding" ng-show="!toDoList.length">
     <a ng-href="#/addToDo">Create Todo</a>
 </md-content>
 
 
-<md-content class="md-padding" ng-show="toDoList.length">
+<md-content class="md-padding" ng-show="ParentToDos.length">
     <div layout="row">
         <md-input-container flex="40">
             <label>Search:</label>
@@ -21,7 +24,7 @@
 
             <md-list>
                 <form>
-                    <md-item ng-repeat="toDo in toDoList | filter: query  | orderBy: '-Created'">
+                    <md-item ng-repeat="toDo in ParentToDos | filter: query  | orderBy: '-Created'">
                         <md-item-content>
                             <div class="md-tile-left">
                                 <span class="glyphicon glyphicon-star starSpan"></span>

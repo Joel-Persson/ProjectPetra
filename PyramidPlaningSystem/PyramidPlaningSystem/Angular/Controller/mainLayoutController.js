@@ -1,7 +1,5 @@
 ﻿myApp.controller('mainLayoutController', function ($scope, $mdSidenav) {
 
-    $scope.PageHeader = "Add ToDo";
-
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
     }

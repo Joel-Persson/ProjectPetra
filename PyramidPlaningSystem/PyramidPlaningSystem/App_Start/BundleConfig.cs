@@ -39,6 +39,8 @@ namespace PyramidPlaningSystem
                    "~/Angular/Shared/app.js",
                    "~/Angular/Controller/mainLayoutController.js",
                    "~/Angular/Controller/addToDoController.js",
+                   "~/Angular/Controller/listAllToDosController.js",
+                   "~/Angular/Controller/editToDoController.js",
                    "~/Angular/ColorTheming/colorTheming.js",
                    "~/Angular/Route/Route.js",
                    "~/Angular/Services/ToDoFactory.js"

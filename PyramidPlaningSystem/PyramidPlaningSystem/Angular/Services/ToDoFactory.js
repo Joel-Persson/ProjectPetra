@@ -1,24 +1,24 @@
-﻿myApp.factory("toDoFactory", function ($http) {
+﻿myApp.factory("toDoFactory", function($http) {
     var urlBase = "/api/ToDo";
     var toDoFactory = {};
 
-    toDoFactory.getSingleToDo = function (id) {
+    toDoFactory.getSingleToDo = function(id) {
         return $http.get(urlBase + "/" + id);
     }
 
-    toDoFactory.addToDo = function (toDoModel) {
+    toDoFactory.addToDo = function(toDoModel) {
         return $http.post(urlBase, toDoModel);
     }
     toDoFactory.getToDoList = function() {
         return $http.get(urlBase);
     }
-    toDoFactory.deleteToDo = function (id) {
+    toDoFactory.deleteToDo = function(id) {
         return $http.delete(urlBase + "/" + id);
     }
-    toDoFactory.editToDo = function (toDo) {
+    toDoFactory.editToDo = function(toDo) {
         return $http.put(urlBase + "/" + toDo.ToDoId, toDo);
     }
-   
+
     return toDoFactory;
-})
+});
 
