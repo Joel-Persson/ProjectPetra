@@ -3,6 +3,8 @@
 myApp.controller('editToDoController', function ($scope, $routeParams, toDoFactory, $location, $mdDialog) {
     $scope.PageHeader = "Edit ToDo";
 
+    $scope.oneAtATime = true;
+
     getSingleToDo();
     function getSingleToDo() {
         toDoFactory.getSingleToDo($routeParams.Id).success(function (data) {

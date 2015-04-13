@@ -1,139 +1,164 @@
-﻿<div layout layout-align="start center" class="md-padding">
-    <h1 class="md-padding" style="color: #bdbdbd; margin-bottom: 10px; margin-left: 25px;">{{PageHeader}}</h1>
-</div>
-<md-content class="md-padding">
-    <md-card flex-md flex-gt-md>
-        <md-card-content>
+﻿<div ng-controller="editToDoController">
+    <div layout layout-align="start center" class="md-padding">
+        <h1 class="md-padding" style="color: #bdbdbd; margin-bottom: 10px; margin-left: 25px;">{{PageHeader}}</h1>
+    </div>
+    <md-content class="md-padding">
+        <md-card flex-md flex-gt-md>
+            <md-card-content>
 
-            <form name="editTodo" ng-submit="editToDo(toDoModel.ParentToDo)">
+                <form name="editTodo" ng-submit="editToDo(toDoModel.ParentToDo)">
 
-                <div layout layout-sm="column">
+                    <div layout layout-sm="column">
 
-                    <md-input-container flex>
-                        <label for="title">Title</label>
-                        <input ng-model="toDoModel.ParentToDo.Title"
-                               required
-                               ng-maxlength="250"
-                               ng-minlength="1"
-                               name="title"
-                               autofocus />
-                    </md-input-container>
+                        <md-input-container flex>
+                            <label for="title">Title</label>
+                            <input ng-model="toDoModel.ParentToDo.Title"
+                                   required
+                                   ng-maxlength="250"
+                                   ng-minlength="1"
+                                   name="title"
+                                   autofocus />
+                        </md-input-container>
 
-                    <md-input-container flex>
-                        <label for="estimatedTime">Estimated Time</label>
-                        <input type="number"
-                               required
-                               min="0"
-                               max="1000"
-                               name="estimatedTime"
-                               ng-model="toDoModel.ParentToDo.Effort" />
+                        <md-input-container flex>
+                            <label for="estimatedTime">Estimated Time</label>
+                            <input type="number"
+                                   required
+                                   min="0"
+                                   max="1000"
+                                   name="estimatedTime"
+                                   ng-model="toDoModel.ParentToDo.Effort" />
 
-                        <div ng-messages="toDoSubmit.estimatedTime.$error">
-                            <div ng-message="number">
-                                This value must be a number
+                            <div ng-messages="toDoSubmit.estimatedTime.$error">
+                                <div ng-message="number">
+                                    This value must be a number
+                                </div>
                             </div>
+
+
+                        </md-input-container>
+
+                        <p class="radiobuttonInfo" hide-gt-sm>Please choose days or hours:</p>
+                        <md-radio-group layout-sm="column" required ng-model="toDoModel.ParentToDo.Time" layout="row">
+                            <md-radio-button class="radioButtonEffort" name="days" value="days">Days</md-radio-button>
+                            <md-radio-button class="radioButtonEffort" name="hours" value=" hours"> Hours </md-radio-button>
+                        </md-radio-group>
+
+                    </div>
+                    <div layout layout-sm="row">
+                        <md-input-container flex="66">
+                            <label>Description</label>
+                            <textarea ng-model="toDoModel.ParentToDo.Description"
+                                      ng-maxlength="800"
+                                      required
+                                      md-maxlength="800"
+                                      ng-minlength="10"></textarea>
+                        </md-input-container>
+
+                        <md-select class="customSelect" name="prioritySelect" placeholder="Priority" ng-model="toDoModel.ParentToDo.Priority" required>
+                            <md-optgroup label="Priority">
+                                <md-option value="100">100</md-option>
+                                <md-option value="200">200</md-option>
+                                <md-option value="300">300</md-option>
+                                <md-option value="400">400</md-option>
+                                <md-option value="500">500</md-option>
+                                <md-option value="600">600</md-option>
+                                <md-option value="700">700</md-option>
+                                <md-option value="800">800</md-option>
+                                <md-option value="900">900</md-option>
+                                <md-option value="1000">1000</md-option>
+                            </md-optgroup>
+                        </md-select>
+
+                    </div>
+
+
+
+                    <div layout-align="start end" layout="row">
+                        <md-button class="md-primary md-hue-1 md-raised" type="submit" value="Submit">Save</md-button>
+                    </div>
+
+                </form>
+                <div layout-align="end center" layout="row">
+                    <md-button aria-label="addToDo" class="md-fab md-mini" ng-click="ShowAddSubToDo($event)">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <md-tooltip md-direction="left">
+                            Add subitem
+                        </md-tooltip>
+                    </md-button>
+                </div>
+
+            </md-card-content>
+        </md-card>
+
+
+        <!--<md-card ng-show="toDoModel.ChildToDos.length">
+            <md-toolbar>
+                <h1 class="md-toolbar-tools">
+                    <span>Child todos</span>
+                </h1>
+            </md-toolbar>
+
+            <md-card-content>-->
+        <!--<md-list>
+
+            <form>
+                <md-item ng-repeat="toDo in toDoModel.ChildToDos">
+                    <md-item-content>
+                        <div class="md-tile-left">
+                            <span class="glyphicon glyphicon-star starSpan"></span>
+                        </div>
+                        <div class="md-tile-content">
+                            <h3>Title: <span class="listSpan">{{toDo.Title | limitTo: 50}}</span></h3>
+                            <h3 class="listItemheaders">Estimated Time: <span class="listSpan">{{toDo.Effort}}</span> </h3>
+                            <h3 class="listItemheaders">Description:<span class="listSpan"> {{toDo.Description | limitTo: 90}}...</span></h3>
+                            <h3 class="listItemheaders">Priority:<span class="listSpan"> {{toDo.Priority}}</span></h3>
                         </div>
 
-
-                    </md-input-container>
-
-                    <p class="radiobuttonInfo" hide-gt-sm>Please choose days or hours:</p>
-                    <md-radio-group layout-sm="column" required ng-model="toDoModel.ParentToDo.Time" layout="row">
-                        <md-radio-button class="radioButtonEffort" name="days" value="days">Days</md-radio-button>
-                        <md-radio-button class="radioButtonEffort" name="hours" value=" hours"> Hours </md-radio-button>
-                    </md-radio-group>
-
-                </div>
-                <div layout layout-sm="row">
-                    <md-input-container flex="66">
-                        <label>Description</label>
-                        <textarea ng-model="toDoModel.ParentToDo.Description"
-                                  ng-maxlength="800"
-                                  required
-                                  md-maxlength="800"
-                                  ng-minlength="10"></textarea>
-                    </md-input-container>
-
-                    <md-select class="customSelect" name="prioritySelect" placeholder="Priority" ng-model="toDoModel.ParentToDo.Priority" required>
-                        <md-optgroup label="Priority">
-                            <md-option value="100">100</md-option>
-                            <md-option value="200">200</md-option>
-                            <md-option value="300">300</md-option>
-                            <md-option value="400">400</md-option>
-                            <md-option value="500">500</md-option>
-                            <md-option value="600">600</md-option>
-                            <md-option value="700">700</md-option>
-                            <md-option value="800">800</md-option>
-                            <md-option value="900">900</md-option>
-                            <md-option value="1000">1000</md-option>
-                        </md-optgroup>
-                    </md-select>
-
-                </div>
+                        <md-button aria-label="edit" class="md-fab md-mini" ng-href="#/editToDo/{{toDo.ToDoId}}">
+                            <md-icon layout="row" layout-align="center center" class="glyphicon glyphicon-edit"></md-icon>
+                            <md-tooltip md-direction="left">
+                                Edit
+                            </md-tooltip>
+                        </md-button>
 
 
-
-                <div layout-align="start end" layout="row">
-                    <md-button class="md-primary md-hue-1 md-raised" type="submit" value="Submit">Save</md-button>
-                </div>
-
-            </form>
-            <div layout-align="end center" layout="row">
-                <md-button aria-label="addToDo" class="md-fab md-mini" ng-click="ShowAddSubToDo($event)">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <md-tooltip md-direction="left">
-                        Add subitem
-                    </md-tooltip>
-                </md-button>
-            </div>
-
-        </md-card-content>
-    </md-card>
-
-    <md-card ng-show="toDoModel.ChildToDos.length">
-        <md-toolbar>
-            <h1 class="md-toolbar-tools">
-                <span>Child todos</span>
-            </h1>
-        </md-toolbar>
-
-        <md-card-content>
-
-            <md-list>
-                <form>
-                    <md-item ng-repeat="toDo in toDoModel.ChildToDos">
-                        <md-item-content>
-                            <div class="md-tile-left">
-                                <span class="glyphicon glyphicon-star starSpan"></span>
-                            </div>
-                            <div class="md-tile-content">
-                                <h3>Title: <span class="listSpan">{{toDo.Title | limitTo: 50}}</span></h3>
-                                <h3 class="listItemheaders">Estimated Time: <span class="listSpan">{{toDo.Effort}}</span> </h3>
-                                <h3 class="listItemheaders">Description:<span class="listSpan"> {{toDo.Description | limitTo: 90}}...</span></h3>
-                                <h3 class="listItemheaders">Priority:<span class="listSpan"> {{toDo.Priority}}</span></h3>
-                            </div>
-
-                            <md-button aria-label="edit" class="md-fab md-mini" ng-href="#/editToDo/{{toDo.ToDoId}}">
-                                <md-icon layout="row" layout-align="center center" class="glyphicon glyphicon-edit"></md-icon>
-                                <md-tooltip md-direction="left">
-                                    Edit
-                                </md-tooltip>
+                        <div class="md-tile-right">
+                            <md-button aria-label="delete" class="md-fab md-mini" ng-click="deleteConfirm($event, toDo)">
+                                <md-icon layout="row" layout-align="center center" class="glyphicon glyphicon-remove"></md-icon>
                             </md-button>
+                        </div>
+                    </md-item-content>
+
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-item>
+            </form>
+        </md-list>-->
+        <!--</md-card-content>
+        </md-card>-->
+
+    </md-content>
 
 
-                            <div class="md-tile-right">
-                                <md-button aria-label="delete" class="md-fab md-mini" ng-click="deleteConfirm($event, toDo)">
-                                    <md-icon layout="row" layout-align="center center" class="glyphicon glyphicon-remove"></md-icon>
-                                </md-button>
+
+
+    <div class="col-md-6" style="margin-top: 10%">
+        <accordion close-others="oneAtATime">
+
+            <accordion-group heading="Dynamic Body Content" ng-repeat="toDo in toDoModel.ChildToDos">
+                <form>
+                    <md-item>
+                        <md-item-content>
+                            <div class="md-tile-content">
+                                <h2>{{toDo.Title}}</h2>
                             </div>
                         </md-item-content>
-
                         <md-divider ng-if="!$last"></md-divider>
                     </md-item>
                 </form>
-            </md-list>
-        </md-card-content>
-    </md-card>
+            </accordion-group>
 
-</md-content>
+        </accordion>
+    </div>
 
+</div>
