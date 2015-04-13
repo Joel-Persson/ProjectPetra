@@ -36,6 +36,8 @@ namespace PyramidPlaningSystem
                    "~/Scripts/angular-aria.js",
                    "~/Scripts/angular-route.js",
                    "~/Scripts/angular-messages.js",
+                   "~/Scripts/angular-ui/ui-bootstrap.js",
+                   "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
                    "~/Angular/Shared/app.js",
                    "~/Angular/Controller/mainLayoutController.js",
                    "~/Angular/Controller/addToDoController.js",
