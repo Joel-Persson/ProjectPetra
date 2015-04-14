@@ -89,6 +89,11 @@ myApp.controller('editToDoController', function ($scope, $routeParams, toDoFacto
             });
 
     };
+
+    $scope.status = {
+        isFirstOpen: true,
+        isFirstDisabled: false
+    };
 });
 
 myApp.controller('AccordionDemoCtrl', function ($scope) {

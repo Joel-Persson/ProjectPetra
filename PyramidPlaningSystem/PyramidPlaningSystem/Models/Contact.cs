@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Services.Description;
 
+
 namespace PyramidPlaningSystem.Models
 {
     public class Contact
@@ -37,5 +38,6 @@ namespace PyramidPlaningSystem.Models
         [Required]
         [MaxLength(20)]
         public string ZipCode { get; set; }
+       
     }
 }
