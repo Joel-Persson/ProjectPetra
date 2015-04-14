@@ -17,7 +17,7 @@
                                    ng-maxlength="250"
                                    ng-minlength="1"
                                    name="title"
-                                   autofocus/>
+                                   autofocus />
                         </md-input-container>
 
                         <md-input-container flex>
@@ -27,7 +27,7 @@
                                    min="0"
                                    max="1000"
                                    name="estimatedTime"
-                                   ng-model="toDoModel.ParentToDo.Effort"/>
+                                   ng-model="toDoModel.ParentToDo.Effort" />
 
                             <div ng-messages="toDoSubmit.estimatedTime.$error">
                                 <div ng-message="number">
@@ -92,75 +92,73 @@
         </md-card>
 
 
-        <md-card ng-show="toDoModel.ChildToDos.length">
+        <!--<md-card ng-show="toDoModel.ChildToDos.length">
             <md-toolbar>
                 <h1 class="md-toolbar-tools">
                     <span>Child todos</span>
                 </h1>
             </md-toolbar>
 
-            <md-card-content>
-                <md-list>
+            <md-card-content>-->
+        <!--<md-list>
 
-                    <form>
-                        <md-item ng-repeat="toDo in toDoModel.ChildToDos">
-                            <md-item-content>
-                                <div class="md-tile-left">
-                                    <span class="glyphicon glyphicon-star starSpan"></span>
-                                </div>
-                                <div class="md-tile-content">
-                                    <h3>Title: <span class="listSpan">{{toDo.Title | limitTo: 50}}</span></h3>
-                                    <h3 class="listItemheaders">Estimated Time: <span class="listSpan">{{toDo.Effort}}</span> </h3>
-                                    <h3 class="listItemheaders">Description:<span class="listSpan"> {{toDo.Description | limitTo: 90}}...</span></h3>
-                                    <h3 class="listItemheaders">Priority:<span class="listSpan"> {{toDo.Priority}}</span></h3>
-                                </div>
+            <form>
+                <md-item ng-repeat="toDo in toDoModel.ChildToDos">
+                    <md-item-content>
+                        <div class="md-tile-left">
+                            <span class="glyphicon glyphicon-star starSpan"></span>
+                        </div>
+                        <div class="md-tile-content">
+                            <h3>Title: <span class="listSpan">{{toDo.Title | limitTo: 50}}</span></h3>
+                            <h3 class="listItemheaders">Estimated Time: <span class="listSpan">{{toDo.Effort}}</span> </h3>
+                            <h3 class="listItemheaders">Description:<span class="listSpan"> {{toDo.Description | limitTo: 90}}...</span></h3>
+                            <h3 class="listItemheaders">Priority:<span class="listSpan"> {{toDo.Priority}}</span></h3>
+                        </div>
 
-                                <md-button aria-label="edit" class="md-fab md-mini" ng-href="#/editToDo/{{toDo.ToDoId}}">
-                                    <md-icon layout="row" layout-align="center center" class="glyphicon glyphicon-edit"></md-icon>
-                                    <md-tooltip md-direction="left">
-                                        Edit
-                                    </md-tooltip>
-                                </md-button>
+                        <md-button aria-label="edit" class="md-fab md-mini" ng-href="#/editToDo/{{toDo.ToDoId}}">
+                            <md-icon layout="row" layout-align="center center" class="glyphicon glyphicon-edit"></md-icon>
+                            <md-tooltip md-direction="left">
+                                Edit
+                            </md-tooltip>
+                        </md-button>
 
 
-                                <div class="md-tile-right">
-                                    <md-button aria-label="delete" class="md-fab md-mini" ng-click="deleteConfirm($event, toDo)">
-                                        <md-icon layout="row" layout-align="center center" class="glyphicon glyphicon-remove"></md-icon>
-                                    </md-button>
-                                </div>
-                            </md-item-content>
+                        <div class="md-tile-right">
+                            <md-button aria-label="delete" class="md-fab md-mini" ng-click="deleteConfirm($event, toDo)">
+                                <md-icon layout="row" layout-align="center center" class="glyphicon glyphicon-remove"></md-icon>
+                            </md-button>
+                        </div>
+                    </md-item-content>
 
-                            <md-divider ng-if="!$last"></md-divider>
-                        </md-item>
-                    </form>
-                </md-list>
-            </md-card-content>
-        </md-card>
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-item>
+            </form>
+        </md-list>-->
+        <!--</md-card-content>
+        </md-card>-->
 
     </md-content>
 
 
 
 
+    <div class="col-md-6" style="margin-top: 10%">
+        <accordion close-others="oneAtATime">
 
+            <accordion-group heading="Dynamic Body Content" ng-repeat="toDo in toDoModel.ChildToDos">
+                <form>
+                    <md-item>
+                        <md-item-content>
+                            <div class="md-tile-content">
+                                <h2>{{toDo.Title}}</h2>
+                            </div>
+                        </md-item-content>
+                        <md-divider ng-if="!$last"></md-divider>
+                    </md-item>
+                </form>
+            </accordion-group>
 
-</div>
-<div class="col-md-6" style="margin-top: 10%" ng-controller="editToDoController">
-    <accordion close-others="oneAtATime">
+        </accordion>
+    </div>
 
-        <accordion-group heading="{{toDo.Title}}" ng-repeat="toDo in toDoModel.ChildToDos">
-            <!--<form>
-                <md-item>
-                    <md-item-content>
-                        <div class="md-tile-content">
-                            <h2>{{toDo.Title}}</h2>
-                        </div>
-                    </md-item-content>
-                    <md-divider ng-if="!$last"></md-divider>
-                </md-item>
-            </form>-->
-            {{toDo.Description}}
-        </accordion-group>
-
-    </accordion>
 </div>
