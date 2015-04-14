@@ -18,7 +18,8 @@ myApp.controller('editToDoController', function ($scope, $routeParams, toDoFacto
 
     $scope.editToDo = function (toDo) {
         toDoFactory.editToDo(toDo).success(function () {
-            $location.path('/toDos');
+            //$location.path('/toDos');
+      
         });
     };
 

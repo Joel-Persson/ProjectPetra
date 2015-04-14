@@ -281,3 +281,12 @@ md-radio-group {
 .customSelect {
       margin-top: 3.9em;
 }
+
+.saved {
+    -webkit-transition: background 3s ease-in-out;
+-moz-transition: background 3s ease-in-out;
+-ms-transition: background 3s ease-in-out;
+-o-transition: background 3s ease-in-out;
+transition: background 3s ease-in-out;
+    color: red;
+}
