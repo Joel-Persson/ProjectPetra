@@ -1,6 +1,6 @@
 ﻿
 myApp.controller('listAllToDosController', function ($scope, toDoFactory, $mdDialog) {
-    $scope.PageHeader = "Listing all Todos";
+    $scope.PageHeader = "Listing all Tasks";
     $scope.toDoList = [];
     $scope.ParentToDos = [];
     getTodos();

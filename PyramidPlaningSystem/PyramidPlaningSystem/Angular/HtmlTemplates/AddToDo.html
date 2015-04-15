@@ -45,17 +45,9 @@
                     </md-radio-group>
 
                 </div>
-                <div layout layout-sm="row">
-                    <md-input-container flex="66">
-                        <label>Description</label>
-                        <textarea ng-model="ToDoModel.ParentToDo.Description"
-                                  ng-maxlength="800"
-                                  required
-                                  md-maxlength="800"
-                                  ng-minlength="10"></textarea>
-                    </md-input-container>
-
-                    <md-select class="customSelect" name="prioritySelect" placeholder="Priority" ng-model="ToDoModel.ParentToDo.Priority" required>
+                
+                <div layout layout-md="column" layout-sm="column">
+                    <md-select class="customSelect" name="prioritySelect" placeholder="Priority" ng-model="ToDoModel.ParentToDo.Priority" flex="20" required>
                         <md-optgroup label="Priority">
                             <md-option value="100">100</md-option>
                             <md-option value="200">200</md-option>
@@ -69,21 +61,80 @@
                             <md-option value="1000">1000</md-option>
                         </md-optgroup>
                     </md-select>
+
+                    <md-input-container flex="">
+                        <label for="deadline">Deadline</label>
+                        <input type="date"
+                               ng-model="ToDoModel.ParentToDo.Deadline"
+                               name="deadline" />
+                    </md-input-container>
+
+                </div>
+                
+
+                <div layout layout-sm="column">
+                    <md-input-container flex="">
+                        <label>Description</label>
+                        <textarea ng-model="ToDoModel.ParentToDo.Description"
+                                  ng-maxlength="800"
+                                  required
+                                  md-maxlength="800"
+                                  ng-minlength="10"></textarea>
+                    </md-input-container>
+
+                  
+
                 </div>
 
+               
 
-                <div layout-align="start end" layout="row">
-                    <md-button class="md-primary md-hue-1 md-raised" type="submit" ng-disabled="toDoSubmit.$invalid">Submit</md-button>
+
+                    <!--<div layout layout-sm="row">
+
+            <div ng-controller="datePickerController">
+                <div class="input-group">
+                    <md-input-container>
+                        <label for="Deadline">Deadline</label>
+                        <input type="text"
+                               name="Deadline"
+                               datepicker-popup="{{format}}"
+                               ng-model="dt | date:'yyyy-MM-dd'"
+                               is-open="opened"
+                               min-date="minDate"
+                               max-date="'2015-06-22'"
+                               datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)"
+                               ng-required="true"
+                               close-text="Close" />
+                    </md-input-container>
+
+                    <span class="input-group-btn">
+                        <button type="button"
+                                class="btn btn-default"
+                                ng-click="open($event)">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </span>
                 </div>
 
-            </form>
+            </div>
+
+
+
+        </div>-->
+
+                    <div layout-align="start end" layout="row">
+                        <md-button class="md-primary md-hue-1 md-raised" type="submit" ng-disabled="toDoSubmit.$invalid">Submit</md-button>
+                    </div>
+
+</form>
 
 
             <div layout-align="end center" layout="row">
                 <md-button aria-label="addToDo" class="md-fab md-mini" ng-click="ShowAddSubToDo($event)">
                     <span class="glyphicon glyphicon-plus"></span>
                     <md-tooltip md-direction="left">
-                        Add subitem
+                        Add subtask
                     </md-tooltip>
                 </md-button>
             </div>
@@ -97,7 +148,7 @@
     <md-card>
         <md-toolbar>
             <h1 class="md-toolbar-tools">
-                <span>Sub Items</span>
+                <span>Sub Tasks</span>
             </h1>
         </md-toolbar>
         <md-card-content>

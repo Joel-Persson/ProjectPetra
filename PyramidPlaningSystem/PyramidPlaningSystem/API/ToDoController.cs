@@ -22,7 +22,7 @@ namespace PyramidPlaningSystem.API
         [HttpGet]
         public IEnumerable<ToDo> Get()
         {
-            return db.ToDos.AsEnumerable();
+            return db.ToDos.Where(x => x.Deleted==false).AsEnumerable();
         }
 
         public ToDoModel Get(Guid id)
@@ -57,6 +57,11 @@ namespace PyramidPlaningSystem.API
         {
             if (ModelState.IsValid)
             {
+                //DateTime dateToDisplay = Convert.ToDateTime(toDoModel.ParentToDo.Deadline);
+                //String shortDateTime = dateToDisplay.ToShortDateString();
+                //DateTime shortDate = Convert.ToDateTime(shortDateTime);
+                //toDoModel.ParentToDo.Deadline = shortDate;
+
                 if (toDoModel.ParentToDo.ToDoId == Guid.Empty)
                 {
                     toDoModel.ParentToDo.Created = DateTime.Now;
@@ -118,24 +123,26 @@ namespace PyramidPlaningSystem.API
 
         public HttpResponseMessage Delete(Guid id)
         {
-            ToDo toDoModel = db.ToDos.Find(id);
+            ToDo parentToDo = db.ToDos.Find(id);
 
-            var toDos = (from b in db.ToDos
+            var childToDos = (from b in db.ToDos
                          where b.ParentId == id
                          select b).ToList();
 
-            if (toDoModel == null)
+            if (parentToDo == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
-            if (toDos.Any())
+            if (childToDos.Any())
             {
-                foreach (var toDo in toDos)
+                foreach (var toDo in childToDos)
                 {
-                    db.ToDos.Remove(toDo);
+                    toDo.Deleted = true;
+                    //db.ToDos.Remove(toDo);
                 }
             }
-            db.ToDos.Remove(toDoModel);
+            parentToDo.Deleted = true;
+            //db.ToDos.Remove(parentToDo);
 
             try
             {
@@ -146,7 +153,7 @@ namespace PyramidPlaningSystem.API
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
 
-            return Request.CreateResponse(HttpStatusCode.OK, toDoModel);
+            return Request.CreateResponse(HttpStatusCode.OK, parentToDo);
         }
 
         protected override void Dispose(bool disposing)

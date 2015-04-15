@@ -13,113 +13,114 @@
 
 </head>
 <body>
-<div ng-controller="mainLayoutController">
+    <div ng-controller="mainLayoutController">
 
-    <md-toolbar layout="row">
-        @if (Request.IsAuthenticated)
-        {
+        <md-toolbar layout="row">
+            @if (Request.IsAuthenticated)
+            {
                 @*<button ng-click="toggleSidenav('right')" class="menuBtn" hide-gt-md>
                         <span class="visually-hidden">Menu</span>
                     </button>*@
-        }
-            @*<h1 class="ieHeaderText" hide-sm>Plandito</h1>*@<div layout="row" flex layout-align="start center">
-            <img src="../../Images/logo_pyramid.svg" alt="" class="ieLogo"/>
-        </div>
+            }
+            @*<h1 class="ieHeaderText" hide-sm>Plandito</h1>*@
+            @*<div layout="row" flex layout-align="start center">
+                <img src="../../Images/logo_pyramid.svg" alt="" class="ieLogo" />
+            </div>*@
+            <div flex="95"></div>
+            <div layout="row" flex="5" layout-align="end center">
+                @Html.Partial("_LoginPartial")
+            </div>
 
-        <div layout="row" flex layout-align="end center">
-            @Html.Partial("_LoginPartial")
-        </div>
-
-    </md-toolbar>
+        </md-toolbar>
 
 
-    <div layout="row" flex>
-        @if (Request.IsAuthenticated)
-        {
-            <md-sidenav class="md-sidenav-right md-whiteframe-z2 ieSideNav" md-component-id="right" md-is-locked-open="$mdMedia('gt-md')">
+        <div layout="row" flex>
+            @if (Request.IsAuthenticated)
+            {
+                <md-sidenav style="min-height: 850px;" class="md-sidenav-right md-whiteframe-z2 ieSideNav" md-component-id="right" md-is-locked-open="$mdMedia('gt-md')">
 
-                <md-content class="md-padding" flex>
-                    @if (User.IsInRole("Production") || User.IsInRole("Administrator"))
-                    {
-                        <md-list class="menuList">
-                            <md-list-item>
-                                <md-button ng-href="#/" ng-click="close()" layout="row">
-                                    <span layout="row" flex layout-align="start center">Home</span>
-                                    <md-icon md-svg-icon="~/Images/Icons/ic_home_48px.svg"></md-icon>
-                                </md-button>
-                               
-                            </md-list-item>
+                    <md-content class="md-padding" flex>
+                        @if (User.IsInRole("Production") || User.IsInRole("Administrator"))
+                        {
+                            <md-list class="menuList">
+                                <md-list-item>
+                                    <md-button ng-href="#/" ng-click="close()" layout="row">
+                                        <span layout="row" flex layout-align="start center">Home</span>
+                                        <md-icon md-svg-icon="~/Images/Icons/ic_home_48px.svg"></md-icon>
+                                    </md-button>
 
-                            <md-divider></md-divider>
+                                </md-list-item>
 
-                            <md-list-item>
-                                <md-button ng-click="close()" ng-href="#/toDos" layout="row">
-                                    <span layout="row" flex layout-align="start center">Tasks</span>
-                                    <md-icon md-svg-icon="~/Images/Icons/ic_view_list_48px.svg"></md-icon>
-                                </md-button>
-                            </md-list-item>
-                        </md-list>
+                                <md-divider></md-divider>
+
+                                <md-list-item>
+                                    <md-button ng-click="close()" ng-href="#/toDos" layout="row">
+                                        <span layout="row" flex layout-align="start center">Task Manager</span>
+                                        <md-icon md-svg-icon="~/Images/Icons/ic_view_list_48px.svg"></md-icon>
+                                    </md-button>
+                                </md-list-item>
+                            </md-list>
                             @*@if (User.IsInRole("Administrator"))
-                            {
-                                <li>
-                                    <a class="md-button md-raised firefoxAdminButton adminLink" ng-click="toggle(showAndHideBool)"> Admin <span class="firefoxAdminSpanSymbol" ng-class="{'glyphicon glyphicon-menu-up': showAndHideBool == true, 'glyphicon glyphicon-menu-down': showAndHideBool ==false }"></span></a>
-                                </li>
-                                <li ng-show="showAndHideBool">
-                                    @Html.ActionLink("Admin", "Index", "Admin", null, new {@class = "md-button md-raised"})
-                                </li>
-                                <li ng-show="showAndHideBool">
-                                    @Html.ActionLink("Role Admin", "Index", "RoleAdmin", null, new {@class = "md-button md-raised"})
-                                </li>
-                            }*@
+                                {
+                                    <li>
+                                        <a class="md-button md-raised firefoxAdminButton adminLink" ng-click="toggle(showAndHideBool)"> Admin <span class="firefoxAdminSpanSymbol" ng-class="{'glyphicon glyphicon-menu-up': showAndHideBool == true, 'glyphicon glyphicon-menu-down': showAndHideBool ==false }"></span></a>
+                                    </li>
+                                    <li ng-show="showAndHideBool">
+                                        @Html.ActionLink("Admin", "Index", "Admin", null, new {@class = "md-button md-raised"})
+                                    </li>
+                                    <li ng-show="showAndHideBool">
+                                        @Html.ActionLink("Role Admin", "Index", "RoleAdmin", null, new {@class = "md-button md-raised"})
+                                    </li>
+                                }*@
                             @*<md-divider class="sidenavDivider"></md-divider>*@
 
                             @*@if (Request.IsAuthenticated)
-                            {
-                                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "logoutForm"}))
                                 {
-                                    @Html.AntiForgeryToken()
+                                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "logoutForm"}))
+                                    {
+                                        @Html.AntiForgeryToken()
 
-                                    <li hide-gt-md>
-                                        <a href="javascript:document.getElementById('logoutForm').submit()">Sign out <span class="glyphicon glyphicon-log-out"></span></a>
-                                    </li>
-                                }
-                            }*@
-                        
-                    }
-                </md-content>
-            </md-sidenav>
-        }
-        <md-content class="md-padding main-container" flex layout="column">
-            @RenderBody()
-        </md-content>
-    </div>
-    @*<footer layout="row" layout-align="center center">
+                                        <li hide-gt-md>
+                                            <a href="javascript:document.getElementById('logoutForm').submit()">Sign out <span class="glyphicon glyphicon-log-out"></span></a>
+                                        </li>
+                                    }
+                                }*@
+
+                        }
+                    </md-content>
+                </md-sidenav>
+            }
+            <md-content class="md-padding main-container" flex layout="column">
+                @RenderBody()
+            </md-content>
+        </div>
+        @*<footer layout="row" layout-align="center center">
                 <h4 class="ieFooterText">&copy; @DateTime.Now.Year - Pyramid Communications AB</h4>
             </footer>*@
- <md-content class="footer">
+        <md-content class="footer">
 
-        <md-toolbar id="bottomToolbar" hide-gt-md style="background-color: #E0E0E0">
-            <div class="md-toolbar-tools">
-                <md-button class="md-icon-button" ng-href="#/" aria-label="Settings" style="color: #4A1070" flex>
-                    <md-icon md-svg-icon="~/Images/Icons/ic_home_48px.svg" style="height: 35px; width: 35px;"></md-icon>
-                </md-button>
-                <md-button class="md-icon-button" ng-href="#/toDos" aria-label="Settings" style="color: #4A1070" flex>
-                    <md-icon md-svg-icon="~/Images/Icons/ic_view_list_48px.svg" style="height: 35px; width: 35px;"></md-icon>
-                </md-button>
-                <md-button class="md-icon-button" aria-label="Settings" style="color: #4A1070" flex>
-                    <md-icon md-svg-icon="~/Images/Icons/ic_announcement_48px.svg" style="height: 35px; width: 35px;"></md-icon>
-                </md-button>
-                <span flex></span>
-                <md-button class="md-icon-button" aria-label="Settings" style="color: #4A1070" flex ng-click="toggleSidenav('right')">
-                    <md-icon md-svg-icon="~/Images/Icons/ic_more_vert_48px.svg" style="height: 35px; width: 35px;"></md-icon>
-                </md-button>
-            </div>
-        </md-toolbar>
-    </md-content>
+            <md-toolbar id="bottomToolbar" hide-gt-md style="background-color: #E0E0E0">
+                <div class="md-toolbar-tools">
+                    <md-button class="md-icon-button" ng-href="#/" aria-label="Settings" style="color: #4A1070" flex>
+                        <md-icon md-svg-icon="~/Images/Icons/ic_home_48px.svg" style="height: 35px; width: 35px;"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" ng-href="#/toDos" aria-label="Settings" style="color: #4A1070" flex>
+                        <md-icon md-svg-icon="~/Images/Icons/ic_view_list_48px.svg" style="height: 35px; width: 35px;"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="Settings" style="color: #4A1070" flex>
+                        <md-icon md-svg-icon="~/Images/Icons/ic_announcement_48px.svg" style="height: 35px; width: 35px;"></md-icon>
+                    </md-button>
+                    <span flex></span>
+                    <md-button class="md-icon-button" aria-label="Settings" style="color: #4A1070" flex ng-click="toggleSidenav('right')">
+                        <md-icon md-svg-icon="~/Images/Icons/ic_more_vert_48px.svg" style="height: 35px; width: 35px;"></md-icon>
+                    </md-button>
+                </div>
+            </md-toolbar>
+        </md-content>
 
 
-</div>
-   
+    </div>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/angular")

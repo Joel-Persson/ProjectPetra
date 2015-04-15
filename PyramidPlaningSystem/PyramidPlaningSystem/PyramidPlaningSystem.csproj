@@ -248,12 +248,25 @@
     <Compile Include="Migrations\201504070908586_addPriorityinToDo.Designer.cs">
       <DependentUpon>201504070908586_addPriorityinToDo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504151154421_addedFieldsDeletedStartedEnded.cs" />
+    <Compile Include="Migrations\201504151154421_addedFieldsDeletedStartedEnded.Designer.cs">
+      <DependentUpon>201504151154421_addedFieldsDeletedStartedEnded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504151156294_updateOnDeadLine.cs" />
+    <Compile Include="Migrations\201504151156294_updateOnDeadLine.Designer.cs">
+      <DependentUpon>201504151156294_updateOnDeadLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504151208583_createdTableProjects.cs" />
+    <Compile Include="Migrations\201504151208583_createdTableProjects.Designer.cs">
+      <DependentUpon>201504151208583_createdTableProjects.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Projects.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\ToDo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -266,6 +279,7 @@
     <Content Include="Angular\Controller\editToDoController.js" />
     <Content Include="Angular\Controller\listAllToDosController.js" />
     <Content Include="Angular\Directives\subItems.html" />
+    <Content Include="Angular\HtmlTemplates\dateTimePickerTemplate.html" />
     <Content Include="Angular\HtmlTemplates\editToDo.html" />
     <Content Include="Angular\HtmlTemplates\toDos.html" />
     <Content Include="Angular\Shared\app.js" />
@@ -441,6 +455,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504070908586_addPriorityinToDo.resx">
       <DependentUpon>201504070908586_addPriorityinToDo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504151154421_addedFieldsDeletedStartedEnded.resx">
+      <DependentUpon>201504151154421_addedFieldsDeletedStartedEnded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504151156294_updateOnDeadLine.resx">
+      <DependentUpon>201504151156294_updateOnDeadLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504151208583_createdTableProjects.resx">
+      <DependentUpon>201504151208583_createdTableProjects.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

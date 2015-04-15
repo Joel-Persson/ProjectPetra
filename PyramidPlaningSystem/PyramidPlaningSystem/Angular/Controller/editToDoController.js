@@ -1,7 +1,7 @@
 ﻿
 
 myApp.controller('editToDoController', function ($scope, $routeParams, toDoFactory, $location, $mdDialog) {
-    $scope.PageHeader = "Edit ToDo";
+    $scope.PageHeader = "Edit Task";
 
     $scope.oneAtATime = true;
 

@@ -1,6 +1,7 @@
 ﻿
 myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, $location) {
-    $scope.PageHeader = "Add Todo";
+
+    $scope.PageHeader = "Add Task";
     $scope.Time = "";
     $scope.ToDoModel = {
         ParentToDo: {},
@@ -65,6 +66,66 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
             $mdDialog.hide(subItem);
         };
     };
+
+});
+
+myApp.controller('datePickerController', function ($scope, $mdDialog) {
+
+    $scope.today = function () {
+        $scope.dt = new Date();
+    };
+    $scope.today();
+
+    $scope.clear = function () {
+        $scope.dt = null;
+    };
+
+    // Disable weekend selection
+    $scope.disabled = function (date, mode) {
+        return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
+    };
+
+    $scope.toggleMin = function () {
+        $scope.minDate = $scope.minDate ? null : new Date();
+    };
+    $scope.toggleMin();
+
+    //$scope.open = function ($event) {
+    //    $event.preventDefault();
+    //    $event.stopPropagation();
+
+    //    $scope.opened = true;
+    //};
+
+    $scope.open = function (ev) {
+        $mdDialog.show({
+            controller: DialogController,
+            templateUrl: '/Angular/HtmlTemplates/dateTimePickerTemplate.html',
+            targetEvent: ev,
+
+        }).then(function (subItem) {
+            $scope.ToDoModel.ChildToDos.push(subItem);
+
+        });
+    };
+
+    function DialogController($scope, $mdDialog) {
+
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+        $scope.addSubItem = function (subItem) {
+            $mdDialog.hide(subItem);
+        };
+    };
+
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+    };
+
+    $scope.formats = ['yyyy-MM-dd'];
+    $scope.format = $scope.formats[0];
 
 });
 
