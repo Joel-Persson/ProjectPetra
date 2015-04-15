@@ -4,16 +4,16 @@
         $mdSidenav(menuId).toggle();
     }
 
-    $scope.getWidth = function () {
-        return $(window).width();
-    };
-    $scope.$watch($scope.getWidth, function (newValue) {
-        $scope.windowWidth = newValue;
+    //$scope.getWidth = function () {
+    //    return $(window).width();
+    //};
+    //$scope.$watch($scope.getWidth, function (newValue) {
+    //    $scope.windowWidth = newValue;
 
-    });
-    window.onresize = function () {
-        $scope.$apply();
-    }
+    //});
+    //window.onresize = function () {
+    //    $scope.$apply();
+    //}
 
     $scope.showAndHideBool = true;
     $scope.showAndHideButtonName = "Show";

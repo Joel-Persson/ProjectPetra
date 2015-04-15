@@ -293,6 +293,10 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Images\btn_red.png" />
+    <Content Include="Images\Icons\ic_announcement_48px.svg" />
+    <Content Include="Images\Icons\ic_home_48px.svg" />
+    <Content Include="Images\Icons\ic_more_vert_48px.svg" />
+    <Content Include="Images\Icons\ic_view_list_48px.svg" />
     <Content Include="Images\logo_pyramid.svg" />
     <Content Include="Images\Sign-in-Large---Active.png" />
     <Content Include="Images\Sign-in-Small---Active.png" />
