@@ -6,7 +6,7 @@ body {
     font-family: Roboto-Regular;
     height: 100%;
     padding: 0;
-    /*overflow-y: hidden;*/
+    overflow: auto;
 }
 
 
@@ -79,20 +79,33 @@ md-list .md-button {
     width: 1px;
 }
 
-.nav>li>a{
-    background-color: #404040;
-    color: white;
-    margin-bottom: 5px;
+a{
+    text-decoration: none;
+    color: inherit;
+    text-transform: uppercase;
 }
 
-
-.nav>li>a:focus {
-     background-color: #404040;
+.menuList {
+    color: #4A1070;
 }
 
-.nav>li>a:hover {
-     color: black;
+a:focus {
+       text-decoration: none;
+    color: inherit;
+    border: none;
 }
+
+a:hover {
+        text-decoration: none;
+    color: inherit;
+}
+
+#bottomToolbar {
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+}
+
 
 
 /* Using Data-URI converted from svg until <md-icon> becomes available 
@@ -131,7 +144,7 @@ h1 {
 /*shared*/
 
 .main-container {
-    margin-bottom: -60px;
+    margin-bottom: -64px;
     min-height: 100%;
 }
 
@@ -140,7 +153,7 @@ h1 {
         display: block;
     }
 
-footer {
+.footer {
     background-color: #404040;
     padding-top: 2rem;
     padding-bottom: 2rem;
@@ -149,13 +162,10 @@ footer {
     box-shadow: 2px -4px 5px 0px rgba(50, 50, 50, 0.75);*/
 }
 
-footer, .main-container:after {
-    height: 60px;
+.footer, .main-container:after {
+    height: 64px;
 }
 
-.test {
-    margin-top: 45px;
-}
 
 
 /*only for Internet Explorer*/

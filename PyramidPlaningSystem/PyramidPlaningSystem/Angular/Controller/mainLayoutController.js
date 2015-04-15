@@ -4,6 +4,10 @@
         $mdSidenav(menuId).toggle();
     }
 
+    $scope.close = function() {
+        $mdSidenav('right').close();
+    };
+
     //$scope.getWidth = function () {
     //    return $(window).width();
     //};
