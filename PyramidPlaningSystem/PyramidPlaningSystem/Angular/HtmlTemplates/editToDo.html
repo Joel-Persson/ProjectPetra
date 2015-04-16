@@ -8,7 +8,6 @@
             <form name="editTodo" ng-submit="editToDo(toDoModel.ParentToDo)">
 
                 <div layout layout-sm="column">
-
                     <md-input-container flex>
                         <label for="title">Title</label>
                         <input ng-model="toDoModel.ParentToDo.Title"
@@ -16,7 +15,7 @@
                                ng-maxlength="250"
                                ng-minlength="1"
                                name="title"
-                               autofocus />
+                               autofocus/>
                     </md-input-container>
 
                     <md-input-container flex>
@@ -26,7 +25,7 @@
                                min="0"
                                max="1000"
                                name="estimatedTime"
-                               ng-model="toDoModel.ParentToDo.Effort" />
+                               ng-model="toDoModel.ParentToDo.Effort"/>
 
                         <div ng-messages="toDoSubmit.estimatedTime.$error">
                             <div ng-message="number">
@@ -44,21 +43,12 @@
                     </md-radio-group>
 
                 </div>
-                <div layout layout-sm="row">
-                    <md-input-container flex="66">
-                        <label>Description</label>
-                        <textarea ng-model="toDoModel.ParentToDo.Description"
-                                  ng-maxlength="800"
-                                  required
-                                  md-maxlength="800"
-                                  ng-minlength="10"></textarea>
-                    </md-input-container>
-
-                    <md-select class="customSelect" name="prioritySelect" placeholder="Priority" ng-model="toDoModel.ParentToDo.Priority" required>
+                <div layout layout-md="column" layout-sm="column">
+                    <md-select class="customSelect" name="prioritySelect" placeholder="Priority" ng-model="toDoModel.ParentToDo.Priority" flex="20" required>
                         <md-optgroup label="Priority">
                             <md-option value="100">100</md-option>
                             <md-option value="200">200</md-option>
-                            <md-option value="300">300</md-option>
+                            <md-option value="300">300<</md-option>
                             <md-option value="400">400</md-option>
                             <md-option value="500">500</md-option>
                             <md-option value="600">600</md-option>
@@ -69,8 +59,24 @@
                         </md-optgroup>
                     </md-select>
 
+                    <md-input-container flex="">
+                        <label for="deadline">Current Deadline: {{currentDeadline | date: 'yyyy-MM-dd'}} </label>
+                        <input type="date"
+                               ng-model="toDoModel.ParentToDo.Deadline"
+                               name="deadline" />
+                    </md-input-container>
                 </div>
 
+                <div layout layout-sm="column">
+                    <md-input-container flex="">
+                        <label>Description</label>
+                        <textarea ng-model="toDoModel.ParentToDo.Description"
+                                  ng-maxlength="800"
+                                  required
+                                  md-maxlength="800"
+                                  ng-minlength="10"></textarea>
+                    </md-input-container>
+                </div>
 
 
                 <div layout-align="start end" layout="row">
@@ -142,21 +148,12 @@
                             </md-radio-group>
 
                         </div>
-                        <div layout layout-sm="row">
-                            <md-input-container flex="66">
-                                <label>Description</label>
-                                <textarea ng-model="toDo.Description"
-                                          ng-maxlength="800"
-                                          required
-                                          md-maxlength="800"
-                                          ng-minlength="10"></textarea>
-                            </md-input-container>
-
-                            <md-select class="customSelect" name="prioritySelect" placeholder="Priority" ng-model="toDo.Priority" required>
+                        <div layout layout-md="column" layout-sm="column">
+                            <md-select class="customSelect" name="prioritySelect" placeholder="Priority" ng-model="toDo.Priority" flex="20" required>
                                 <md-optgroup label="Priority">
                                     <md-option value="100">100</md-option>
                                     <md-option value="200">200</md-option>
-                                    <md-option value="300">300</md-option>
+                                    <md-option value="300">300<</md-option>
                                     <md-option value="400">400</md-option>
                                     <md-option value="500">500</md-option>
                                     <md-option value="600">600</md-option>
@@ -167,8 +164,25 @@
                                 </md-optgroup>
                             </md-select>
 
+                            <md-input-container flex="">
+                                <label for="deadline">Current Deadline: {{currentDeadline | date: 'yyyy-MM-dd'}} </label>
+                                <input type="date"
+                                       ng-model="toDo.Deadline"
+                                       name="deadline" />
+                            </md-input-container>
                         </div>
 
+                        <div layout layout-sm="column">
+                            <md-input-container flex="">
+                                <label>Description</label>
+                                <textarea ng-model="toDo.Description"
+                                          ng-maxlength="800"
+                                          required
+                                          md-maxlength="800"
+                                          ng-minlength="10"></textarea>
+                            </md-input-container>
+                        </div>
+                        
                         <div layout-align="start end" layout="row">
                             <md-button class="md-primary md-hue-1 md-raised" type="submit" value="Submit">Save</md-button>
                         </div>
