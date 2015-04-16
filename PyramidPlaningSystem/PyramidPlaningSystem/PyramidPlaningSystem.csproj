@@ -281,7 +281,7 @@
     <Content Include="Angular\Directives\subItems.html" />
     <Content Include="Angular\HtmlTemplates\dateTimePickerTemplate.html" />
     <Content Include="Angular\HtmlTemplates\editToDo.html" />
-    <Content Include="Angular\HtmlTemplates\toDos.html" />
+    <Content Include="Angular\HtmlTemplates\listAllToDos.html" />
     <Content Include="Angular\Shared\app.js" />
     <Content Include="Angular\Controller\mainLayoutController.js" />
     <Content Include="Angular\HtmlTemplates\addSubToDo.html" />
@@ -308,6 +308,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Images\btn_red.png" />
     <Content Include="Images\Icons\ic_announcement_48px.svg" />
+    <Content Include="Images\Icons\ic_exit_to_app_48px.svg" />
     <Content Include="Images\Icons\ic_home_48px.svg" />
     <Content Include="Images\Icons\ic_more_vert_48px.svg" />
     <Content Include="Images\Icons\ic_view_list_48px.svg" />

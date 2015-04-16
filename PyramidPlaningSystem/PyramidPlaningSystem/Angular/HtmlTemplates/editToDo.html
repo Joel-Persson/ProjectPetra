@@ -104,7 +104,7 @@
             </h1>
         </md-toolbar>
 
-        <md-card-content ng-class="{'saved': startAni1}">
+        <md-card-content>
 
             <accordion close-others="oneAtATime">
                 <accordion-group heading="{{toDo.Title}}" ng-repeat="toDo in toDoModel.ChildToDos">
@@ -186,8 +186,17 @@
                         <div layout-align="start end" layout="row">
                             <md-button class="md-primary md-hue-1 md-raised" type="submit" value="Submit">Save</md-button>
                         </div>
-
+                       
                     </form>
+                    
+                    <div layout="row" layout-align="end center">
+                        <md-button aria-label="delete" class="md-fab md-mini" ng-click="deleteConfirm($event, toDo)">
+                            <md-icon layout="row" layout-align="center center" class="glyphicon glyphicon-remove"></md-icon>
+                            <md-tooltip md-direction="left">
+                                Remove subtask
+                            </md-tooltip>
+                        </md-button>
+                    </div>
 
                 </accordion-group>
             </accordion>
@@ -195,35 +204,3 @@
     </md-card>
 </md-content>
 
-
-<!--<form>
-                <md-item ng-repeat="toDo in toDoModel.ChildToDos">
-                    <md-item-content>
-                        <div class="md-tile-left">
-                            <span class="glyphicon glyphicon-star starSpan"></span>
-                        </div>
-                        <div class="md-tile-content">
-                            <h3>Title: <span class="listSpan">{{toDo.Title | limitTo: 50}}</span></h3>
-                            <h3 class="listItemheaders">Estimated Time: <span class="listSpan">{{toDo.Effort}}</span> </h3>
-                            <h3 class="listItemheaders">Description:<span class="listSpan"> {{toDo.Description | limitTo: 90}}...</span></h3>
-                            <h3 class="listItemheaders">Priority:<span class="listSpan"> {{toDo.Priority}}</span></h3>
-                        </div>
-
-                        <md-button aria-label="edit" class="md-fab md-mini" ng-href="#/editToDo/{{toDo.ToDoId}}">
-                            <md-icon layout="row" layout-align="center center" class="glyphicon glyphicon-edit"></md-icon>
-                            <md-tooltip md-direction="left">
-                                Edit
-                            </md-tooltip>
-                        </md-button>
-
-
-                        <div class="md-tile-right">
-                            <md-button aria-label="delete" class="md-fab md-mini" ng-click="deleteConfirm($event, toDo)">
-                                <md-icon layout="row" layout-align="center center" class="glyphicon glyphicon-remove"></md-icon>
-                            </md-button>
-                        </div>
-                    </md-item-content>
-
-                    <md-divider ng-if="!$last"></md-divider>
-                </md-item>
-            </form>-->

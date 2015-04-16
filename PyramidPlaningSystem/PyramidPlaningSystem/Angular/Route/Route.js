@@ -14,7 +14,7 @@
               .when('/toDos',
         {
             controller: 'listAllToDosController',
-            templateUrl: '/Angular/HtmlTemplates/toDos.html'
+            templateUrl: '/Angular/HtmlTemplates/listAllToDos.html'
         })
                .when('/editToDo/:Id',
         {

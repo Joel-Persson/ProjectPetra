@@ -15,20 +15,22 @@
 <body>
     <div ng-controller="mainLayoutController">
 
-        <md-toolbar layout="row">
-            @if (Request.IsAuthenticated)
-            {
-                @*<button ng-click="toggleSidenav('right')" class="menuBtn" hide-gt-md>
-                        <span class="visually-hidden">Menu</span>
-                    </button>*@
-            }
-            @*<h1 class="ieHeaderText" hide-sm>Plandito</h1>*@
-            @*<div layout="row" flex layout-align="start center">
-                <img src="../../Images/logo_pyramid.svg" alt="" class="ieLogo" />
-            </div>*@
+        <md-toolbar hide-sm hide-md layout="row">
             <div flex="95"></div>
             <div layout="row" flex="5" layout-align="end center">
-                @Html.Partial("_LoginPartial")
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <a href="javascript:document.getElementById('logoutForm').submit()">
+                            <md-icon md-svg-icon="~/Images/Icons/ic_exit_to_app_48px.svg" style="height: 35px; width: 35px; color: white; margin-right: 10px">
+                            </md-icon>
+                        </a>
+                    }
+                }
+
             </div>
 
         </md-toolbar>
@@ -97,27 +99,33 @@
         @*<footer layout="row" layout-align="center center">
                 <h4 class="ieFooterText">&copy; @DateTime.Now.Year - Pyramid Communications AB</h4>
             </footer>*@
-        <md-content class="footer">
+        @if (Request.IsAuthenticated)
+        {
+            <md-content class="footer">
 
-            <md-toolbar id="bottomToolbar" hide-gt-md style="background-color: #E0E0E0">
-                <div class="md-toolbar-tools">
-                    <md-button class="md-icon-button" ng-href="#/" aria-label="Settings" style="color: #4A1070" flex>
-                        <md-icon md-svg-icon="~/Images/Icons/ic_home_48px.svg" style="height: 35px; width: 35px;"></md-icon>
-                    </md-button>
-                    <md-button class="md-icon-button" ng-href="#/toDos" aria-label="Settings" style="color: #4A1070" flex>
-                        <md-icon md-svg-icon="~/Images/Icons/ic_view_list_48px.svg" style="height: 35px; width: 35px;"></md-icon>
-                    </md-button>
-                    <md-button class="md-icon-button" aria-label="Settings" style="color: #4A1070" flex>
-                        <md-icon md-svg-icon="~/Images/Icons/ic_announcement_48px.svg" style="height: 35px; width: 35px;"></md-icon>
-                    </md-button>
-                    <span flex></span>
-                    <md-button class="md-icon-button" aria-label="Settings" style="color: #4A1070" flex ng-click="toggleSidenav('right')">
-                        <md-icon md-svg-icon="~/Images/Icons/ic_more_vert_48px.svg" style="height: 35px; width: 35px;"></md-icon>
-                    </md-button>
-                </div>
-            </md-toolbar>
-        </md-content>
+                <md-toolbar id="bottomToolbar" hide-gt-md style="background-color: #E0E0E0">
+                    <div class="md-toolbar-tools">
+                        <md-button class="md-icon-button" ng-href="#/" aria-label="Settings" style="color: #4A1070" flex>
+                            <md-icon md-svg-icon="~/Images/Icons/ic_home_48px.svg" style="height: 35px; width: 35px;"></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" ng-href="#/toDos" aria-label="Settings" style="color: #4A1070" flex>
+                            <md-icon md-svg-icon="~/Images/Icons/ic_view_list_48px.svg" style="height: 35px; width: 35px;"></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" aria-label="Settings" style="color: #4A1070" flex>
+                            <md-icon md-svg-icon="~/Images/Icons/ic_announcement_48px.svg" style="height: 35px; width: 35px;"></md-icon>
+                        </md-button>
 
+                        <md-button class="md-icon-button" aria-label="Settings" style="color: #4A1070" flex>
+                            @Html.Partial("_LoginPartial")
+                        </md-button>
+
+                        <md-button class="md-icon-button" aria-label="Settings" style="color: #4A1070" flex ng-click="toggleSidenav('right')">
+                            <md-icon md-svg-icon="~/Images/Icons/ic_more_vert_48px.svg" style="height: 35px; width: 35px;"></md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+            </md-content>
+        }
 
     </div>
 

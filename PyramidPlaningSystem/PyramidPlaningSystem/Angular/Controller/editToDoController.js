@@ -10,7 +10,7 @@ myApp.controller('editToDoController', function ($scope, $routeParams, toDoFacto
         toDoFactory.getSingleToDo($routeParams.Id).success(function (data) {
             $scope.toDoModel = data;
           // $scope.toDoModel.ParentToDo.Deadline = $filter('date')($scope.toDoModel.ParentToDo.Deadline, 'yyyy-MM-dd');
-                $scope.currentDeadline = $scope.toDoModel.ParentToDo.Deadline;
+               // $scope.currentDeadline = $scope.toDoModel.ParentToDo.Deadline;
             })
         .error(function () {
             $scope.status = "Something went wrong!";

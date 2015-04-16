@@ -3,14 +3,12 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
     {
-    @Html.AntiForgeryToken()
-
-
-        @*<li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>*@
-        <a style="color: white; margin-right: 30px;" href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-log-out"></span></a> 
-
+        @Html.AntiForgeryToken()
+    
+        <a href="javascript:document.getElementById('logoutForm').submit()">
+            <md-icon md-svg-icon="~/Images/Icons/ic_exit_to_app_48px.svg" style="height: 35px; width: 35px;">
+            </md-icon>
+        </a>
     }
 }
 
