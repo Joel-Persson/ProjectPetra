@@ -1,5 +1,5 @@
 ﻿
-myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, $location) {
+myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, $location, formatDateFactory) {
 
     $scope.PageHeader = "Add Task";
     $scope.Time = "";
@@ -13,8 +13,10 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
 
         if (ToDoModel.ParentToDo.Time == "days") {
             ToDoModel.ParentToDo.Effort = ToDoModel.ParentToDo.Effort * 8;
+            ToDoModel.ParentToDo.Deadline = formatDateFactory.formatDate(ToDoModel.ParentToDo.Deadline);
         }
         for (var i = 0; i < ToDoModel.ChildToDos.length; i++) {
+            ToDoModel.ChildToDos[i].Deadline = formatDateFactory.formatDate(ToDoModel.ChildToDos[i].Deadline);
             if (ToDoModel.ChildToDos[i].Time == "days") {
                 ToDoModel.ChildToDos[i].Effort = ToDoModel.ChildToDos[i].Effort * 8;
             }

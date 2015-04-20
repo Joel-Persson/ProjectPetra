@@ -43,6 +43,7 @@
 
 
                 </div>
+
                 <div layout layout-sm="row">
                     <md-input-container flex>
                         <label>Description</label>
@@ -68,6 +69,25 @@
                             <md-option value="1000">1000</md-option>
                         </md-optgroup>
                     </md-select>
+
+                    <!--<md-input-container flex="">
+                        <label for="deadline">Deadline</label>
+                        <input type="date"
+                               ng-model="subItem.Deadline"
+                               name="deadline" />
+                    </md-input-container>-->
+
+                </div>
+
+                <div layout layout-sm="row">
+                    <md-input-container flex>
+                        <label>Description</label>
+                        <textarea ng-model="subItem.Description"
+                                  ng-maxlength="800"
+                                  required
+                                  md-maxlength="800"
+                                  ng-minlength="10"></textarea>
+                    </md-input-container>
                 </div>
 
                 <div class="md-actions" layout="row">

@@ -85,6 +85,14 @@ namespace PyramidPlaningSystem.API
             }
             else
             {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+
+                foreach (var error in errors)
+                {
+                    
+                }
+
+
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
         }
