@@ -2,13 +2,13 @@
 
 myApp.controller('editToDoController', function ($scope, $routeParams, toDoFactory, $location, $mdDialog, formatDateFactory) {
     $scope.PageHeader = "Edit Task";
-
     $scope.oneAtATime = true;
 
     getSingleToDo();
     function getSingleToDo() {
         toDoFactory.getSingleToDo($routeParams.Id).success(function (data) {
             $scope.toDoModel = data;
+            $scope.currentDeadline = formatDateFactory.formatDate(data.ParentToDo.Deadline);
             })
         .error(function () {
             $scope.status = "Something went wrong!";
@@ -17,7 +17,7 @@ myApp.controller('editToDoController', function ($scope, $routeParams, toDoFacto
     };
 
     $scope.editToDo = function (toDo) {
-        toDo.Deadline = formatDateFactory.formatDate(toDo.Deadline);
+        formatDateFactory.formatTime(toDo);
         toDoFactory.editToDo(toDo).success(function () {
             $location.path('/toDos');
         });
@@ -72,17 +72,7 @@ myApp.controller('editToDoController', function ($scope, $routeParams, toDoFacto
     };
 
     $scope.editSubToDo = function (toDoModel) {
-
-        if (toDoModel.ParentToDo.Time == "days") {
-            toDoModel.ParentToDo.Effort = toDoModel.ParentToDo.Effort * 8;
-            toDoModel.ParentToDo.Deadline = formatDateFactory.formatDate(toDoModel.ParentToDo.Deadline);
-        }
-        for (var i = 0; i < toDoModel.ChildToDos.length; i++) {
-            toDoModel.ChildToDos[i].Deadline = formatDateFactory.formatDate(toDoModel.ChildToDos[i].Deadline);
-            if (toDoModel.ChildToDos[i].Time == "days") {
-                toDoModel.ChildToDos[i].Effort = toDoModel.ChildToDos[i].Effort * 8;
-            }
-        }
+        formatDateFactory.formatTime(toDoModel);
 
         toDoFactory.addToDo(toDoModel).success(function () {
             $scope.success = "Yes";

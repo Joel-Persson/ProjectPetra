@@ -260,6 +260,10 @@
     <Compile Include="Migrations\201504151208583_createdTableProjects.Designer.cs">
       <DependentUpon>201504151208583_createdTableProjects.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504200857003_changeNameOnStartAndEndDate.cs" />
+    <Compile Include="Migrations\201504200857003_changeNameOnStartAndEndDate.Designer.cs">
+      <DependentUpon>201504200857003_changeNameOnStartAndEndDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -279,7 +283,6 @@
     <Content Include="Angular\Controller\editToDoController.js" />
     <Content Include="Angular\Controller\listAllToDosController.js" />
     <Content Include="Angular\Directives\subItems.html" />
-    <Content Include="Angular\HtmlTemplates\dateTimePickerTemplate.html" />
     <Content Include="Angular\HtmlTemplates\editToDo.html" />
     <Content Include="Angular\HtmlTemplates\listAllToDos.html" />
     <Content Include="Angular\Shared\app.js" />
@@ -465,6 +468,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504151208583_createdTableProjects.resx">
       <DependentUpon>201504151208583_createdTableProjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504200857003_changeNameOnStartAndEndDate.resx">
+      <DependentUpon>201504200857003_changeNameOnStartAndEndDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

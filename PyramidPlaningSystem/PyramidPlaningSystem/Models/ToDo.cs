@@ -23,8 +23,8 @@ namespace PyramidPlaningSystem.Models
         public Priority? Priority { get; set; }
         public bool Deleted { get; set; }
         public DateTime? Deadline { get; set; }
-        public DateTime? Started { get; set; }
-        public DateTime? Ended { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public virtual Projects Project { get; set; }
 
     }

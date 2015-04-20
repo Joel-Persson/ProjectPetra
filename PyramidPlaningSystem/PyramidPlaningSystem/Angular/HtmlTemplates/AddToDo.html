@@ -66,6 +66,8 @@
                         <label for="deadline">Deadline</label>
                         <input type="date"
                                ng-model="ToDoModel.ParentToDo.Deadline"
+                               min="2015-01-01"
+                               max="2050-01-01"
                                name="deadline" />
                     </md-input-container>
 
@@ -83,47 +85,29 @@
                     </md-input-container>
                 </div>
 
-               
-
-
-                    <!--<div layout layout-sm="row">
-
-            <div ng-controller="datePickerController">
-                <div class="input-group">
-                    <md-input-container>
-                        <label for="Deadline">Deadline</label>
-                        <input type="text"
-                               name="Deadline"
-                               datepicker-popup="{{format}}"
-                               ng-model="dt | date:'yyyy-MM-dd'"
-                               is-open="opened"
-                               min-date="minDate"
-                               max-date="'2015-06-22'"
-                               datepicker-options="dateOptions"
-                               date-disabled="disabled(date, mode)"
-                               ng-required="true"
-                               close-text="Close" />
+                <div layout layout-sm="column">
+                    <md-input-container flex>
+                        <label for="StartDate">Start date</label>
+                        <input type="date"
+                               name="StartDate"
+                               ng-model="ToDoModel.ParentToDo.StartDate"
+                               min="2015-01-01"
+                               max="2050-01-01"/>
                     </md-input-container>
 
-                    <span class="input-group-btn">
-                        <button type="button"
-                                class="btn btn-default"
-                                ng-click="open($event)">
-                            <i class="glyphicon glyphicon-calendar"></i>
-                        </button>
-                    </span>
+                    <md-input-container flex>
+                        <label for="EndDate">End date</label>
+                        <input type="date"
+                               name="EndDate"
+                               ng-model="ToDoModel.ParentToDo.EndDate"
+                               min="2015-01-01"
+                               max="2050-01-01" />
+                    </md-input-container>
                 </div>
-
-            </div>
-
-
-
-        </div>-->
 
                 <div layout-align="start end" layout="row">
                     <md-button class="md-primary md-hue-1 md-raised" type="submit" ng-disabled="toDoSubmit.$invalid">Submit</md-button>
                 </div>
-                {{test}}
 
 </form>
 

@@ -11,16 +11,7 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
 
     $scope.add = function (ToDoModel) {
 
-        if (ToDoModel.ParentToDo.Time == "days") {
-            ToDoModel.ParentToDo.Effort = ToDoModel.ParentToDo.Effort * 8;
-            ToDoModel.ParentToDo.Deadline = formatDateFactory.formatDate(ToDoModel.ParentToDo.Deadline);
-        }
-        for (var i = 0; i < ToDoModel.ChildToDos.length; i++) {
-            ToDoModel.ChildToDos[i].Deadline = formatDateFactory.formatDate(ToDoModel.ChildToDos[i].Deadline);
-            if (ToDoModel.ChildToDos[i].Time == "days") {
-                ToDoModel.ChildToDos[i].Effort = ToDoModel.ChildToDos[i].Effort * 8;
-            }
-        }
+        formatDateFactory.formatTime(ToDoModel);
 
         toDoFactory.addToDo(ToDoModel).success(function () {
             $scope.success = "Yes";
@@ -53,7 +44,6 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
           .targetEvent(ev);
         $mdDialog.show(confirm).then(function () {
             $scope.ToDoModel.ChildToDos.splice($scope.ToDoModel.ChildToDos.indexOf(subItem), 1);
-            //$scope.ToDoModel.ChildToDos.splice($index, 1);
         }, function () {
             $mdDialog.cancel();
         });
@@ -71,65 +61,7 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
 
 });
 
-myApp.controller('datePickerController', function ($scope, $mdDialog) {
 
-    $scope.today = function () {
-        $scope.dt = new Date();
-    };
-    $scope.today();
-
-    $scope.clear = function () {
-        $scope.dt = null;
-    };
-
-    // Disable weekend selection
-    $scope.disabled = function (date, mode) {
-        return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
-    };
-
-    $scope.toggleMin = function () {
-        $scope.minDate = $scope.minDate ? null : new Date();
-    };
-    $scope.toggleMin();
-
-    //$scope.open = function ($event) {
-    //    $event.preventDefault();
-    //    $event.stopPropagation();
-
-    //    $scope.opened = true;
-    //};
-
-    $scope.open = function (ev) {
-        $mdDialog.show({
-            controller: DialogController,
-            templateUrl: '/Angular/HtmlTemplates/dateTimePickerTemplate.html',
-            targetEvent: ev,
-
-        }).then(function (subItem) {
-            $scope.ToDoModel.ChildToDos.push(subItem);
-
-        });
-    };
-
-    function DialogController($scope, $mdDialog) {
-
-        $scope.cancel = function () {
-            $mdDialog.cancel();
-        };
-        $scope.addSubItem = function (subItem) {
-            $mdDialog.hide(subItem);
-        };
-    };
-
-    $scope.dateOptions = {
-        formatYear: 'yy',
-        startingDay: 1
-    };
-
-    $scope.formats = ['yyyy-MM-dd'];
-    $scope.format = $scope.formats[0];
-
-});
 
 
 

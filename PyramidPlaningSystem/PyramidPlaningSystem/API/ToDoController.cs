@@ -51,10 +51,6 @@ namespace PyramidPlaningSystem.API
         {
             if (ModelState.IsValid)
             {
-                //DateTime dateToDisplay = Convert.ToDateTime(toDoModel.ParentToDo.Deadline);
-                //String shortDateTime = dateToDisplay.ToShortDateString();
-                //DateTime shortDate = Convert.ToDateTime(shortDateTime);
-                //toDoModel.ParentToDo.Deadline = shortDate;
 
                 if (toDoModel.ParentToDo.ToDoId == Guid.Empty)
                 {
@@ -85,13 +81,6 @@ namespace PyramidPlaningSystem.API
             }
             else
             {
-                var errors = ModelState.Values.SelectMany(v => v.Errors);
-
-                foreach (var error in errors)
-                {
-                    
-                }
-
 
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
