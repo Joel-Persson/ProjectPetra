@@ -8,7 +8,6 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
         ChildToDos: []
     };
 
-
     $scope.add = function (ToDoModel) {
 
         formatDateFactory.formatTime(ToDoModel);
