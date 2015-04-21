@@ -264,9 +264,14 @@
     <Compile Include="Migrations\201504200857003_changeNameOnStartAndEndDate.Designer.cs">
       <DependentUpon>201504200857003_changeNameOnStartAndEndDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504210835386_addTableAssignment.cs" />
+    <Compile Include="Migrations\201504210835386_addTableAssignment.Designer.cs">
+      <DependentUpon>201504210835386_addTableAssignment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\Assignment.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -471,6 +476,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504200857003_changeNameOnStartAndEndDate.resx">
       <DependentUpon>201504200857003_changeNameOnStartAndEndDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504210835386_addTableAssignment.resx">
+      <DependentUpon>201504210835386_addTableAssignment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
