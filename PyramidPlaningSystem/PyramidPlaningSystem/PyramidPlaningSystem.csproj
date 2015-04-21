@@ -186,6 +186,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\AssignmentController.cs" />
+    <Compile Include="API\ContactsController.cs" />
     <Compile Include="API\ToDoController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -268,6 +270,10 @@
     <Compile Include="Migrations\201504210835386_addTableAssignment.Designer.cs">
       <DependentUpon>201504210835386_addTableAssignment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504210854199_changesToAssignmentTable.cs" />
+    <Compile Include="Migrations\201504210854199_changesToAssignmentTable.Designer.cs">
+      <DependentUpon>201504210854199_changesToAssignmentTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -298,6 +304,7 @@
     <Content Include="Angular\Services\ToDoFactory.js" />
     <Content Include="Content\angular-material\angular-material.css" />
     <Content Include="Content\angular-material\angular-material.min.css" />
+    <Content Include="Content\angular-tagger.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -353,6 +360,7 @@
     <Content Include="Scripts\angular-messages.min.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular-tagger.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
@@ -479,6 +487,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504210835386_addTableAssignment.resx">
       <DependentUpon>201504210835386_addTableAssignment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504210854199_changesToAssignmentTable.resx">
+      <DependentUpon>201504210854199_changesToAssignmentTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

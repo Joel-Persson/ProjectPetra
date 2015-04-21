@@ -74,3 +74,13 @@ myApp.factory('formatDateFactory', function () {
 
 });
 
+myApp.factory("contactFactory", function($http) {
+    var urlBase = "/api/Contacts";
+    var contactFactory = {};
+
+    contactFactory.getContacts = function() {
+        return $http.get(urlBase);
+    };
+
+    return contactFactory;
+});
