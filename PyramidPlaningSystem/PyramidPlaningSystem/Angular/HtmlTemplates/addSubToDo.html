@@ -4,6 +4,11 @@
         <md-header class="md-sticky-no-effect">Add Sub Task</md-header>
         <div class="dialog-content">
             <form name="SubToDoSubmit" novalidate>
+                
+                <div layout-sm="column" ng-controller="assignmentController">
+                    <tagger ng-model="tags" options="contacts" disable-new placeholder="Assign to" />
+                    test: {{test}}
+                </div>
 
                 <div layout layout-sm="column">
 
@@ -76,7 +81,6 @@
                     </md-input-container>
                 </div>
 
-
                 <div layout layout-sm="column">
                     <md-input-container flex>
                         <label for="StartDate">Start date</label>
@@ -96,7 +100,7 @@
                                max="2050-01-01" />
                     </md-input-container>
                 </div>
-
+                
                 <div class="md-actions" layout="row">
                     <md-button ng-click="addSubItem(subItem)" class="md-primary" ng-disabled="SubToDoSubmit.$invalid">
                         Add
@@ -104,7 +108,6 @@
                     <md-button ng-click="cancel()">
                         Cancel
                     </md-button>
-
                 </div>
             </form>
         </div>

@@ -13,6 +13,7 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
 
         formatDateFactory.formatTime(ToDoModel);
         ToDoModel.ContactIdList = tagService.getTags();
+
         toDoFactory.addToDo(ToDoModel).success(function () {
             $location.path('/toDos');
         })
@@ -22,6 +23,13 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
 
     };
 
+    //funktion för att skapa unika id??
+
+    //'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    //    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    //    return v.toString(16);
+    //});
+
     $scope.ShowAddSubToDo = function (ev) {
         $mdDialog.show({
             controller: DialogController,
@@ -29,7 +37,7 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
             targetEvent: ev,
 
         }).then(function (subItem) {
-            $scope.ToDoModel.ChildToDos.push(subItem);
+            $scope.ToDoModel.ChildToDos.push(subItem);//kanske skapa ett unikt id för varje child här
 
         });
     };
@@ -93,6 +101,7 @@ myApp.controller('assignmentController', function ($scope, contactFactory, tagSe
                 }
             });
         });
+
     tagService.addTags(contactIdList);
         $scope.test = tagService.getTags();
     }, true);
