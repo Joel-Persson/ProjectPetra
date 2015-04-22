@@ -84,3 +84,20 @@ myApp.factory("contactFactory", function($http) {
 
     return contactFactory;
 });
+
+myApp.service('tagService', function() {
+    var tagList = [];
+
+    var addTags = function(tags) {
+        tagList = tags;
+    };
+
+    var getTags = function() {
+        return tagList;
+    }
+
+    return {
+        addTags: addTags,
+        getTags: getTags
+    };
+});

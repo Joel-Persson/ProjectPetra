@@ -8,7 +8,7 @@ using PyramidPlaningSystem.Models;
 
 namespace PyramidPlaningSystem.API
 {
-    [Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Administrator")]
     public class ContactsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();

@@ -105,6 +105,14 @@
                                max="2050-01-01" />
                     </md-input-container>
                 </div>
+                
+                <div layout layout-sm="column" ng-controller="assignmentController" >
+
+                    <tagger ng-model="tags" options="contacts" disable-new placeholder="Assign to" />
+                    
+                  test: {{test}}
+                </div>
+
 
                 <div layout-align="start end" layout="row">
                     <md-button class="md-primary md-hue-1 md-raised" type="submit" ng-disabled="toDoSubmit.$invalid">Submit</md-button>
@@ -121,6 +129,7 @@
                     </md-tooltip>
                 </md-button>
             </div>
+
         </md-card-content>
     </md-card>
 </md-content>
@@ -144,12 +153,5 @@
     </md-card>
 </md-content>
 
-<div ng-controller="assignmentController" layout="column">
 
-    {{status}}
-
-    <tagger ng-model="tags" options="contacts" disable-new placeholder="Assign to" />
-    
-    {{contacts.Firstname}}
-</div>
 

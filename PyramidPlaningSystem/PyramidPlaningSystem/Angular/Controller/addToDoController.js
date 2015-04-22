@@ -1,5 +1,5 @@
 ﻿
-myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, $location, formatDateFactory) {
+myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, $location, formatDateFactory, tagService) {
 
     $scope.PageHeader = "Add Task";
     $scope.Time = "";
@@ -60,14 +60,24 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
 
 });
 
-myApp.controller('assignmentController', function ($scope, contactFactory) {
+myApp.controller('assignmentController', function ($scope, contactFactory, tagService) {
 
     $scope.contacts = [];
-  
+
+    $scope.FullContacts = [];
+
+    $scope.tags = [];
+
     (function getContacts() {
-        contactFactory.getContacts().success(function(data) {
-            $scope.contactID = data.Id; //fortsätt här
-            $.each(data, function(i) {
+        contactFactory.getContacts().success(function (data) {
+            //$scope.contacts = data;
+
+            $.each(data, function (i) {
+                var contactObject = {
+                    "Name": data[i].Firstname + " " + data[i].Lastname,
+                    "Id": data[i].Id
+                }
+                $scope.FullContacts.push(contactObject);
                 $scope.contacts.push(data[i].Firstname + " " + data[i].Lastname);
             });
         });
@@ -75,11 +85,9 @@ myApp.controller('assignmentController', function ($scope, contactFactory) {
 
 
 
+    $scope.$watch('tags', function (tag) {
+        tagService.addTags(tag);
+        $scope.test = tagService.getTags();
+    }, true);
+
 });
-
-
-//$.each($scope.toDoList, function (i) {
-//    if ($scope.toDoList[i].ParentId == null) {
-//        $scope.ParentToDos.push($scope.toDoList[i]);
-//    }
-//});
