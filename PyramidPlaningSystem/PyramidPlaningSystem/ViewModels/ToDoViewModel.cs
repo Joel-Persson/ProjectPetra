@@ -12,5 +12,7 @@ namespace PyramidPlaningSystem.ViewModels
         public ToDo ParentToDo { get; set; }
 
         public List<ToDo> ChildToDos { get; set; }
+
+        public List<string> ContactIdList { get; set; }
     }
 }

@@ -7,7 +7,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using PyramidPlaningSystem.Models;
-using PyramidPlaningSystem.ViewModels;
 
 namespace PyramidPlaningSystem.API
 {

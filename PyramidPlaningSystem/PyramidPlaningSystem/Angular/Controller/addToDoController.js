@@ -1,19 +1,19 @@
 ﻿
-myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, $location, formatDateFactory, tagService) {
+myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, $location, formatDateFactory, tagService, assignmentFactory) {
 
     $scope.PageHeader = "Add Task";
     $scope.Time = "";
     $scope.ToDoModel = {
         ParentToDo: {},
-        ChildToDos: []
+        ChildToDos: [],
+        ContactIdList: []
     };
 
     $scope.add = function (ToDoModel) {
 
         formatDateFactory.formatTime(ToDoModel);
-
+        ToDoModel.ContactIdList = tagService.getTags();
         toDoFactory.addToDo(ToDoModel).success(function () {
-            $scope.success = "Yes";
             $location.path('/toDos');
         })
             .error(function () {
@@ -70,7 +70,6 @@ myApp.controller('assignmentController', function ($scope, contactFactory, tagSe
 
     (function getContacts() {
         contactFactory.getContacts().success(function (data) {
-            //$scope.contacts = data;
 
             $.each(data, function (i) {
                 var contactObject = {
@@ -85,8 +84,16 @@ myApp.controller('assignmentController', function ($scope, contactFactory, tagSe
 
 
 
-    $scope.$watch('tags', function (tag) {
-        tagService.addTags(tag);
+    $scope.$watch('tags', function (tagList) {
+        var contactIdList = [];
+        $.each(tagList, function(i) { // ändra så man slipper ha två foreach loopar
+            $.each($scope.FullContacts, function (x) {
+                if (tagList[i] === $scope.FullContacts[x].Name) {
+                    contactIdList.push($scope.FullContacts[x].Id);
+                }
+            });
+        });
+    tagService.addTags(contactIdList);
         $scope.test = tagService.getTags();
     }, true);
 

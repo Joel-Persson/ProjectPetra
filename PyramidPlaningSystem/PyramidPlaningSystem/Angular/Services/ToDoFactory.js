@@ -85,6 +85,17 @@ myApp.factory("contactFactory", function($http) {
     return contactFactory;
 });
 
+myApp.factory("assignmentFactory", function($http) {
+    var urlBase = "/api/Assignment";
+    var assignmentFactory = {};
+
+    assignmentFactory.addAssignment = function(assignment) {
+        return $http.post(urlBase, assignment);
+    }
+
+    return assignmentFactory;
+});
+
 myApp.service('tagService', function() {
     var tagList = [];
 

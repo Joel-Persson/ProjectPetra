@@ -5,9 +5,9 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
-using Microsoft.Ajax.Utilities;
-using PyramidPlaningSystem.Authorize;
+using Microsoft.AspNet.Identity.Owin;
 using PyramidPlaningSystem.Models;
 using PyramidPlaningSystem.ViewModels;
 
@@ -19,10 +19,16 @@ namespace PyramidPlaningSystem.API
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        private ApplicationUserManager UserManager
+        {
+            get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+        }
+
+
         [HttpGet]
         public IEnumerable<ToDo> Get()
         {
-            return db.ToDos.Where(x => x.Deleted==false).AsEnumerable();
+            return db.ToDos.Where(x => x.Deleted == false).AsEnumerable();
         }
 
         public ToDoModel Get(Guid id)
@@ -36,10 +42,10 @@ namespace PyramidPlaningSystem.API
             }
 
             var childTodods = db.ToDos.Where(x => x.ParentId == id && x.Deleted == false).ToList();
-            
+
             var toDoModel = new ToDoModel
             {
-                ParentToDo = parentToDoModel, 
+                ParentToDo = parentToDoModel,
                 ChildToDos = childTodods
             };
 
@@ -57,6 +63,31 @@ namespace PyramidPlaningSystem.API
                     toDoModel.ParentToDo.Created = DateTime.Now;
                     db.ToDos.Add(toDoModel.ParentToDo);
                     db.SaveChanges();
+
+                    if (toDoModel.ContactIdList.Any())
+                    {
+                        foreach (var contactId in toDoModel.ContactIdList)
+                        {
+                            var users = UserManager.Users.ToList();
+                            var user = users.FirstOrDefault(x => x.Contact.Id == int.Parse(contactId));
+
+                            var a = new Assignment();
+                            a.User.Id = user.Id;
+                            a.Todo.ToDoId = toDoModel.ParentToDo.ToDoId;
+                            a.TimeStamp = DateTime.Now;
+                            a.AddedBy = "admin";
+
+                            //var assignment = new Assignment
+                            //{
+                            //    TimeStamp = DateTime.Now,
+                            //    Todo = toDoModel.ParentToDo,
+                            //    User = user,
+                            //    AddedBy = "Admin"
+                            //};
+                            db.Assignments.Add(a);
+                        }
+                        db.SaveChanges();
+                    }
                 }
 
 
@@ -117,8 +148,8 @@ namespace PyramidPlaningSystem.API
             ToDo parentToDo = db.ToDos.Find(id);
 
             var childToDos = (from b in db.ToDos
-                         where b.ParentId == id
-                         select b).ToList();
+                              where b.ParentId == id
+                              select b).ToList();
 
             if (parentToDo == null)
             {
@@ -129,12 +160,10 @@ namespace PyramidPlaningSystem.API
                 foreach (var toDo in childToDos)
                 {
                     toDo.Deleted = true;
-                    //db.ToDos.Remove(toDo);
                 }
             }
             parentToDo.Deleted = true;
-            //db.ToDos.Remove(parentToDo);
-
+         
             try
             {
                 db.SaveChanges();
