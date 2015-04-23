@@ -74,41 +74,49 @@ myApp.factory('formatDateFactory', function () {
 
 });
 
-myApp.factory("contactFactory", function($http) {
+myApp.factory("contactFactory", function ($http) {
     var urlBase = "/api/Contacts";
     var contactFactory = {};
 
-    contactFactory.getContacts = function() {
+    contactFactory.getContacts = function () {
         return $http.get(urlBase);
     };
 
     return contactFactory;
 });
 
-myApp.factory("assignmentFactory", function($http) {
+myApp.factory("assignmentFactory", function ($http) {
     var urlBase = "/api/Assignment";
     var assignmentFactory = {};
 
-    assignmentFactory.addAssignment = function(assignment) {
+    assignmentFactory.addAssignment = function (assignment) {
         return $http.post(urlBase, assignment);
     }
 
     return assignmentFactory;
 });
 
-myApp.service('tagService', function() {
+myApp.service('tagService', function () {
     var tagList = [];
 
-    var addTags = function(tags) {
+    var addTags = function (tags) {
         tagList = tags;
     };
 
-    var getTags = function() {
+    var getTags = function () {
         return tagList;
     }
 
+    var replace = function () {
+        var c = "";
+        var randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+        c = randLetter + Date.now();
+        return c;
+    };
+
     return {
         addTags: addTags,
-        getTags: getTags
+        getTags: getTags,
+        replace: replace
     };
 });

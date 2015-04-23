@@ -9,9 +9,17 @@ namespace PyramidPlaningSystem.ViewModels
 {
     public class ToDoModel
     {
-        public ToDo ParentToDo { get; set; }
+        public ToDoViewModel ParentToDo { get; set; }
 
-        public List<ToDo> ChildToDos { get; set; }
+        public List<ToDoViewModel> ChildToDos { get; set; }
+
+    }
+
+    public class ToDoViewModel
+    {
+        public ToDo ToDo { get; set; }
+
+        public string UniqueId { get; set; }
 
         public List<string> ContactIdList { get; set; }
     }

@@ -5,14 +5,29 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
     $scope.Time = "";
     $scope.ToDoModel = {
         ParentToDo: {},
-        ChildToDos: [],
-        ContactIdList: []
+        ChildToDos: []
     };
 
     $scope.add = function (ToDoModel) {
 
         formatDateFactory.formatTime(ToDoModel);
-        ToDoModel.ContactIdList = tagService.getTags();
+
+        function Convert(ToDoModel) {
+            var ToDo = {};
+            ToDo.Title = ToDoModel.ParentToDo.Title;
+            ToDo.Description = ToDoModel.ParentToDo.Description;
+            ToDo.Effort = ToDoModel.ParentToDo.Effort;
+            ToDo.Deadline = ToDoModel.ParentToDo.Deadline;
+            ToDo.EndDate = ToDoModel.ParentToDo.EndDate;
+            ToDo.StartDate = ToDoModel.ParentToDo.StartDate;
+            ToDo.Priority = ToDoModel.ParentToDo.Priority;
+            return ToDoModel.ParentToDo.ToDo = ToDo;
+        };
+
+        ToDoModel= Convert(ToDoModel);
+
+        ToDoModel.ParentToDo.UniqueId = tagService.replace();
+        ToDoModel.ParentToDo.ContactIdList = tagService.getTags();
 
         toDoFactory.addToDo(ToDoModel).success(function () {
             $location.path('/toDos');
@@ -22,13 +37,6 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
             });
 
     };
-
-    //funktion för att skapa unika id??
-
-    //'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    //    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-    //    return v.toString(16);
-    //});
 
     $scope.ShowAddSubToDo = function (ev) {
         $mdDialog.show({

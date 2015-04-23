@@ -277,6 +277,10 @@
     <Compile Include="Migrations\201504210854199_changesToAssignmentTable.Designer.cs">
       <DependentUpon>201504210854199_changesToAssignmentTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504230607195_identityOnAssignmentID.cs" />
+    <Compile Include="Migrations\201504230607195_identityOnAssignmentID.Designer.cs">
+      <DependentUpon>201504230607195_identityOnAssignmentID.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -493,6 +497,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504210854199_changesToAssignmentTable.resx">
       <DependentUpon>201504210854199_changesToAssignmentTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504230607195_identityOnAssignmentID.resx">
+      <DependentUpon>201504230607195_identityOnAssignmentID.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

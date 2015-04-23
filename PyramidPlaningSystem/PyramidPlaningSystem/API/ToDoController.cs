@@ -45,12 +45,17 @@ namespace PyramidPlaningSystem.API
 
             var childTodods = db.ToDos.Where(x => x.ParentId == id && x.Deleted == false).ToList();
 
-            var toDoModel = new ToDoModel
-            {
-                ParentToDo = parentToDoModel,
-                ChildToDos = childTodods
-            };
+            var toDoModel = new ToDoModel();
+            toDoModel.ParentToDo.ToDo = parentToDoModel;
 
+            foreach (var item in childTodods)
+            {
+                toDoModel.ChildToDos.Add(new ToDoViewModel()
+                {
+                    ToDo = item
+                });
+            }
+            //toDoModel.ChildToDos = childTodods.ToList();
             return toDoModel;
         }
 
@@ -59,14 +64,14 @@ namespace PyramidPlaningSystem.API
         {
             if (ModelState.IsValid)
             {
-                if (toDoModel.ParentToDo.ToDoId == Guid.Empty)
+                if (toDoModel.ParentToDo.ToDo.ToDoId == Guid.Empty)
                 {
                     CreateAndAddParentToDo(toDoModel);
                     db.SaveChanges();
                 }
-                if (toDoModel.ContactIdList.Any())
+                if (toDoModel.ParentToDo.ContactIdList.Any())
                 {
-                    foreach (var contactId in toDoModel.ContactIdList)
+                    foreach (var contactId in toDoModel.ParentToDo.ContactIdList)
                     {
                         var userId = int.Parse(contactId);
                         var user = db.Users.FirstOrDefault(x => x.Contact.Id == userId);
@@ -82,9 +87,9 @@ namespace PyramidPlaningSystem.API
                 {
                     foreach (var childToDo in toDoModel.ChildToDos)
                     {
-                        if (childToDo.ToDoId == Guid.Empty)
+                        if (childToDo.ToDo.ToDoId == Guid.Empty)
                         {
-                            CreateAndAddChildToDo(toDoModel, childToDo);
+                            CreateAndAddChildToDo(toDoModel, childToDo.ToDo);
                           
                         }
                     }
@@ -92,7 +97,7 @@ namespace PyramidPlaningSystem.API
                 }
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, toDoModel.ParentToDo);
-                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = toDoModel.ParentToDo.ToDoId }));
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = toDoModel.ParentToDo.ToDo.ToDoId }));
                 return response;
             }
             else
@@ -104,15 +109,15 @@ namespace PyramidPlaningSystem.API
 
         private void CreateAndAddChildToDo(ToDoModel toDoModel, ToDo childToDo)
         {
-            childToDo.ParentId = toDoModel.ParentToDo.ToDoId;
+            childToDo.ParentId = toDoModel.ParentToDo.ToDo.ToDoId;
             childToDo.Created = DateTime.Now;
             db.ToDos.Add(childToDo);
         }
 
         private void CreateAndAddParentToDo(ToDoModel toDoModel)
         {
-            toDoModel.ParentToDo.Created = DateTime.Now;
-            db.ToDos.Add(toDoModel.ParentToDo);
+            toDoModel.ParentToDo.ToDo.Created = DateTime.Now;
+            db.ToDos.Add(toDoModel.ParentToDo.ToDo);
         }
 
         private void CreateAndAddAssignment(ToDoModel toDoModel, ApplicationUser user)
@@ -120,13 +125,11 @@ namespace PyramidPlaningSystem.API
             var assignment = new Assignment
             {
                 TimeStamp = DateTime.Now,
-                Todo = toDoModel.ParentToDo,
+                Todo = toDoModel.ParentToDo.ToDo,
                 AddedBy = "Admin",
                 User = user
             };
 
-            Guid id = Guid.NewGuid();
-            assignment.Id = id;
             db.Assignments.Add(assignment);
         }
 
