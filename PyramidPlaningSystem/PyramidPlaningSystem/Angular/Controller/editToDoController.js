@@ -32,7 +32,7 @@
         }).then(function (subItem) {
             subItem.ToDo = convertService.convertTodo(subItem);
             subItem.UniqueId = tagService.replace();
-            subItem.ContactIdList = tagService.getChildTags();
+            //subItem.ContactIdList = tagService.getChildTags();
             $scope.toDoModel.ChildToDos.push(subItem);
             $scope.editSubToDo($scope.toDoModel);
         });

@@ -19,7 +19,7 @@ namespace PyramidPlaningSystem.ViewModels
     {
         public ToDo ToDo { get; set; }
 
-        public string UniqueId { get; set; }
+      //  public string UniqueId { get; set; }
 
         public List<string> ContactIdList { get; set; }
     }

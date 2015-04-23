@@ -105,10 +105,12 @@
                                max="2050-01-01" />
                     </md-input-container>
                 </div>
-                
-                <div layout layout-sm="column" ng-controller="assignmentController" >
-                    <tagger ng-model="tags" options="contacts" disable-new placeholder="Assign to" />
-                    test: {{test}}
+
+                <div layout layout-sm="column" ng-controller="assignmentController">
+                    <div flex>
+                        <tagger ng-model="tags" options="contacts" disable-new placeholder="Assign" />
+                        <!--test: {{test}}-->
+                    </div>
                 </div>
 
 

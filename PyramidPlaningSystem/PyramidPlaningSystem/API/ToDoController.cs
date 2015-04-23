@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using PyramidPlaningSystem.DAL;
 using PyramidPlaningSystem.Models;
 using PyramidPlaningSystem.ViewModels;
 
@@ -21,10 +22,12 @@ namespace PyramidPlaningSystem.API
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private readonly ICreateService _createService;
-
+        private readonly IConvertService _convertService;
+        private ToDoController _toDoController;
         public ToDoController()
         {
             _createService = new CreateService(db);
+            _convertService = new ConvertService(_toDoController);
         }
 
         private ApplicationUserManager UserManager
@@ -49,35 +52,28 @@ namespace PyramidPlaningSystem.API
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
             }
 
-            var childTodosModel = db.ToDos.Where(x => x.ParentId == id && x.Deleted == false).ToList();
-
             var parentTodo = new ToDoViewModel
             {
                 ToDo = parentToDoModel
             };
 
-            var childToDos = new List<ToDoViewModel>();
+            var childToDos = _convertService.ConvertChildTodos(id);
 
-            if (childTodosModel.Any())
-            {
-
-                foreach (var item in childTodosModel)
-                {
-                    var child = new ToDoViewModel
-                    {
-                        ToDo = item
-                    };
-
-                    childToDos.Add(child);
-                }
-            }
             var toDoModel = new ToDoModel
             {
                 ParentToDo = parentTodo,
                 ChildToDos = childToDos
             };
-            //toDoModel.ChildToDos = childTodods.ToList();
+
             return toDoModel;
+        }
+
+       
+
+        public List<ToDo> GetChildToDos(Guid id)
+        {
+            var childTodosModel = db.ToDos.Where(x => x.ParentId == id && x.Deleted == false).ToList();
+            return childTodosModel;
         }
 
         [HttpPost]

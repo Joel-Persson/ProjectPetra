@@ -17,7 +17,7 @@ namespace PyramidPlaningSystem.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
-        private readonly ConvertClass _convertClass = new ConvertClass();
+        private readonly ConvertService _convertService = new ConvertService();
 
         public AccountController()
         {
@@ -372,7 +372,7 @@ namespace PyramidPlaningSystem.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var contact = _convertClass.ContactConvert(model.ContactInfoViewModel);
+                var contact = _convertService.ContactConvert(model.ContactInfoViewModel);
                 
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Contact = contact};
                 var result = await UserManager.CreateAsync(user);

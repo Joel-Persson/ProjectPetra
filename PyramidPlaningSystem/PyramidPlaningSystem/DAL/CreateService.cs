@@ -3,17 +3,8 @@ using System.Linq;
 using PyramidPlaningSystem.Models;
 using PyramidPlaningSystem.ViewModels;
 
-namespace PyramidPlaningSystem.API
+namespace PyramidPlaningSystem.DAL
 {
-    public interface ICreateService
-    {
-        void CreateAndAddChildToDo(ToDoModel toDoModel, ToDo childToDo);
-        void CreateAndAddParentToDo(ToDoModel toDoModel);
-        void CreateAndAddAssignment(ToDo toDo, ApplicationUser user);
-        void ManageChildTodos(ToDoModel toDoModel);
-        void ManageParentTodo(ToDoModel toDoModel);
-    }
-
     public class CreateService : ICreateService
     {
   
@@ -53,7 +44,7 @@ namespace PyramidPlaningSystem.API
 
         public void ManageChildTodos(ToDoModel toDoModel)
         {
-            if (toDoModel.ChildToDos.Any())
+            if (toDoModel.ChildToDos != null && toDoModel.ChildToDos.Any())
             {
                 foreach (var childToDo in toDoModel.ChildToDos)
                 {
@@ -66,7 +57,7 @@ namespace PyramidPlaningSystem.API
 
                 foreach (var childToDo in toDoModel.ChildToDos)
                 {
-                    if (childToDo.ContactIdList != null)
+                    if (childToDo.ContactIdList != null && childToDo.ContactIdList.Any())
                     {
                         foreach (var item in childToDo.ContactIdList)
                         {
@@ -91,7 +82,7 @@ namespace PyramidPlaningSystem.API
                 CreateAndAddParentToDo(toDoModel);
                 _db.SaveChanges();
 
-                if (toDoModel.ParentToDo.ContactIdList.Any())
+                if (toDoModel.ParentToDo.ContactIdList != null && toDoModel.ParentToDo.ContactIdList.Any())
                 {
                     foreach (var contactId in toDoModel.ParentToDo.ContactIdList)
                     {

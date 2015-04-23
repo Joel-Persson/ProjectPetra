@@ -191,7 +191,6 @@
   <ItemGroup>
     <Compile Include="API\AssignmentController.cs" />
     <Compile Include="API\ContactsController.cs" />
-    <Compile Include="API\CreateService.cs" />
     <Compile Include="API\ToDoController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -205,7 +204,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleAdminController.cs" />
-    <Compile Include="DAL\ConvertClass.cs" />
+    <Compile Include="DAL\ConvertService.cs" />
+    <Compile Include="DAL\CreateService.cs" />
+    <Compile Include="DAL\IConvertService.cs" />
+    <Compile Include="DAL\ICreateService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

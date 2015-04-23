@@ -9,16 +9,11 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
     };
 
     $scope.add = function (ToDoModel) {
+        modifyModel(ToDoModel);
 
-        formatDateFactory.formatTime(ToDoModel);
-
-        ToDoModel.ParentToDo.ToDo = convertService.convertTodo(ToDoModel.ParentToDo);
-        ToDoModel.ParentToDo.UniqueId = tagService.replace();
-        ToDoModel.ParentToDo.ContactIdList = tagService.getTags();
-
-        $.each(ToDoModel.ChildToDos, function(i) {
+        $.each(ToDoModel.ChildToDos, function (i) {
             ToDoModel.ChildToDos[i].ToDo = convertService.convertTodo(ToDoModel.ChildToDos[i]);
-            ToDoModel.ChildToDos[i].UniqueId = tagService.replace();
+            //ToDoModel.ChildToDos[i].UniqueId = tagService.replace();
         });
 
         toDoFactory.addToDo(ToDoModel).success(function () {
@@ -38,7 +33,7 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
 
         }).then(function (subItem) {
             subItem.ContactIdList = tagService.getChildTags();
-            $scope.ToDoModel.ChildToDos.push(subItem);//kanske skapa ett unikt id för varje child här
+            $scope.ToDoModel.ChildToDos.push(subItem);
 
         });
     };
@@ -65,6 +60,14 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
         $scope.addSubItem = function (subItem) {
             $mdDialog.hide(subItem);
         };
+    };
+
+    function modifyModel(ToDoModel) {
+
+        formatDateFactory.formatTime(ToDoModel);
+        ToDoModel.ParentToDo.ToDo = convertService.convertTodo(ToDoModel.ParentToDo);
+        //ToDoModel.ParentToDo.UniqueId = tagService.replace();
+        ToDoModel.ParentToDo.ContactIdList = tagService.getTags();
     };
 
 });
@@ -95,7 +98,7 @@ myApp.controller('assignmentController', function ($scope, contactFactory, tagSe
 
     $scope.$watch('tags', function (tagList) {
         var contactIdList = [];
-        $.each(tagList, function(i) { // ändra så man slipper ha två foreach loopar
+        $.each(tagList, function (i) { // ändra så man slipper ha två foreach loopar
             $.each($scope.FullContacts, function (x) {
                 if (tagList[i] === $scope.FullContacts[x].Name) {
                     contactIdList.push($scope.FullContacts[x].Id);
@@ -103,7 +106,7 @@ myApp.controller('assignmentController', function ($scope, contactFactory, tagSe
             });
         });
 
-    tagService.addTags(contactIdList);
+        tagService.addTags(contactIdList);
         $scope.test = tagService.getTags();
     }, true);
 
