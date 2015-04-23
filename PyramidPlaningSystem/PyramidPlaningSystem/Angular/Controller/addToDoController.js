@@ -14,20 +14,24 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
 
         function Convert(ToDoModel) {
             var ToDo = {};
-            ToDo.Title = ToDoModel.ParentToDo.Title;
-            ToDo.Description = ToDoModel.ParentToDo.Description;
-            ToDo.Effort = ToDoModel.ParentToDo.Effort;
-            ToDo.Deadline = ToDoModel.ParentToDo.Deadline;
-            ToDo.EndDate = ToDoModel.ParentToDo.EndDate;
-            ToDo.StartDate = ToDoModel.ParentToDo.StartDate;
-            ToDo.Priority = ToDoModel.ParentToDo.Priority;
-            return ToDoModel.ParentToDo.ToDo = ToDo;
+            ToDo.Title = ToDoModel.Title;
+            ToDo.Description = ToDoModel.Description;
+            ToDo.Effort = ToDoModel.Effort;
+            ToDo.Deadline = ToDoModel.Deadline;
+            ToDo.EndDate = ToDoModel.EndDate;
+            ToDo.StartDate = ToDoModel.StartDate;
+            ToDo.Priority = ToDoModel.Priority;
+            return ToDo;
         };
 
-        ToDoModel= Convert(ToDoModel);
-
+        ToDoModel.ParentToDo.ToDo = Convert(ToDoModel.ParentToDo);
         ToDoModel.ParentToDo.UniqueId = tagService.replace();
         ToDoModel.ParentToDo.ContactIdList = tagService.getTags();
+
+        $.each(ToDoModel.ChildToDos, function(i) {
+            ToDoModel.ChildToDos[i].ToDo = Convert(ToDoModel.ChildToDos[i]);
+            ToDoModel.ChildToDos[i].UniqueId = tagService.replace();
+        });
 
         toDoFactory.addToDo(ToDoModel).success(function () {
             $location.path('/toDos');
@@ -45,6 +49,7 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
             targetEvent: ev,
 
         }).then(function (subItem) {
+            subItem.ContactIdList = tagService.getChildTags();
             $scope.ToDoModel.ChildToDos.push(subItem);//kanske skapa ett unikt id för varje child här
 
         });
@@ -113,5 +118,48 @@ myApp.controller('assignmentController', function ($scope, contactFactory, tagSe
     tagService.addTags(contactIdList);
         $scope.test = tagService.getTags();
     }, true);
+
+
+});
+
+
+myApp.controller('subAssignmentController', function ($scope, contactFactory, tagService) {
+
+    $scope.contacts = [];
+
+    $scope.FullContacts = [];
+
+    $scope.tags = [];
+
+    (function getContacts() {
+        contactFactory.getContacts().success(function (data) {
+
+            $.each(data, function (i) {
+                var contactObject = {
+                    "Name": data[i].Firstname + " " + data[i].Lastname,
+                    "Id": data[i].Id
+                }
+                $scope.FullContacts.push(contactObject);
+                $scope.contacts.push(data[i].Firstname + " " + data[i].Lastname);
+            });
+        });
+    })();
+
+
+
+    $scope.$watch('tags', function (tagList) {
+        var contactIdList = [];
+        $.each(tagList, function (i) { // ändra så man slipper ha två foreach loopar
+            $.each($scope.FullContacts, function (x) {
+                if (tagList[i] === $scope.FullContacts[x].Name) {
+                    contactIdList.push($scope.FullContacts[x].Id);
+                }
+            });
+        });
+
+        tagService.addChildTags(contactIdList);
+        $scope.test = tagService.getChildTags();
+    }, true);
+
 
 });

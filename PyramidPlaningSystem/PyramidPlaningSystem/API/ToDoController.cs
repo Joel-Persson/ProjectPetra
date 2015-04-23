@@ -77,7 +77,7 @@ namespace PyramidPlaningSystem.API
                         var user = db.Users.FirstOrDefault(x => x.Contact.Id == userId);
                         if (user != null)
                         {
-                            CreateAndAddAssignment(toDoModel, user);
+                            CreateAndAddAssignment(toDoModel.ParentToDo.ToDo, user);
                         }
                     }
                     db.SaveChanges();
@@ -93,6 +93,24 @@ namespace PyramidPlaningSystem.API
                           
                         }
                     }
+                    db.SaveChanges();
+
+                    foreach (var childToDo in toDoModel.ChildToDos)
+                    {
+                        if (childToDo.ContactIdList.Any())
+                        {
+                            foreach (var item in childToDo.ContactIdList)
+                            {
+                                var contactId = int.Parse(item);
+                                var user = db.Users.FirstOrDefault(x => x.Contact.Id == contactId);
+                                if (user != null)
+                                {
+                                    CreateAndAddAssignment(childToDo.ToDo, user);
+                                }
+                            }
+                        }
+                    }
+
                     db.SaveChanges();
                 }
 
@@ -120,12 +138,12 @@ namespace PyramidPlaningSystem.API
             db.ToDos.Add(toDoModel.ParentToDo.ToDo);
         }
 
-        private void CreateAndAddAssignment(ToDoModel toDoModel, ApplicationUser user)
+        private void CreateAndAddAssignment(ToDo toDo, ApplicationUser user)
         {
             var assignment = new Assignment
             {
                 TimeStamp = DateTime.Now,
-                Todo = toDoModel.ParentToDo.ToDo,
+                Todo = toDo,
                 AddedBy = "Admin",
                 User = user
             };
