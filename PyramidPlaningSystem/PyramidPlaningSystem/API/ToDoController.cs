@@ -20,6 +20,12 @@ namespace PyramidPlaningSystem.API
     public class ToDoController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ICreateService _createService;
+
+        public ToDoController()
+        {
+            _createService = new CreateService(db);
+        }
 
         private ApplicationUserManager UserManager
         {
@@ -43,18 +49,33 @@ namespace PyramidPlaningSystem.API
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
             }
 
-            var childTodods = db.ToDos.Where(x => x.ParentId == id && x.Deleted == false).ToList();
+            var childTodosModel = db.ToDos.Where(x => x.ParentId == id && x.Deleted == false).ToList();
 
-            var toDoModel = new ToDoModel();
-            toDoModel.ParentToDo.ToDo = parentToDoModel;
-
-            foreach (var item in childTodods)
+            var parentTodo = new ToDoViewModel
             {
-                toDoModel.ChildToDos.Add(new ToDoViewModel()
+                ToDo = parentToDoModel
+            };
+
+            var childToDos = new List<ToDoViewModel>();
+
+            if (childTodosModel.Any())
+            {
+
+                foreach (var item in childTodosModel)
                 {
-                    ToDo = item
-                });
+                    var child = new ToDoViewModel
+                    {
+                        ToDo = item
+                    };
+
+                    childToDos.Add(child);
+                }
             }
+            var toDoModel = new ToDoModel
+            {
+                ParentToDo = parentTodo,
+                ChildToDos = childToDos
+            };
             //toDoModel.ChildToDos = childTodods.ToList();
             return toDoModel;
         }
@@ -64,55 +85,9 @@ namespace PyramidPlaningSystem.API
         {
             if (ModelState.IsValid)
             {
-                if (toDoModel.ParentToDo.ToDo.ToDoId == Guid.Empty)
-                {
-                    CreateAndAddParentToDo(toDoModel);
-                    db.SaveChanges();
-                }
-                if (toDoModel.ParentToDo.ContactIdList.Any())
-                {
-                    foreach (var contactId in toDoModel.ParentToDo.ContactIdList)
-                    {
-                        var userId = int.Parse(contactId);
-                        var user = db.Users.FirstOrDefault(x => x.Contact.Id == userId);
-                        if (user != null)
-                        {
-                            CreateAndAddAssignment(toDoModel.ParentToDo.ToDo, user);
-                        }
-                    }
-                    db.SaveChanges();
-                }
+                _createService.ManageParentTodo(toDoModel);
 
-                if (toDoModel.ChildToDos.Any())
-                {
-                    foreach (var childToDo in toDoModel.ChildToDos)
-                    {
-                        if (childToDo.ToDo.ToDoId == Guid.Empty)
-                        {
-                            CreateAndAddChildToDo(toDoModel, childToDo.ToDo);
-                          
-                        }
-                    }
-                    db.SaveChanges();
-
-                    foreach (var childToDo in toDoModel.ChildToDos)
-                    {
-                        if (childToDo.ContactIdList.Any())
-                        {
-                            foreach (var item in childToDo.ContactIdList)
-                            {
-                                var contactId = int.Parse(item);
-                                var user = db.Users.FirstOrDefault(x => x.Contact.Id == contactId);
-                                if (user != null)
-                                {
-                                    CreateAndAddAssignment(childToDo.ToDo, user);
-                                }
-                            }
-                        }
-                    }
-
-                    db.SaveChanges();
-                }
+                _createService.ManageChildTodos(toDoModel);
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, toDoModel.ParentToDo);
                 response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = toDoModel.ParentToDo.ToDo.ToDoId }));
@@ -125,31 +100,6 @@ namespace PyramidPlaningSystem.API
             }
         }
 
-        private void CreateAndAddChildToDo(ToDoModel toDoModel, ToDo childToDo)
-        {
-            childToDo.ParentId = toDoModel.ParentToDo.ToDo.ToDoId;
-            childToDo.Created = DateTime.Now;
-            db.ToDos.Add(childToDo);
-        }
-
-        private void CreateAndAddParentToDo(ToDoModel toDoModel)
-        {
-            toDoModel.ParentToDo.ToDo.Created = DateTime.Now;
-            db.ToDos.Add(toDoModel.ParentToDo.ToDo);
-        }
-
-        private void CreateAndAddAssignment(ToDo toDo, ApplicationUser user)
-        {
-            var assignment = new Assignment
-            {
-                TimeStamp = DateTime.Now,
-                Todo = toDo,
-                AddedBy = "Admin",
-                User = user
-            };
-
-            db.Assignments.Add(assignment);
-        }
 
         public HttpResponseMessage Put(Guid id, ToDo toDo)
         {

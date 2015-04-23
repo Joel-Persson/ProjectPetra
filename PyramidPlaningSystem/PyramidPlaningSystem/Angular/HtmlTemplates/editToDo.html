@@ -10,7 +10,7 @@
                 <div layout layout-sm="column">
                     <md-input-container flex>
                         <label for="title">Title</label>
-                        <input ng-model="toDoModel.ParentToDo.Title"
+                        <input ng-model="toDoModel.ParentToDo.ToDo.Title"
                                required
                                ng-maxlength="250"
                                ng-minlength="1"
@@ -25,7 +25,7 @@
                                min="0"
                                max="1000"
                                name="estimatedTime"
-                               ng-model="toDoModel.ParentToDo.Effort"/>
+                               ng-model="toDoModel.ParentToDo.ToDo.Effort" />
 
                         <div ng-messages="toDoSubmit.estimatedTime.$error">
                             <div ng-message="number">
@@ -44,7 +44,7 @@
 
                 </div>
                 <div layout layout-md="column" layout-sm="column">
-                    <md-select class="customSelect" name="prioritySelect" placeholder="Priority" ng-model="toDoModel.ParentToDo.Priority" flex="20" required>
+                    <md-select class="customSelect" name="prioritySelect" placeholder="Priority" ng-model="toDoModel.ParentToDo.ToDo.Priority" flex="20" required>
                         <md-optgroup label="Priority">
                             <md-option value="100">100</md-option>
                             <md-option value="200">200</md-option>
@@ -62,7 +62,7 @@
                     <md-input-container flex="">
                         <label for="deadline">Current Deadline: {{currentDeadline }} </label>
                         <input type="date"
-                               ng-model="toDoModel.ParentToDo.Deadline"
+                               ng-model="toDoModel.ParentToDo.ToDo.Deadline"
                                min="2015-01-01"
                                max="2050-01-01"
                                name="deadline" />
@@ -72,7 +72,7 @@
                 <div layout layout-sm="column">
                     <md-input-container flex="">
                         <label>Description</label>
-                        <textarea ng-model="toDoModel.ParentToDo.Description"
+                        <textarea ng-model="toDoModel.ParentToDo.ToDo.Description"
                                   ng-maxlength="800"
                                   required
                                   md-maxlength="800"
@@ -85,7 +85,7 @@
                         <label for="StartDate">Start date</label>
                         <input type="date"
                                name="StartDate"
-                               ng-model="toDoModel.ParentToDo.StartDate"
+                               ng-model="toDoModel.ParentToDo.ToDo.StartDate"
                                min="2015-01-01"
                                max="2050-01-01" />
                     </md-input-container>
@@ -94,7 +94,7 @@
                         <label for="EndDate">End date</label>
                         <input type="date"
                                name="EndDate"
-                               ng-model="toDoModel.ParentToDo.EndDate"
+                               ng-model="toDoModel.ParentToDo.ToDo.EndDate"
                                min="2015-01-01"
                                max="2050-01-01" />
                     </md-input-container>
@@ -128,15 +128,14 @@
         <md-card-content>
 
             <accordion close-others="oneAtATime">
-                <accordion-group heading="{{toDo.Title}}" ng-repeat="toDo in toDoModel.ChildToDos">
+                <accordion-group heading="{{item.ToDo.Title}}" ng-repeat="item in toDoModel.ChildToDos">
                     <h2>Edit Subtask</h2>
                     <form name="editTodo" ng-submit="editToDo(toDo)">
-
                         <div layout layout-sm="column">
 
                             <md-input-container flex>
                                 <label for="title">Title</label>
-                                <input ng-model="toDo.Title"
+                                <input ng-model="item.ToDo.Title"
                                        required
                                        ng-maxlength="250"
                                        ng-minlength="1"
@@ -151,7 +150,7 @@
                                        min="0"
                                        max="1000"
                                        name="estimatedTime"
-                                       ng-model="toDo.Effort" />
+                                       ng-model="item.ToDo.Effort" />
 
                                 <div ng-messages="toDoSubmit.estimatedTime.$error">
                                     <div ng-message="number">
@@ -170,7 +169,7 @@
 
                         </div>
                         <div layout layout-md="column" layout-sm="column">
-                            <md-select class="customSelect" name="prioritySelect" placeholder="Priority" ng-model="toDo.Priority" flex="20" required>
+                            <md-select class="customSelect" name="prioritySelect" placeholder="Priority" ng-model="item.ToDo.Priority" flex="20" required>
                                 <md-optgroup label="Priority">
                                     <md-option value="100">100</md-option>
                                     <md-option value="200">200</md-option>
@@ -188,7 +187,7 @@
                             <md-input-container flex="">
                                 <label for="deadline">Deadline: </label>
                                 <input type="date"
-                                       ng-model="toDo.Deadline"
+                                       ng-model="item.ToDo.Deadline"
                                        min="2015-01-01"
                                        max="2050-01-01"
                                        name="deadline" />
@@ -199,7 +198,7 @@
                         <div layout layout-sm="column">
                             <md-input-container flex="">
                                 <label>Description</label>
-                                <textarea ng-model="toDo.Description"
+                                <textarea ng-model="item.ToDo.Description"
                                           ng-maxlength="800"
                                           required
                                           md-maxlength="800"
@@ -212,7 +211,7 @@
                                 <label for="StartDate">Start date</label>
                                 <input type="date"
                                        name="StartDate"
-                                       ng-model="toDo.StartDate"
+                                       ng-model="item.ToDo.StartDate"
                                        min="2015-01-01"
                                        max="2050-01-01" />
                             </md-input-container>
@@ -221,7 +220,7 @@
                                 <label for="EndDate">End date</label>
                                 <input type="date"
                                        name="EndDate"
-                                       ng-model="toDo.EndDate"
+                                       ng-model="item.ToDo.EndDate"
                                        min="2015-01-01"
                                        max="2050-01-01" />
                             </md-input-container>
@@ -230,9 +229,9 @@
                         <div layout-align="start end" layout="row">
                             <md-button class="md-primary md-hue-1 md-raised" type="submit" value="Submit">Save</md-button>
                         </div>
-                       
+
                     </form>
-                    
+
                     <div layout="row" layout-align="end center">
                         <md-button aria-label="delete" class="md-fab md-mini" ng-click="deleteConfirm($event, toDo)">
                             <md-icon layout="row" layout-align="center center" class="glyphicon glyphicon-remove"></md-icon>

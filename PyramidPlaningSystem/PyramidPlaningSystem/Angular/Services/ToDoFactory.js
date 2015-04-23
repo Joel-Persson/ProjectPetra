@@ -131,3 +131,22 @@ myApp.service('tagService', function () {
         getChildTags: getChildTags
     };
 });
+
+myApp.service('convertService', function () {
+
+    var convertTodo = function (ToDoModel) {
+        var ToDo = {};
+        ToDo.Title = ToDoModel.Title;
+        ToDo.Description = ToDoModel.Description;
+        ToDo.Effort = ToDoModel.Effort;
+        ToDo.Deadline = ToDoModel.Deadline;
+        ToDo.EndDate = ToDoModel.EndDate;
+        ToDo.StartDate = ToDoModel.StartDate;
+        ToDo.Priority = ToDoModel.Priority;
+        return ToDo;
+    };
+
+    return {
+        convertTodo: convertTodo
+    };
+});

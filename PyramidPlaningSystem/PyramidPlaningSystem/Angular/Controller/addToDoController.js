@@ -1,5 +1,5 @@
 ﻿
-myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, $location, formatDateFactory, tagService, assignmentFactory) {
+myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, $location, formatDateFactory, tagService, convertService) {
 
     $scope.PageHeader = "Add Task";
     $scope.Time = "";
@@ -12,24 +12,12 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
 
         formatDateFactory.formatTime(ToDoModel);
 
-        function Convert(ToDoModel) {
-            var ToDo = {};
-            ToDo.Title = ToDoModel.Title;
-            ToDo.Description = ToDoModel.Description;
-            ToDo.Effort = ToDoModel.Effort;
-            ToDo.Deadline = ToDoModel.Deadline;
-            ToDo.EndDate = ToDoModel.EndDate;
-            ToDo.StartDate = ToDoModel.StartDate;
-            ToDo.Priority = ToDoModel.Priority;
-            return ToDo;
-        };
-
-        ToDoModel.ParentToDo.ToDo = Convert(ToDoModel.ParentToDo);
+        ToDoModel.ParentToDo.ToDo = convertService.convertTodo(ToDoModel.ParentToDo);
         ToDoModel.ParentToDo.UniqueId = tagService.replace();
         ToDoModel.ParentToDo.ContactIdList = tagService.getTags();
 
         $.each(ToDoModel.ChildToDos, function(i) {
-            ToDoModel.ChildToDos[i].ToDo = Convert(ToDoModel.ChildToDos[i]);
+            ToDoModel.ChildToDos[i].ToDo = convertService.convertTodo(ToDoModel.ChildToDos[i]);
             ToDoModel.ChildToDos[i].UniqueId = tagService.replace();
         });
 

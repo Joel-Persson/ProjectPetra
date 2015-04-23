@@ -1,4 +1,4 @@
-﻿myApp.controller('editToDoController', function ($scope, $routeParams, toDoFactory, $location, $mdDialog, formatDateFactory) {
+﻿myApp.controller('editToDoController', function ($scope, $routeParams, toDoFactory, $location, $mdDialog, formatDateFactory, tagService, convertService) {
     $scope.PageHeader = "Edit Task";
     $scope.oneAtATime = true;
 
@@ -30,6 +30,9 @@
             targetEvent: ev,
 
         }).then(function (subItem) {
+            subItem.ToDo = convertService.convertTodo(subItem);
+            subItem.UniqueId = tagService.replace();
+            subItem.ContactIdList = tagService.getChildTags();
             $scope.toDoModel.ChildToDos.push(subItem);
             $scope.editSubToDo($scope.toDoModel);
         });
