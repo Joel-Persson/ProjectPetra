@@ -93,6 +93,10 @@ myApp.factory("assignmentFactory", function ($http) {
         return $http.post(urlBase, assignment);
     }
 
+    assignmentFactory.getAssignments = function(id) {
+        return $http.get(urlBase + "/" + id);
+    }
+
     return assignmentFactory;
 });
 

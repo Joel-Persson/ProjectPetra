@@ -1,16 +1,16 @@
-﻿myApp.controller('editToDoController', function ($scope, $routeParams, toDoFactory, $location, $mdDialog, formatDateFactory, tagService, convertService) {
+﻿myApp.controller('editToDoController', function ($scope, $routeParams, toDoFactory, $location, $mdDialog, formatDateFactory, tagService, convertService, assignmentFactory) {
     $scope.PageHeader = "Edit Task";
     $scope.oneAtATime = true;
+    $scope.Assignments = [];
 
     getSingleToDo();
     function getSingleToDo() {
         toDoFactory.getSingleToDo($routeParams.Id).success(function (data) {
-           $scope.currentDeadline = formatDateFactory.formatDate(data.ParentToDo.ToDo.Deadline);
-           data.ParentToDo.ToDo.Deadline = new Date(currentDeadline);
-           $scope.toDoModel = data;
-            //$scope.currentDeadline = formatDateFactory.formatDate(data.ParentToDo.ToDo.Deadline);
-            //    var date = data.ParentToDo.ToDo.Deadline;
-            //toDoModel.ParentToDo.ToDo.Deadline = new Date(date);
+            $scope.toDoModel = data;
+            $scope.deadlineDate = new Date(data.ParentToDo.ToDo.Deadline);
+            $scope.startDate = new Date(data.ParentToDo.ToDo.StartDate);
+            $scope.endDate = new Date(data.ParentToDo.ToDo.EndDate);
+            getAssignments(data.ParentToDo.ToDo.ToDoId);
             })
         .error(function () {
             $scope.status = "Something went wrong!";
@@ -18,8 +18,27 @@
 
     };
 
+    function getAssignments(toDoId) {
+        assignmentFactory.getAssignments(toDoId).success(function (data) {
+            $.each(data, function(i) {
+                $scope.Assignments.push(data[i].User.Contact.Firstname + " " + data[i].User.Contact.Lastname);
+            });
+        });
+    }
+
+    //$.each($scope.FullContacts, function (x) {
+    //    if (tagList[i] === $scope.FullContacts[x].Name) {
+    //        contactIdList.push($scope.FullContacts[x].Id);
+    //    }
+    //});
+
     $scope.editToDo = function (toDoModel) {
-        formatDateFactory.formatTime(toDoModel);
+
+        toDoModel.ToDo.Deadline = $scope.deadlineDate;
+        toDoModel.ToDo.StartDate = $scope.startDate;
+        toDoModel.ToDo.EndDate = $scope.endDate;
+
+        formatDateFactory.formatTime(toDoModel.ToDo);
         toDoModel.ContactIdList = tagService.getTags();
         toDoFactory.editToDo(toDoModel).success(function () {
             $location.path('/toDos');
@@ -36,7 +55,6 @@
 
         }).then(function (subItem) {
             subItem.ToDo = convertService.convertTodo(subItem);
-            //subItem.UniqueId = tagService.replace();
             subItem.ContactIdList = tagService.getChildTags();
             $scope.toDoModel.ChildToDos.push(subItem);
             $scope.editSubToDo($scope.toDoModel);

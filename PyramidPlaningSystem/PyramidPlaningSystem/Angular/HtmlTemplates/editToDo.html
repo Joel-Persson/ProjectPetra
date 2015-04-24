@@ -60,9 +60,9 @@
                     </md-select>
 
                     <md-input-container flex="">
-                        <label for="deadline">Current Deadline: {{currentDeadline }} </label>
+                        <label for="deadline">Deadline </label>
                         <input type="date"
-                               ng-model="toDoModel.ParentToDo.ToDo.Deadline"
+                               ng-model="deadlineDate"
                                min="2015-01-01"
                                max="2050-01-01"
                                name="deadline" />
@@ -85,26 +85,29 @@
                         <label for="StartDate">Start date</label>
                         <input type="date"
                                name="StartDate"
-                               ng-model="toDoModel.ParentToDo.ToDo.StartDate"
+                               ng-model="startDate"
                                min="2015-01-01"
-                               max="2050-01-01"/>
+                               max="2050-01-01" />
                     </md-input-container>
 
                     <md-input-container flex>
                         <label for="EndDate">End date</label>
                         <input type="date"
                                name="EndDate"
-                               ng-model="toDoModel.ParentToDo.ToDo.EndDate"
+                               ng-model="endDate"
                                min="2015-01-01"
-                               max="2050-01-01"/>
+                               max="2050-01-01" />
                     </md-input-container>
                 </div>
 
                 <div layout layout-sm="column" ng-controller="assignmentController">
                     <div flex>
-                        <tagger ng-model="tags" options="contacts" disable-new placeholder="Assign" />
-                      
+                        <tagger ng-model="tags" options="contacts" disable-new placeholder="Assign" />                      
                     </div>
+                </div>
+                
+                <div ng-repeat="item in Assignments">
+                    {{item}}
                 </div>
 
                 <div layout-align="start end" layout="row">

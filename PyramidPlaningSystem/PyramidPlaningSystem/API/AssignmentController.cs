@@ -21,9 +21,9 @@ namespace PyramidPlaningSystem.API
             return db.Assignments.AsEnumerable();
         }
 
-        public Assignment Get(Guid id)
+        public IEnumerable<Assignment> Get(Guid id)
         {
-            Assignment assignment = db.Assignments.Find(id);
+            var assignment = db.Assignments.Where(x => x.Todo.ToDoId == id).ToList();
 
             if (assignment == null)
             {
@@ -32,6 +32,8 @@ namespace PyramidPlaningSystem.API
 
             return assignment;
         }
+        
+
 
         [HttpPost]
         public HttpResponseMessage Post(Assignment assignment)
