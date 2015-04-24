@@ -5,8 +5,12 @@
     getSingleToDo();
     function getSingleToDo() {
         toDoFactory.getSingleToDo($routeParams.Id).success(function (data) {
-            $scope.toDoModel = data;
-            $scope.currentDeadline = formatDateFactory.formatDate(data.ParentToDo.Deadline);
+           $scope.currentDeadline = formatDateFactory.formatDate(data.ParentToDo.ToDo.Deadline);
+           data.ParentToDo.ToDo.Deadline = new Date(currentDeadline);
+           $scope.toDoModel = data;
+            //$scope.currentDeadline = formatDateFactory.formatDate(data.ParentToDo.ToDo.Deadline);
+            //    var date = data.ParentToDo.ToDo.Deadline;
+            //toDoModel.ParentToDo.ToDo.Deadline = new Date(date);
             })
         .error(function () {
             $scope.status = "Something went wrong!";
@@ -14,9 +18,10 @@
 
     };
 
-    $scope.editToDo = function (toDo) {
-        formatDateFactory.formatTime(toDo);
-        toDoFactory.editToDo(toDo).success(function () {
+    $scope.editToDo = function (toDoModel) {
+        formatDateFactory.formatTime(toDoModel);
+        toDoModel.ContactIdList = tagService.getTags();
+        toDoFactory.editToDo(toDoModel).success(function () {
             $location.path('/toDos');
         });
     };
@@ -31,8 +36,8 @@
 
         }).then(function (subItem) {
             subItem.ToDo = convertService.convertTodo(subItem);
-            subItem.UniqueId = tagService.replace();
-            //subItem.ContactIdList = tagService.getChildTags();
+            //subItem.UniqueId = tagService.replace();
+            subItem.ContactIdList = tagService.getChildTags();
             $scope.toDoModel.ChildToDos.push(subItem);
             $scope.editSubToDo($scope.toDoModel);
         });

@@ -84,10 +84,10 @@ namespace PyramidPlaningSystem.DAL
 
                 if (toDoModel.ParentToDo.ContactIdList != null && toDoModel.ParentToDo.ContactIdList.Any())
                 {
-                    foreach (var contactId in toDoModel.ParentToDo.ContactIdList)
+                    foreach (var item in toDoModel.ParentToDo.ContactIdList)
                     {
-                        var userId = int.Parse(contactId);
-                        var user = _db.Users.FirstOrDefault(x => x.Contact.Id == userId);
+                        var contactId = int.Parse(item);
+                        var user = _db.Users.FirstOrDefault(x => x.Contact.Id == contactId);
                         if (user != null)
                         {
                             CreateAndAddAssignment(toDoModel.ParentToDo.ToDo, user);

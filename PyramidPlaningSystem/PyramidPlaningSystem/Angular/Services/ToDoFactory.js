@@ -15,8 +15,8 @@
     toDoFactory.deleteToDo = function (id) {
         return $http.delete(urlBase + "/" + id);
     }
-    toDoFactory.editToDo = function (toDo) {
-        return $http.put(urlBase + "/" + toDo.ToDoId, toDo);
+    toDoFactory.editToDo = function (toDoModel) {
+        return $http.put(urlBase + "/" + toDoModel.ToDo.ToDoId, toDoModel);
     }
 
     return toDoFactory;

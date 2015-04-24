@@ -9,16 +9,15 @@ namespace PyramidPlaningSystem.DAL
 {
     public class ConvertService : IConvertService
     {
-        private readonly ToDoController _toDoController;
 
-        //private ApplicationDbContext context = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db;
 
         public ConvertService()
         {            
         }
-        public ConvertService(ToDoController toDoController)
+        public ConvertService(ApplicationDbContext db)
         {
-            _toDoController = toDoController;
+            _db = db;
         }
       
         public Contact ContactConvert(ContactInfoViewModel model)
@@ -51,7 +50,7 @@ namespace PyramidPlaningSystem.DAL
 
         public List<ToDoViewModel> ConvertChildTodos(Guid id)
         {
-            var childTodosModel = _toDoController.GetChildToDos(id);
+            var childTodosModel = RetriveChildToDos(id);
             var childToDos = new List<ToDoViewModel>();
 
             if (childTodosModel != null && childTodosModel.Any())
@@ -67,6 +66,12 @@ namespace PyramidPlaningSystem.DAL
                 }
             }
             return childToDos;
+        }
+
+        public List<ToDo> RetriveChildToDos(Guid id)
+        {
+            var childTodosModel = _db.ToDos.Where(x => x.ParentId == id && x.Deleted == false).ToList();
+            return childTodosModel;
         }
 
     }

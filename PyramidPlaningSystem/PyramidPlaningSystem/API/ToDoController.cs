@@ -23,11 +23,10 @@ namespace PyramidPlaningSystem.API
         private ApplicationDbContext db = new ApplicationDbContext();
         private readonly ICreateService _createService;
         private readonly IConvertService _convertService;
-        private ToDoController _toDoController;
         public ToDoController()
         {
             _createService = new CreateService(db);
-            _convertService = new ConvertService(_toDoController);
+            _convertService = new ConvertService(db);
         }
 
         private ApplicationUserManager UserManager
@@ -68,13 +67,7 @@ namespace PyramidPlaningSystem.API
             return toDoModel;
         }
 
-       
-
-        public List<ToDo> GetChildToDos(Guid id)
-        {
-            var childTodosModel = db.ToDos.Where(x => x.ParentId == id && x.Deleted == false).ToList();
-            return childTodosModel;
-        }
+      
 
         [HttpPost]
         public HttpResponseMessage Post(ToDoModel toDoModel)
@@ -97,19 +90,34 @@ namespace PyramidPlaningSystem.API
         }
 
 
-        public HttpResponseMessage Put(Guid id, ToDo toDo)
+        public HttpResponseMessage Put(Guid id, ToDoViewModel toDoViewModel)
         {
             if (!ModelState.IsValid)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
 
-            if (id != toDo.ToDoId)
+            if (id != toDoViewModel.ToDo.ToDoId)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
-            db.Entry(toDo).State = EntityState.Modified;
+            db.Entry(toDoViewModel.ToDo).State = EntityState.Modified;
+
+            if (toDoViewModel.ContactIdList != null && toDoViewModel.ContactIdList.Any())
+            {
+                foreach (var item in toDoViewModel.ContactIdList)
+                {
+                    var contactId = int.Parse(item);
+                    var user = db.Users.FirstOrDefault(x => x.Contact.Id == contactId);
+                    if (user != null)
+                    {
+                        _createService.CreateAndAddAssignment(toDoViewModel.ToDo, user);
+                    }
+                }
+
+                db.SaveChanges();
+            }
 
             try
             {
