@@ -34,10 +34,10 @@ namespace PyramidPlaningSystem.DAL
             _db.ToDos.Add(childToDo);
         }
 
-        public void CreateAndAddParentToDo(ToDoModel toDoModel)
+        public void CreateAndAddParentToDo(ToDo toDoModel)
         {
-            toDoModel.ParentToDo.ToDo.Created = DateTime.Now;
-            _db.ToDos.Add(toDoModel.ParentToDo.ToDo);
+            toDoModel.Created = DateTime.Now;
+            _db.ToDos.Add(toDoModel);
         }
 
         public void CreateAndAddAssignment(ToDo toDo, ApplicationUser user)
@@ -94,27 +94,27 @@ namespace PyramidPlaningSystem.DAL
             }
         }
 
-        public void ManageParentTodo(ToDoModel toDoModel)
+        public void ManageParentTodo(ToDoViewModel toDoModel)
         {
-            if (toDoModel.ParentToDo.ToDo.ToDoId == Guid.Empty)
+            if (toDoModel.ToDo.ToDoId == Guid.Empty)
             {
-                CreateAndAddParentToDo(toDoModel);
+                CreateAndAddParentToDo(toDoModel.ToDo);
                 _db.SaveChanges();
-
-                if (toDoModel.ParentToDo.ContactIdList != null && toDoModel.ParentToDo.ContactIdList.Any())
-                {
-                    foreach (var item in toDoModel.ParentToDo.ContactIdList)
-                    {
-                        var contactId = int.Parse(item);
-                        var user = _db.Users.FirstOrDefault(x => x.Contact.Id == contactId);
-                        if (user != null)
-                        {
-                            CreateAndAddAssignment(toDoModel.ParentToDo.ToDo, user);
-                        }
-                    }
-                    _db.SaveChanges();
-                }
             }
+            if (toDoModel.ContactIdList != null && toDoModel.ContactIdList.Any())
+            {
+                foreach (var item in toDoModel.ContactIdList)
+                {
+                    var contactId = int.Parse(item);
+                    var user = _db.Users.FirstOrDefault(x => x.Contact.Id == contactId);
+                    if (user != null)
+                    {
+                        CreateAndAddAssignment(toDoModel.ToDo, user);
+                    }
+                }
+                _db.SaveChanges();
+            }
+
         }
     }
 }

@@ -74,7 +74,7 @@ namespace PyramidPlaningSystem.API
         {
             if (ModelState.IsValid)
             {
-                _createService.ManageParentTodo(toDoModel);
+                _createService.ManageParentTodo(toDoModel.ParentToDo);
 
                 _createService.ManageChildTodos(toDoModel);
 
@@ -104,20 +104,7 @@ namespace PyramidPlaningSystem.API
 
             db.Entry(toDoViewModel.ToDo).State = EntityState.Modified;
 
-            if (toDoViewModel.ContactIdList != null && toDoViewModel.ContactIdList.Any())
-            {
-                foreach (var item in toDoViewModel.ContactIdList)
-                {
-                    var contactId = int.Parse(item);
-                    var user = db.Users.FirstOrDefault(x => x.Contact.Id == contactId);
-                    if (user != null)
-                    {
-                        _createService.CreateAndAddAssignment(toDoViewModel.ToDo, user);
-                    }
-                }
-
-                db.SaveChanges();
-            }
+            _createService.ManageParentTodo(toDoViewModel);
 
             try
             {

@@ -6,9 +6,9 @@ namespace PyramidPlaningSystem.DAL
     public interface ICreateService
     {
         void CreateAndAddChildToDo(ToDoModel toDoModel, ToDo childToDo);
-        void CreateAndAddParentToDo(ToDoModel toDoModel);
+        void CreateAndAddParentToDo(ToDo toDoModel);
         void CreateAndAddAssignment(ToDo toDo, ApplicationUser user);
         void ManageChildTodos(ToDoModel toDoModel);
-        void ManageParentTodo(ToDoModel toDoModel);
+        void ManageParentTodo(ToDoViewModel toDoModel);
     }
 }

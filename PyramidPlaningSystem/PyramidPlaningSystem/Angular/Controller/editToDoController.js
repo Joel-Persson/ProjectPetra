@@ -7,10 +7,17 @@
     function getSingleToDo() {
         toDoFactory.getSingleToDo($routeParams.Id).success(function (data) {
             $scope.toDoModel = data;
-            $scope.deadlineDate = new Date(data.ParentToDo.ToDo.Deadline);
-            $scope.startDate = new Date(data.ParentToDo.ToDo.StartDate);
-            $scope.endDate = new Date(data.ParentToDo.ToDo.EndDate);
-            getAssignments(data.ParentToDo.ToDo.ToDoId);
+
+            $scope.toDoModel.ParentToDo.ToDo.Deadline = new Date($scope.toDoModel.ParentToDo.ToDo.Deadline);
+            $scope.toDoModel.ParentToDo.ToDo.StartDate = new Date($scope.toDoModel.ParentToDo.ToDo.StartDate);
+            $scope.toDoModel.ParentToDo.ToDo.EndDate = new Date($scope.toDoModel.ParentToDo.ToDo.EndDate);
+           
+            $.each($scope.toDoModel.ChildToDos, function (i) {
+                $scope.toDoModel.ChildToDos[i].ToDo.Deadline = new Date($scope.toDoModel.ChildToDos[i].ToDo.Deadline);
+                $scope.toDoModel.ChildToDos[i].ToDo.StartDate = new Date($scope.toDoModel.ChildToDos[i].ToDo.StartDate);
+                $scope.toDoModel.ChildToDos[i].ToDo.EndDate = new Date($scope.toDoModel.ChildToDos[i].ToDo.EndDate);
+            });
+            getAssignments(data);
             })
         .error(function () {
             $scope.status = "Something went wrong!";
@@ -18,25 +25,17 @@
 
     };
 
-    function getAssignments(toDoId) {
-        assignmentFactory.getAssignments(toDoId).success(function (data) {
-            $.each(data, function(i) {
-                $scope.Assignments.push(data[i].User.Contact.Firstname + " " + data[i].User.Contact.Lastname);
+    function getAssignments(toDoModel) {
+        assignmentFactory.getAssignments(toDoModel.ParentToDo.ToDo.ToDoId).success(function (parentAssignment) {
+            $.each(parentAssignment, function (i) {
+                $scope.Assignments.push(parentAssignment[i].User.Contact.Firstname + " " + parentAssignment[i].User.Contact.Lastname);
             });
+
         });
     }
 
-    //$.each($scope.FullContacts, function (x) {
-    //    if (tagList[i] === $scope.FullContacts[x].Name) {
-    //        contactIdList.push($scope.FullContacts[x].Id);
-    //    }
-    //});
 
     $scope.editToDo = function (toDoModel) {
-
-        toDoModel.ToDo.Deadline = $scope.deadlineDate;
-        toDoModel.ToDo.StartDate = $scope.startDate;
-        toDoModel.ToDo.EndDate = $scope.endDate;
 
         formatDateFactory.formatTime(toDoModel.ToDo);
         toDoModel.ContactIdList = tagService.getTags();
@@ -45,7 +44,7 @@
         });
     };
 
-
+  
 
     $scope.ShowAddSubToDo = function (ev) {
         $mdDialog.show({
@@ -69,6 +68,18 @@
         $scope.addSubItem = function (subItem) {
             $mdDialog.hide(subItem);
         };
+    };
+
+    $scope.editSubToDo = function (toDoModel) {
+        formatDateFactory.formatTime(toDoModel);
+
+        toDoFactory.addToDo(toDoModel).success(function () {
+            $scope.success = "Yes";
+        })
+            .error(function () {
+                $scope.success = "No";
+            });
+
     };
 
     $scope.deleteConfirm = function (ev, toDo) {
@@ -95,17 +106,6 @@
         });
     };
 
-    $scope.editSubToDo = function (toDoModel) {
-        formatDateFactory.formatTime(toDoModel);
-
-        toDoFactory.addToDo(toDoModel).success(function () {
-            $scope.success = "Yes";
-        })
-            .error(function () {
-                $scope.success = "No";
-            });
-
-    };
 
     $scope.status = {
         isFirstOpen: true,
