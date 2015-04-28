@@ -1,0 +1,89 @@
+﻿<div>
+    <form name="editContactForm" novalidate ng-submit="updateContact(contactDetails)">
+        <div layout layout-sm="column">
+
+            <md-input-container flex>
+                <label>Firstname</label>
+                <input type="text"
+                       required
+                       ng-maxlength="70"
+                       ng-minlength="1"
+                       autofocus
+                       ng-model="contactDetails.Firstname" />
+            </md-input-container>
+
+            <md-input-container flex>
+                <label>Lastname</label>
+                <input type="text"
+                       required
+                       ng-maxlength="70"
+                       ng-minlength="1"
+                       ng-model="contactDetails.Lastname" />
+            </md-input-container>
+
+        </div>
+
+        <div layout layout-sm="column">
+
+            <md-input-container flex>
+                <label>Address</label>
+                <input type="text"
+                       required
+                       ng-maxlength="150"
+                       ng-minlength="1"
+                       ng-model="contactDetails.Address" />
+            </md-input-container>
+
+            <md-input-container flex>
+                <label>City</label>
+                <input type="text"
+                       required
+                       ng-maxlength="100"
+                       ng-minlength="1"
+                       ng-model="contactDetails.City" />
+            </md-input-container>
+
+        </div>
+
+        <div layout layout-sm="column">
+
+            <md-input-container flex>
+                <label>Zip code</label>
+                <input type="text"
+                       required
+                       ng-maxlength="20"
+                       ng-minlength="1"
+                       name="zipCode"
+                       ng-model="contactDetails.ZipCode" />
+
+                <div ng-messages="editContactForm.zipCode.$error">
+                    <div ng-message="number">
+                        This value must be a number
+                    </div>
+                </div>
+
+            </md-input-container>
+
+            <md-input-container flex>
+                <label>Phone</label>
+                <input type="text"
+                       required
+                       ng-maxlength="70"
+                       ng-minlength="1"
+                       name="phone"
+                       ng-model="contactDetails.Phone" />
+
+                <div ng-messages="editContactForm.phone.$error">
+                    <div ng-message="number">
+                        This value must be a number
+                    </div>
+                </div>
+
+            </md-input-container>
+
+        </div>
+        <div layout-align="start end" layout="row">
+            <md-button class="md-primary md-hue-1 md-raised" type="submit" ng-disabled="editContactForm.$invalid">Save</md-button>
+        </div>
+    </form>
+</div>

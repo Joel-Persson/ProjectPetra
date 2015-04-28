@@ -22,6 +22,16 @@
     return toDoFactory;
 });
 
+myApp.factory('userFactory', function($http) {
+    var urlBase = "/api/User";
+    var userFactory = {};
+
+    userFactory.getUser = function() {
+        return $http.get(urlBase);
+    }
+    return userFactory;
+});
+
 myApp.factory('formatDateFactory', function () {
 
     var formatDateFactory = {};
@@ -82,6 +92,10 @@ myApp.factory("contactFactory", function ($http) {
         return $http.get(urlBase);
     };
 
+    contactFactory.updateContactDetails = function(contactDetails) {
+        return $http.put(urlBase + "/" + contactDetails.Id, contactDetails);
+    };
+
     return contactFactory;
 });
 
@@ -94,8 +108,12 @@ myApp.factory("assignmentFactory", function ($http) {
     }
 
     assignmentFactory.getAssignments = function(id) {
-        return $http.get(urlBase + "/" + id);
+        return $http.get(urlBase + "/GetAssignmentsForToDo/" + id);
     }
+
+    assignmentFactory.getAssignmentsForUser = function(id) {
+        return $http.get(urlBase + "/GetUserAssignments/" + id);
+    };
 
     return assignmentFactory;
 });

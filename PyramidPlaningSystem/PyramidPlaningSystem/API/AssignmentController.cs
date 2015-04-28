@@ -10,7 +10,7 @@ using PyramidPlaningSystem.Models;
 
 namespace PyramidPlaningSystem.API
 {
-     [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
     public class AssignmentController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -21,7 +21,7 @@ namespace PyramidPlaningSystem.API
             return db.Assignments.AsEnumerable();
         }
 
-        public IEnumerable<Assignment> Get(Guid id)
+        public IEnumerable<Assignment> GetAssignmentsForToDo(Guid id)
         {
             var assignment = db.Assignments.Where(x => x.Todo.ToDoId == id).ToList();
 
@@ -32,7 +32,12 @@ namespace PyramidPlaningSystem.API
 
             return assignment;
         }
-        
+        [HttpGet]
+        public IEnumerable<Assignment> GetUserAssignments(string id)
+        {
+            var assignments = db.Assignments.Where(x => x.User.Id == id).ToList();
+            return assignments;
+        }
 
 
         [HttpPost]
@@ -43,13 +48,13 @@ namespace PyramidPlaningSystem.API
 
                 if (assignment.Id == Guid.Empty)
                 {
-                    assignment.TimeStamp= DateTime.Now;
+                    assignment.TimeStamp = DateTime.Now;
                     db.Assignments.Add(assignment);
                     db.SaveChanges();
                 }
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, assignment.Id);
-                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = assignment.Id}));
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = assignment.Id }));
                 return response;
             }
             else

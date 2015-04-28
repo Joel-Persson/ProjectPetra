@@ -26,6 +26,7 @@ namespace PyramidPlaningSystem
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/angular-material/angular-material.css",
+                      "~/Content/angular-timeline.css",
                       "~/Content/site.css",
                       "~/Content/ExternalLoginProvider.css"));
 
@@ -39,6 +40,7 @@ namespace PyramidPlaningSystem
                    "~/Scripts/angular-ui/ui-bootstrap.js",
                    "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
                    "~/Scripts/angular-tagger.js",
+                   "~/Scripts/angular-timeline.js",
                    "~/Angular/Shared/app.js",
                 //"~/Angular/Controller/mainLayoutController.js",
                 //"~/Angular/Controller/addToDoController.js",

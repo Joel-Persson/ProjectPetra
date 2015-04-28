@@ -10,8 +10,11 @@ namespace PyramidPlaningSystem
         public static void Register(HttpConfiguration config)
         {
             config.MapHttpAttributeRoutes();
+            //nyaste
+            config.Routes.MapHttpRoute("CustomApi", "Api/{controller}/{action}/{id}", 
+             new { id = RouteParameter.Optional });
 
-            config.Routes.MapHttpRoute("DefaultApiWithId", "Api/{controller}/{id}",
+            config.Routes.MapHttpRoute("DefaultApiWithId", "Api/{controller}/{action}/{id}",
                 new { id = RouteParameter.Optional }, new { id = @"\d+" });
 
             config.Routes.MapHttpRoute(

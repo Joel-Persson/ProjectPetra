@@ -20,6 +20,11 @@
                  controller: 'editToDoController',
                  templateUrl: '/Angular/HtmlTemplates/editToDo.html'
             })
+            .when('/profile',
+            {
+                controller: 'profileController',
+                templateUrl: '/Angular/HtmlTemplates/profilePage.html'
+            })
                 .otherwise({
             redirectTo: '/'
             });

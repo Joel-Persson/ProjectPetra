@@ -2,6 +2,7 @@
 myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, $location, formatDateFactory, tagService, convertService) {
 
     $scope.PageHeader = "Add Task";
+    //$scope.EditAssignments = [];
     $scope.Time = "";
     $scope.ToDoModel = {
         ParentToDo: {},
@@ -21,6 +22,9 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
                 $scope.success = "No";
             });
     };
+
+
+
 
     $scope.ShowAddSubToDo = function (ev) {
         $mdDialog.show({
@@ -74,7 +78,8 @@ myApp.controller('assignmentController', function ($scope, contactFactory, tagSe
 
     $scope.tags = [];
 
-    (function getContacts() {
+
+    (function getContacts() { //kolla mot contacts här
         contactFactory.getContacts().success(function (data) {
 
             $.each(data, function (i) {
@@ -84,6 +89,7 @@ myApp.controller('assignmentController', function ($scope, contactFactory, tagSe
                 }
                 $scope.FullContacts.push(contactObject);
                 $scope.contacts.push(data[i].Firstname + " " + data[i].Lastname);
+               //$scope.tags = $scope.EditAssignments;
             });
         });
     })();
@@ -106,6 +112,8 @@ myApp.controller('assignmentController', function ($scope, contactFactory, tagSe
 
 
 });
+
+
 
 
 myApp.controller('subAssignmentController', function ($scope, contactFactory, tagService) {

@@ -61,6 +61,15 @@
                                         <md-icon md-svg-icon="~/Images/Icons/ic_view_list_48px.svg"></md-icon>
                                     </md-button>
                                 </md-list-item>
+                                
+                                <md-divider></md-divider>
+
+                                <md-list-item>
+                                    <md-button ng-click="close()" ng-href="#/profile" layout="row">
+                                        <span layout="row" flex layout-align="start center">Profile</span>
+                                        <md-icon md-svg-icon="~/Images/Icons/ic_account_circle_48px.svg"></md-icon>
+                                    </md-button>
+                                </md-list-item>
                             </md-list>
                         }
                     </md-content>
@@ -109,6 +118,7 @@
     <script src="~/Angular/Controller/editToDoController.js"></script>
     <script src="~/Angular/Controller/listAllToDosController.js"></script>
     <script src="~/Angular/Controller/mainLayoutController.js"></script>
+    <script src="~/Angular/Controller/profileController.js"></script>
     @*@Scripts.Render("~/bundles/custom")*@
     @RenderSection("scripts", false)
 
