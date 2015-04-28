@@ -3,22 +3,13 @@
     $scope.oneAtATime = true;
     $scope.Assignments = [];
 
+
     getSingleToDo();
     function getSingleToDo() {
         toDoFactory.getSingleToDo($routeParams.Id).success(function (data) {
-            $scope.toDoModel = data;
-
-            $scope.toDoModel.ParentToDo.ToDo.Deadline = new Date($scope.toDoModel.ParentToDo.ToDo.Deadline);
-            $scope.toDoModel.ParentToDo.ToDo.StartDate = new Date($scope.toDoModel.ParentToDo.ToDo.StartDate);
-            $scope.toDoModel.ParentToDo.ToDo.EndDate = new Date($scope.toDoModel.ParentToDo.ToDo.EndDate);
-           
-            $.each($scope.toDoModel.ChildToDos, function (i) {
-                $scope.toDoModel.ChildToDos[i].ToDo.Deadline = new Date($scope.toDoModel.ChildToDos[i].ToDo.Deadline);
-                $scope.toDoModel.ChildToDos[i].ToDo.StartDate = new Date($scope.toDoModel.ChildToDos[i].ToDo.StartDate);
-                $scope.toDoModel.ChildToDos[i].ToDo.EndDate = new Date($scope.toDoModel.ChildToDos[i].ToDo.EndDate);
-            });
+            $scope.toDoModel = convertService.convertTimeVariablesToDateObject(data);
             getAssignments(data);
-            })
+        })
         .error(function () {
             $scope.status = "Something went wrong!";
         });
@@ -30,13 +21,11 @@
             $.each(parentAssignment, function (i) {
                 $scope.Assignments.push(parentAssignment[i].User.Contact.Firstname + " " + parentAssignment[i].User.Contact.Lastname);
             });
-
         });
     }
 
 
     $scope.editToDo = function (toDoModel) {
-
         formatDateFactory.formatTime(toDoModel.ToDo);
         toDoModel.ContactIdList = tagService.getTags();
         toDoFactory.editToDo(toDoModel).success(function () {
@@ -44,7 +33,7 @@
         });
     };
 
-  
+
 
     $scope.ShowAddSubToDo = function (ev) {
         $mdDialog.show({
@@ -72,7 +61,7 @@
 
     $scope.editSubToDo = function (toDoModel) {
         formatDateFactory.formatTime(toDoModel);
-
+        //ska läggas till child todos assignments här...
         toDoFactory.addToDo(toDoModel).success(function () {
             $scope.success = "Yes";
         })

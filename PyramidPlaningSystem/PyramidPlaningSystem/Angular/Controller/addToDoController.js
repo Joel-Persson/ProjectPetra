@@ -7,27 +7,24 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
         ParentToDo: {},
         ChildToDos: []
     };
+    $scope.controllerTest = "Från edit till assignment";
 
     $scope.add = function (ToDoModel) {
         modifyModel(ToDoModel);
-
         $.each(ToDoModel.ChildToDos, function (i) {
             ToDoModel.ChildToDos[i].ToDo = convertService.convertTodo(ToDoModel.ChildToDos[i]);
-            //ToDoModel.ChildToDos[i].UniqueId = tagService.replace();
         });
-
         toDoFactory.addToDo(ToDoModel).success(function () {
             $location.path('/toDos');
         })
             .error(function () {
                 $scope.success = "No";
             });
-
     };
 
     $scope.ShowAddSubToDo = function (ev) {
         $mdDialog.show({
-            controller: DialogController,
+            controller: dialogController,
             templateUrl: '/Angular/HtmlTemplates/addSubToDo.html',
             targetEvent: ev,
 
@@ -52,8 +49,7 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
         });
     };
 
-    function DialogController($scope, $mdDialog) {
-
+    function dialogController($scope, $mdDialog) {
         $scope.cancel = function () {
             $mdDialog.cancel();
         };
@@ -63,10 +59,8 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
     };
 
     function modifyModel(ToDoModel) {
-
         formatDateFactory.formatTime(ToDoModel);
         ToDoModel.ParentToDo.ToDo = convertService.convertTodo(ToDoModel.ParentToDo);
-        //ToDoModel.ParentToDo.UniqueId = tagService.replace();
         ToDoModel.ParentToDo.ContactIdList = tagService.getTags();
     };
 

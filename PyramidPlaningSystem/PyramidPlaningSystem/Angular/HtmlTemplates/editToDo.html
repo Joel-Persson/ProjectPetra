@@ -15,7 +15,7 @@
                                ng-maxlength="250"
                                ng-minlength="1"
                                name="title"
-                               autofocus/>
+                               autofocus />
                     </md-input-container>
 
                     <md-input-container flex>
@@ -102,14 +102,13 @@
 
                 <div layout layout-sm="column" ng-controller="assignmentController">
                     <div flex>
-                        <tagger ng-model="tags" options="contacts" disable-new placeholder="Assign" />                      
+                        <tagger ng-model="tags" options="contacts" disable-new placeholder="Assign" /> 
                     </div>
                 </div>
-                
+
                 <div ng-repeat="item in Assignments">
                     {{item}}
                 </div>
-
                 <div layout-align="start end" layout="row">
                     <md-button class="md-primary md-hue-1 md-raised" type="submit" value="Submit">Save</md-button>
                 </div>
@@ -126,9 +125,11 @@
 
         </md-card-content>
     </md-card>
-
-
+    
     <md-card ng-show="toDoModel.ChildToDos.length">
+        <ng-include ng-src="/Angular/HtmlTemplates/EditSubToDo.html">
+        </ng-include>
+
         <md-toolbar>
             <h1 class="md-toolbar-tools">
                 <span>Subtasks</span>
@@ -242,7 +243,7 @@
                             </div>
                         </div>
 
-                     
+
 
                         <div layout-align="start end" layout="row">
                             <md-button class="md-primary md-hue-1 md-raised" type="submit" value="Submit">Save</md-button>
@@ -263,5 +264,6 @@
             </accordion>
         </md-card-content>
     </md-card>
+
 </md-content>
 

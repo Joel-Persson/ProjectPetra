@@ -304,6 +304,7 @@
     <Content Include="Angular\Controller\editToDoController.js" />
     <Content Include="Angular\Controller\listAllToDosController.js" />
     <Content Include="Angular\Directives\subItems.html" />
+    <Content Include="Angular\HtmlTemplates\editSubToDo.html" />
     <Content Include="Angular\HtmlTemplates\editToDo.html" />
     <Content Include="Angular\HtmlTemplates\listAllToDos.html" />
     <Content Include="Angular\Shared\app.js" />

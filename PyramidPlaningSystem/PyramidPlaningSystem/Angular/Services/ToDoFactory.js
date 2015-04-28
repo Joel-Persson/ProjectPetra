@@ -120,17 +120,9 @@ myApp.service('tagService', function () {
         return childTagList;
     }
 
-    var replace = function () {
-        var c = "";
-        var randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-        c = randLetter + Date.now();
-        return c;
-    };
-
     return {
         addTags: addTags,
         getTags: getTags,
-        replace: replace,
         addChildTags: addChildTags,
         getChildTags: getChildTags
     };
@@ -150,7 +142,21 @@ myApp.service('convertService', function () {
         return ToDo;
     };
 
+    var convertTimeVariablesToDateObject =  function (toDoModel) {
+        toDoModel.ParentToDo.ToDo.Deadline = new Date(toDoModel.ParentToDo.ToDo.Deadline);
+        toDoModel.ParentToDo.ToDo.StartDate = new Date(toDoModel.ParentToDo.ToDo.StartDate);
+        toDoModel.ParentToDo.ToDo.EndDate = new Date(toDoModel.ParentToDo.ToDo.EndDate);
+
+        $.each(toDoModel.ChildToDos, function (i) {
+            toDoModel.ChildToDos[i].ToDo.Deadline = new Date(toDoModel.ChildToDos[i].ToDo.Deadline);
+            toDoModel.ChildToDos[i].ToDo.StartDate = new Date(toDoModel.ChildToDos[i].ToDo.StartDate);
+            toDoModel.ChildToDos[i].ToDo.EndDate = new Date(toDoModel.ChildToDos[i].ToDo.EndDate);
+        });
+        return toDoModel;
+    }
+
     return {
-        convertTodo: convertTodo
+        convertTodo: convertTodo,
+        convertTimeVariablesToDateObject: convertTimeVariablesToDateObject
     };
 });
