@@ -51,13 +51,6 @@ namespace PyramidPlaningSystem
                    "~/Angular/Services/ToDoFactory.js"
                    ));
 
-            //bundles.Add(new ScriptBundle("~/bundles/custom").Include(
-            //       "~/Angular/Controller/app.js").Include(
-            //       "~/Angular/Controller/mainLayoutController.js").Include(
-            //       "~/Angular/ColorTheming/colorTheming.js").Include(
-            //       "~/Angular/Route/Route.js").Include(
-            //       "~/Angular/Services/ToDoFactory.js"));
-
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862

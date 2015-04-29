@@ -17,23 +17,35 @@
                 <md-content class="md-padding">
 
                     <timeline>
-                        <timeline-node side="left">
+                        <timeline-node side="{{direction}}" data-ng-repeat="item in Assignments">
                             <timeline-badge class="primary">
                                 <i class="glyphicon glyphicon-tasks"></i>
                             </timeline-badge>
                             <timeline-panel>
                                 <timeline-heading>
-                                    <timeline-title>Kanske en task här...</timeline-title>
+                                    <timeline-title layout="row">
+                                        <div layout="row" flex layout-align="start center">
+                                            {{item.Todo.Title}}
+                                        </div>
+                                            
+                                        <input type="checkbox" ng-click="isCollapsed = !isCollapsed"></input>
+                                   
+                                    </timeline-title>
                                     <p>
-                                        <small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11 hours ago</small>
+                                        <small class="text-muted"><i class="glyphicon glyphicon-time"></i> Deadline: {{item.Todo.Deadline | date:'yyyy-MM-dd'}}</small>
                                     </p>
                                 </timeline-heading>
-                                <timeline-content>
-                                    <p>Content goes here...</p>
+                                <timeline-content collapse="isCollapsed">
+                                    <p>{{item.Todo.Description}}</p>
                                 </timeline-content>
+                                
+                                <div collapse="isCollapsed">
+                                    <div class="well well-lg">Some content</div>
+                                </div>
                             </timeline-panel>
                         </timeline-node>
-                        <timeline-node side="right">
+                      
+                        <!--<timeline-node side="right">
                             <timeline-badge class="warning">
                                 <i class="glyphicon glyphicon-credit-card"></i>
                             </timeline-badge>
@@ -64,7 +76,7 @@
                                     <p>Another twitter post goes here</p>
                                 </md-card-content>
                             </timeline-panel>
-                        </timeline-node>
+                        </timeline-node>-->
                     </timeline>
 
                 </md-content>

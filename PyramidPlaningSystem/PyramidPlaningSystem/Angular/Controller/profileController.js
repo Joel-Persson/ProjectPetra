@@ -1,8 +1,11 @@
 ﻿myApp.controller('profileController', function ($scope, userFactory, assignmentFactory) {
     $scope.todaysDate = new Date();
     $scope.Assignments = [];
+    $scope.direction = "left";
+    $scope.isCollapsed = false;
 
-    (function getCurrentUser() {
+    getCurrentUser();
+    function getCurrentUser() {
         userFactory.getUser().success(function (data) {
             $scope.user = data.Contact.Firstname + " " + data.Contact.Lastname;
             $scope.contactDetails = data.Contact;
@@ -10,7 +13,7 @@
             getUserAssignments(userId);
 
         });
-    })();
+    };
 
     function getUserAssignments(userId) {
         assignmentFactory.getAssignmentsForUser(userId).success(function (data) {
