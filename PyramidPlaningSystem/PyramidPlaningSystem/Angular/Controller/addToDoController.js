@@ -79,7 +79,7 @@ myApp.controller('assignmentController', function ($scope, contactFactory, tagSe
     $scope.tags = [];
 
 
-    (function getContacts() { //kolla mot contacts här
+    (function getContacts() { 
         contactFactory.getContacts().success(function (data) {
 
             $.each(data, function (i) {
@@ -89,7 +89,6 @@ myApp.controller('assignmentController', function ($scope, contactFactory, tagSe
                 }
                 $scope.FullContacts.push(contactObject);
                 $scope.contacts.push(data[i].Firstname + " " + data[i].Lastname);
-               //$scope.tags = $scope.EditAssignments;
             });
         });
     })();
@@ -107,7 +106,6 @@ myApp.controller('assignmentController', function ($scope, contactFactory, tagSe
         });
 
         tagService.addTags(contactIdList);
-        $scope.test = tagService.getTags();
     }, true);
 
 

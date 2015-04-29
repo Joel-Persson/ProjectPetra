@@ -102,48 +102,48 @@
     };
 });
 
-myApp.controller('editAssignmentController', function ($scope, contactFactory, tagService) {
+//myApp.controller('editAssignmentController', function ($scope, contactFactory, tagService) {
 
-    $scope.contacts = [];
+//    $scope.contacts = [];
 
-    $scope.FullContacts = [];
+//    $scope.FullContacts = [];
 
-    $scope.tags = [];
-
-
-    (function getContacts() { //kolla mot contacts här
-        contactFactory.getContacts().success(function (data) {
-
-            $.each(data, function (i) {
-                var contactObject = {
-                    "Name": data[i].Firstname + " " + data[i].Lastname,
-                    "Id": data[i].Id
-                }
-                $scope.FullContacts.push(contactObject);
-                $scope.contacts.push(data[i].Firstname + " " + data[i].Lastname);
-            });
-            //$scope.tags = $scope.EditAssignments;
-        });
-    })();
+//    $scope.tags = [];
 
 
+//    (function getContacts() { //kolla mot contacts här
+//        contactFactory.getContacts().success(function (data) {
 
-    $scope.$watch('tags', function (tagList) {
-        var contactIdList = [];
-        $.each(tagList, function (i) { // ändra så man slipper ha två foreach loopar
-            $.each($scope.FullContacts, function (x) {
-                if (tagList[i] === $scope.FullContacts[x].Name) {
-                    contactIdList.push($scope.FullContacts[x].Id);
-                }
-            });
-        });
-
-        tagService.addTags(contactIdList);
-        $scope.test = tagService.getTags();
-    }, true);
+//            $.each(data, function (i) {
+//                var contactObject = {
+//                    "Name": data[i].Firstname + " " + data[i].Lastname,
+//                    "Id": data[i].Id
+//                }
+//                $scope.FullContacts.push(contactObject);
+//                $scope.contacts.push(data[i].Firstname + " " + data[i].Lastname);
+//            });
+//            //$scope.tags = $scope.EditAssignments;
+//        });
+//    })();
 
 
-});
+
+//    $scope.$watch('tags', function (tagList) {
+//        var contactIdList = [];
+//        $.each(tagList, function (i) { // ändra så man slipper ha två foreach loopar
+//            $.each($scope.FullContacts, function (x) {
+//                if (tagList[i] === $scope.FullContacts[x].Name) {
+//                    contactIdList.push($scope.FullContacts[x].Id);
+//                }
+//            });
+//        });
+
+//        tagService.addTags(contactIdList);
+//        $scope.test = tagService.getTags();
+//    }, true);
+
+
+//});
 
 myApp.controller('AccordionDemoCtrl', function ($scope) {
     $scope.oneAtATime = true;
