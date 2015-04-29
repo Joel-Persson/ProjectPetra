@@ -3,6 +3,7 @@
     $scope.Assignments = [];
     $scope.direction = "left";
     $scope.isCollapsed = false;
+    $scope.predicate = '-age';
 
     getCurrentUser();
     function getCurrentUser() {
@@ -17,7 +18,9 @@
 
     function getUserAssignments(userId) {
         assignmentFactory.getAssignmentsForUser(userId).success(function (data) {
-            $scope.Assignments = data;
+            $.each(data, function(i) {
+                $scope.Assignments.push(data[i].Todo);
+            });
         });
     };
 

@@ -1,4 +1,5 @@
-﻿<div layout-fill ng-controller="profileController">
+﻿
+<div layout-fill ng-controller="profileController">
     <md-content layout class="md-padding" style="background-color: black; height: 200px">
         <div flex layout="row" layout-align="start center" class="md-padding">
             <h1 style="font-size: 2.5em">{{todaysDate | date:'dd EEEE yyyy'}}</h1>
@@ -14,69 +15,95 @@
     <md-content class="md-padding">
         <md-tabs md-dynamic-height md-border-bottom>
             <md-tab label="Timeline">
+
+                <md-content class="md-padding">
+                    <section layout-align="start center" >
+                        
+                        <div layout="row" layout-sm="column">
+                            <md-radio-group layout="row" >
+                                <md-radio-button value="one" ng-click="predicate = '-Deadline';">Newest</md-radio-button>
+                                <md-radio-button value="two" ng-click="predicate = 'Deadline';"> Oldest </md-radio-button>
+                                <md-radio-button value="three" ng-click="predicate = '';">No filter</md-radio-button>
+                            </md-radio-group>
+
+                            <!--<md-checkbox  ng-click="predicate = '-Deadline'; reverse=false">Newest</md-checkbox>
+                                <md-checkbox  ng-click="predicate = 'Deadline'; reverse=false">Oldest</md-checkbox>
+                                <md-checkbox ng-click="predicate=''">No filter</md-checkbox>-->
+
+                            <md-input-container>
+                                <label>Search:</label>
+                                <input ng-model="query" />
+                            </md-input-container>
+                        </div>
+                    </section>
+                </md-content>
+                <md-divider></md-divider>
+
                 <md-content class="md-padding">
 
                     <timeline>
-                        <timeline-node side="{{direction}}" data-ng-repeat="item in Assignments">
+                        <timeline-node side="{{direction}}" data-ng-repeat="item in Assignments | orderBy: predicate | filter: query ">
                             <timeline-badge class="primary">
                                 <i class="glyphicon glyphicon-tasks"></i>
                             </timeline-badge>
                             <timeline-panel>
-                                <timeline-heading>
-                                    <timeline-title layout="row">
-                                        <div layout="row" flex layout-align="start center">
-                                            {{item.Todo.Title}}
-                                        </div>
-                                            
-                                        <input type="checkbox" ng-click="isCollapsed = !isCollapsed"></input>
-                                   
-                                    </timeline-title>
-                                    <p>
-                                        <small class="text-muted"><i class="glyphicon glyphicon-time"></i> Deadline: {{item.Todo.Deadline | date:'yyyy-MM-dd'}}</small>
-                                    </p>
-                                </timeline-heading>
-                                <timeline-content collapse="isCollapsed">
-                                    <p>{{item.Todo.Description}}</p>
-                                </timeline-content>
-                                
-                                <div collapse="isCollapsed">
-                                    <div class="well well-lg">Some content</div>
+                                <div style="float: right; width: 20px;">
+                                    <md-checkbox style="margin: 0" ng-click="isCollapsed = !isCollapsed"></md-checkbox>
                                 </div>
-                            </timeline-panel>
-                        </timeline-node>
-                      
-                        <!--<timeline-node side="right">
-                            <timeline-badge class="warning">
-                                <i class="glyphicon glyphicon-credit-card"></i>
-                            </timeline-badge>
-                            <timeline-panel>
+
                                 <timeline-heading>
-                                    <timeline-title>Another twitter post</timeline-title>
-                                    <p>
-                                        <small class="text-muted">12 hours ago via Twitter</small>
-                                    </p>
+
+                                    <timeline-title style="padding-top: 5px">
+
+                                        {{item.Title}}
+
+                                    </timeline-title>
+                                    <div collapse="isCollapsed">
+                                        <p>
+                                            <small class="text-muted"><i class="glyphicon glyphicon-time"></i> Deadline: {{item.Deadline | date:'yyyy-MM-dd'}}</small>
+                                        </p>
+                                    </div>
                                 </timeline-heading>
-                                <timeline-content>
-                                    <p>Another twitter post goes here</p>
+
+                                <timeline-content collapse="isCollapsed">
+                                    <p>{{item.Description}}</p>
                                 </timeline-content>
+
                             </timeline-panel>
                         </timeline-node>
-                        <timeline-node side="left">
-                            <timeline-badge class="primary">
-                                <i class="glyphicon glyphicon-tasks"></i>
-                            </timeline-badge>
-                            <timeline-panel>
-                                <md-card-content>
+
+                        <!--<timeline-node side="right">
+                                <timeline-badge class="warning">
+                                    <i class="glyphicon glyphicon-credit-card"></i>
+                                </timeline-badge>
+                                <timeline-panel>
                                     <timeline-heading>
                                         <timeline-title>Another twitter post</timeline-title>
                                         <p>
                                             <small class="text-muted">12 hours ago via Twitter</small>
                                         </p>
                                     </timeline-heading>
-                                    <p>Another twitter post goes here</p>
-                                </md-card-content>
-                            </timeline-panel>
-                        </timeline-node>-->
+                                    <timeline-content>
+                                        <p>Another twitter post goes here</p>
+                                    </timeline-content>
+                                </timeline-panel>
+                            </timeline-node>
+                            <timeline-node side="left">
+                                <timeline-badge class="primary">
+                                    <i class="glyphicon glyphicon-tasks"></i>
+                                </timeline-badge>
+                                <timeline-panel>
+                                    <md-card-content>
+                                        <timeline-heading>
+                                            <timeline-title>Another twitter post</timeline-title>
+                                            <p>
+                                                <small class="text-muted">12 hours ago via Twitter</small>
+                                            </p>
+                                        </timeline-heading>
+                                        <p>Another twitter post goes here</p>
+                                    </md-card-content>
+                                </timeline-panel>
+                            </timeline-node>-->
                     </timeline>
 
                 </md-content>
