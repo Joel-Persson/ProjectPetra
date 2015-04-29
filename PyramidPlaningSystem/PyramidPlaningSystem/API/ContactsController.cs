@@ -21,7 +21,9 @@ namespace PyramidPlaningSystem.API
             return db.Contacts.AsEnumerable();
         }
 
-        public HttpResponseMessage Put(int id, Contact contact)
+
+        [HttpPut]
+        public HttpResponseMessage UpdateContactDetails(int id, Contact contact)
         {
             if (!ModelState.IsValid)
             {

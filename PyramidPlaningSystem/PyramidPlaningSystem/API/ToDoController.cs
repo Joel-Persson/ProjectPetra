@@ -41,7 +41,7 @@ namespace PyramidPlaningSystem.API
             return db.ToDos.Where(x => x.Deleted == false).AsEnumerable();
         }
 
-        public ToDoModel Get(Guid id)
+        public ToDoModel GetTodo(Guid id)
         {
 
             ToDo parentToDoModel = db.ToDos.Find(id);
@@ -89,8 +89,8 @@ namespace PyramidPlaningSystem.API
             }
         }
 
-
-        public HttpResponseMessage Put(Guid id, ToDoViewModel toDoViewModel)
+        [HttpPut]
+        public HttpResponseMessage EditToDo(Guid id, ToDoViewModel toDoViewModel)
         {
             if (!ModelState.IsValid)
             {

@@ -3,7 +3,7 @@
     var toDoFactory = {};
 
     toDoFactory.getSingleToDo = function (id) {
-        return $http.get(urlBase + "/" + id);
+        return $http.get(urlBase + "/GetTodo/" + id);
     }
 
     toDoFactory.addToDo = function (toDoModel) {
@@ -16,7 +16,7 @@
         return $http.delete(urlBase + "/" + id);
     }
     toDoFactory.editToDo = function (toDoModel) {
-        return $http.put(urlBase + "/" + toDoModel.ToDo.ToDoId, toDoModel);
+        return $http.put(urlBase + "/EditToDo/" + toDoModel.ToDo.ToDoId, toDoModel);
     }
 
     return toDoFactory;
@@ -93,7 +93,7 @@ myApp.factory("contactFactory", function ($http) {
     };
 
     contactFactory.updateContactDetails = function(contactDetails) {
-        return $http.put(urlBase + "/" + contactDetails.Id, contactDetails);
+        return $http.put(urlBase + "/UpdateContactDetails/" + contactDetails.Id, contactDetails);
     };
 
     return contactFactory;
