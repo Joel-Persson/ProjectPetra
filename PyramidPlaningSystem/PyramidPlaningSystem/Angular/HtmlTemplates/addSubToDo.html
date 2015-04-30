@@ -3,11 +3,6 @@
         <md-header class="md-sticky-no-effect">Add Sub Task</md-header>
         <div class="dialog-content">
             <form name="SubToDoSubmit" novalidate>
-                
-                <div layout-sm="column" ng-controller="subAssignmentController">
-                    <tagger ng-model="tags" options="contacts" disable-new placeholder="Assign to" />
-                    test: {{test}}
-                </div>
 
                 <div layout layout-sm="column">
 
@@ -98,6 +93,11 @@
                                min="2015-01-01"
                                max="2050-01-01" />
                     </md-input-container>
+                </div>
+                
+                <div layout-sm="column" ng-controller="subAssignmentController">
+                    <tagger ng-model="tags" options="contacts" disable-new placeholder="Assign to" />
+                    test: {{test}}
                 </div>
                 
                 <div class="md-actions" layout="row">
