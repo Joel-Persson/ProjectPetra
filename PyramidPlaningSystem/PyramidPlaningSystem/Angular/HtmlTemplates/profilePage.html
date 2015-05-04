@@ -63,8 +63,26 @@
 
                                 <timeline-content collapse="isCollapsed">
                                     <p>{{item.Description}}</p>
+                                    <div ng-controller="commentController">
+                                        <md-button ng-click="isCollapsed = !isCollapsed">
+                                            <span class="glyphicon glyphicon-comment" style="font-size: 20px; color: #4A1070"></span>
+                                        </md-button>
+                                        <div collapse="isCollapsed">
+                                            <!--<form>
+                                                <md-input-continer>
+                                                    <label>Description</label>
+                                                    <textarea ng-maxlength="800"
+                                                              required
+                                                              md-maxlength="800"
+                                                              ng-minlength="10"></textarea>
+                                                </md-input-continer>
+                                            </form>-->
+                                            <p>HEJ HEJ</p>
+                                        </div>
+                                    </div>
+                                   
                                 </timeline-content>
-
+                               
                             </timeline-panel>
                         </timeline-node>
 

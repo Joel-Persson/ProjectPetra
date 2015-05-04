@@ -38,4 +38,8 @@ myApp.controller('editContactController', function ($scope, contactFactory) {
     };
 });
 
+myApp.controller('commentController', function($scope) {
+    $scope.isCollapsed = true;
+});
+
 
