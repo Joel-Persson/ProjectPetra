@@ -16,26 +16,14 @@ namespace PyramidPlaningSystem.API
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/Comment
-        public IQueryable<Comment> GetComments()
+        [HttpGet]
+        public IEnumerable<Comment> GetCommentsByToDoId(Guid id)
         {
-            return db.Comments;
+            var comments =  db.Comments.Where(x => x.ToDo.ToDoId == id).ToList();
+            return comments;
         }
 
-        // GET: api/Comment/5
-        [ResponseType(typeof(Comment))]
-        public IHttpActionResult GetComment(Guid id)
-        {
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(comment);
-        }
-
-        // PUT: api/Comment/5
+            // PUT: api/Comment/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutComment(Guid id, Comment comment)
         {
@@ -71,18 +59,27 @@ namespace PyramidPlaningSystem.API
         }
 
         // POST: api/Comment
-        [ResponseType(typeof(Comment))]
-        public IHttpActionResult PostComment(Comment comment)
+        [HttpPost]
+        public HttpResponseMessage PostComment(Comment comment)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+
+                if (comment.CommentId == Guid.Empty)
+                {
+                    comment.Date = DateTime.Now;
+                    db.Comments.Add(comment);
+                    db.SaveChanges();
+                }
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, comment.CommentId);
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = comment.CommentId }));
+                return response;
             }
-
-            db.Comments.Add(comment);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = comment.CommentId }, comment);
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
         }
 
         // DELETE: api/Comment/5

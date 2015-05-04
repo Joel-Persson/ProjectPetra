@@ -33,6 +33,21 @@ myApp.factory('userFactory', function ($http) {
     return userFactory;
 });
 
+myApp.factory('commentFactory', function ($http) {
+    var urlBase = "/api/Comment";
+    var commentFactory = {};
+
+    commentFactory.addComment = function (comment) {
+        return $http.post(urlBase + "/PostComment/", comment);
+    };
+
+    commentFactory.getCommentByToDoId = function (id) {
+        return $http.get(urlBase + "/GetCommentsByToDoId/" + id);
+    };
+
+    return commentFactory;
+});
+
 
 myApp.factory("contactFactory", function ($http) {
     var urlBase = "/api/Contacts";
@@ -42,7 +57,7 @@ myApp.factory("contactFactory", function ($http) {
         return $http.get(urlBase);
     };
 
-    contactFactory.updateContactDetails = function(contactDetails) {
+    contactFactory.updateContactDetails = function (contactDetails) {
         return $http.put(urlBase + "/UpdateContactDetails/" + contactDetails.Id, contactDetails);
     };
 
@@ -57,11 +72,11 @@ myApp.factory("assignmentFactory", function ($http) {
         return $http.post(urlBase, assignment);
     }
 
-    assignmentFactory.getAssignments = function(id) {
+    assignmentFactory.getAssignments = function (id) {
         return $http.get(urlBase + "/GetAssignmentsForToDo/" + id);
     }
 
-    assignmentFactory.getAssignmentsForUser = function(id) {
+    assignmentFactory.getAssignmentsForUser = function (id) {
         return $http.get(urlBase + "/GetUserAssignments/" + id);
     };
 
