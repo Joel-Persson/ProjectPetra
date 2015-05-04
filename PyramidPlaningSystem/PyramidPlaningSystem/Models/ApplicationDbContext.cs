@@ -20,5 +20,7 @@ namespace PyramidPlaningSystem.Models
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<ToDo> ToDos { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
+
+        public System.Data.Entity.DbSet<PyramidPlaningSystem.Models.Comment> Comments { get; set; }
     }
 }

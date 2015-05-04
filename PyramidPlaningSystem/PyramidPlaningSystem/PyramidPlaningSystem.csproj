@@ -190,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\AssignmentController.cs" />
+    <Compile Include="API\CommentController.cs" />
     <Compile Include="API\ContactsController.cs" />
     <Compile Include="API\ToDoController.cs" />
     <Compile Include="API\UserController.cs" />
@@ -285,10 +286,15 @@
     <Compile Include="Migrations\201504230607195_identityOnAssignmentID.Designer.cs">
       <DependentUpon>201504230607195_identityOnAssignmentID.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505041049423_AddTableComment.cs" />
+    <Compile Include="Migrations\201505041049423_AddTableComment.Designer.cs">
+      <DependentUpon>201505041049423_AddTableComment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Assignment.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -514,6 +520,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504230607195_identityOnAssignmentID.resx">
       <DependentUpon>201504230607195_identityOnAssignmentID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505041049423_AddTableComment.resx">
+      <DependentUpon>201505041049423_AddTableComment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

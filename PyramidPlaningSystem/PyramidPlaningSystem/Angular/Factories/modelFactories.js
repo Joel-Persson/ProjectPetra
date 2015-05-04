@@ -13,7 +13,7 @@
         return $http.get(urlBase);
     }
     toDoFactory.deleteToDo = function (id) {
-        return $http.delete(urlBase + "/" + id);
+        return $http.delete(urlBase + "/DeleteToDo/" + id);
     }
     toDoFactory.editToDo = function (toDoModel) {
         return $http.put(urlBase + "/EditToDo/" + toDoModel.ToDo.ToDoId, toDoModel);

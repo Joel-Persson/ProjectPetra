@@ -118,7 +118,7 @@ namespace PyramidPlaningSystem.API
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        public HttpResponseMessage Delete(Guid id)
+        public HttpResponseMessage DeleteToDo(Guid id)
         {
             ToDo parentToDo = db.ToDos.Find(id);
 
