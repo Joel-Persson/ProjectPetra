@@ -1,4 +1,11 @@
-﻿var myApp = angular.module("myApp", ['ngMaterial', 'ngAnimate', 'ngRoute', 'ngMessages', 'ui.bootstrap.collapse', 'tagger', 'angular-timeline']);
+﻿var myApp = angular.module("myApp",
+    ['ngMaterial',
+        'ngAnimate',
+        'ngRoute',
+        'ngMessages',
+        'ui.bootstrap.collapse',
+        'tagger',
+        'angular-timeline']);
 
 myApp.directive("subitems", function () {
     return {
@@ -7,14 +14,6 @@ myApp.directive("subitems", function () {
     };
 });
 
-
-myApp.controller('leftController', function ($scope, $mdSidenav) {
-
-    $scope.close = function () {
-        $mdSidenav('left').close();
-    }
-
-});
 
 
 

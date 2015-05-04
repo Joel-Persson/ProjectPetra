@@ -1,5 +1,5 @@
 ﻿
-myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, $location, formatDateFactory, tagService, convertService) {
+myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, $location, formatDateService, tagService, convertService) {
 
     $scope.PageHeader = "Add Task";
     //$scope.EditAssignments = [];
@@ -63,7 +63,7 @@ myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, 
     };
 
     function modifyModel(ToDoModel) {
-        formatDateFactory.formatTime(ToDoModel);
+        formatDateService.formatTime(ToDoModel);
         ToDoModel.ParentToDo.ToDo = convertService.convertTodo(ToDoModel.ParentToDo);
         ToDoModel.ParentToDo.ContactIdList = tagService.getTags();
     };

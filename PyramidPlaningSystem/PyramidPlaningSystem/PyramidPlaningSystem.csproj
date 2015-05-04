@@ -311,12 +311,15 @@
     <Content Include="Angular\HtmlTemplates\editToDo.html" />
     <Content Include="Angular\HtmlTemplates\listAllToDos.html" />
     <Content Include="Angular\HtmlTemplates\profilePage.html" />
+    <Content Include="Angular\Services\convertService.js" />
+    <Content Include="Angular\Services\formatDateService.js" />
+    <Content Include="Angular\Services\tagService.js" />
     <Content Include="Angular\Shared\app.js" />
     <Content Include="Angular\Controller\mainLayoutController.js" />
     <Content Include="Angular\HtmlTemplates\addSubToDo.html" />
     <Content Include="Angular\HtmlTemplates\AddToDo.html" />
     <Content Include="Angular\Route\Route.js" />
-    <Content Include="Angular\Services\ToDoFactory.js" />
+    <Content Include="Angular\Factories\modelFactories.js" />
     <Content Include="Content\angular-material\angular-material.css" />
     <Content Include="Content\angular-material\angular-material.min.css" />
     <Content Include="Content\angular-tagger.css" />

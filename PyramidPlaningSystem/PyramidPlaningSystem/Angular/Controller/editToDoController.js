@@ -1,4 +1,4 @@
-﻿myApp.controller('editToDoController', function ($scope, $routeParams, toDoFactory, $location, $mdDialog, formatDateFactory, tagService, convertService, assignmentFactory) {
+﻿myApp.controller('editToDoController', function ($scope, $routeParams, toDoFactory, $location, $mdDialog, formatDateService, tagService, convertService, assignmentFactory) {
     $scope.PageHeader = "Edit Task";
     $scope.oneAtATime = true;
     $scope.EditAssignments = [];
@@ -26,7 +26,7 @@
 
 
     $scope.editToDo = function (toDoModel) {
-        formatDateFactory.formatTime(toDoModel.ToDo);
+        formatDateService.formatTime(toDoModel.ToDo);
         toDoModel.ContactIdList = tagService.getTags();
         toDoFactory.editToDo(toDoModel).success(function () {
             $location.path('/toDos');
@@ -60,7 +60,7 @@
     };
 
     $scope.editSubToDo = function (toDoModel) {
-        formatDateFactory.formatTime(toDoModel);
+        formatDateService.formatTime(toDoModel);
         //ska läggas till child todos assignments här...
         toDoFactory.addToDo(toDoModel).success(function () {
             $scope.success = "Yes";
