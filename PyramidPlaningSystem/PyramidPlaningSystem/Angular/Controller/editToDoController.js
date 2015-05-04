@@ -1,6 +1,5 @@
-﻿myApp.controller('editToDoController', function ($scope, $routeParams, toDoFactory, $location, $mdDialog, formatDateService, tagService, convertService, assignmentFactory) {
+﻿myApp.controller('editToDoController', function ($scope, $routeParams, toDoFactory, $location, $mdDialog, formatDateFactory, tagService, convertService, assignmentFactory) {
     $scope.PageHeader = "Edit Task";
-    $scope.oneAtATime = true;
     $scope.EditAssignments = [];
 
 
@@ -26,7 +25,7 @@
 
 
     $scope.editToDo = function (toDoModel) {
-        formatDateService.formatTime(toDoModel.ToDo);
+        formatDateFactory.formatTime(toDoModel.ToDo);
         toDoModel.ContactIdList = tagService.getTags();
         toDoFactory.editToDo(toDoModel).success(function () {
             $location.path('/toDos');
@@ -45,7 +44,7 @@
             subItem.ToDo = convertService.convertTodo(subItem);
             subItem.ContactIdList = tagService.getChildTags();
             $scope.toDoModel.ChildToDos.push(subItem);
-            $scope.editSubToDo($scope.toDoModel);
+            $scope.editAddSubToDo($scope.toDoModel);
         });
     };
 
@@ -59,8 +58,8 @@
         };
     };
 
-    $scope.editSubToDo = function (toDoModel) {
-        formatDateService.formatTime(toDoModel);
+    $scope.editAddSubToDo = function (toDoModel) {
+        formatDateFactory.formatTime(toDoModel);
         //ska läggas till child todos assignments här...
         toDoFactory.addToDo(toDoModel).success(function () {
             $scope.success = "Yes";
@@ -95,33 +94,17 @@
         });
     };
 
-
-    $scope.status = {
-        isFirstOpen: true,
-        isFirstDisabled: false
-    };
 });
 
-
-myApp.controller('AccordionDemoCtrl', function ($scope) {
+myApp.controller('editSubToDoController', function($scope, $routeParams, toDoFactory, $location, $mdDialog, formatDateFactory, tagService, convertService, assignmentFactory) {
     $scope.oneAtATime = true;
 
-    $scope.groups = [
-      {
-          title: 'Dynamic Group Header - 1',
-          content: 'Dynamic Group Body - 1'
-      },
-      {
-          title: 'Dynamic Group Header - 2',
-          content: 'Dynamic Group Body - 2'
-      }
-    ];
-
-    $scope.items = ['Item 1', 'Item 2', 'Item 3'];
-
-    $scope.addItem = function () {
-        var newItemNo = $scope.items.length + 1;
-        $scope.items.push('Item ' + newItemNo);
+    $scope.editSubToDo = function (toDoModel) {
+        formatDateFactory.formatTime(toDoModel.ToDo);
+        toDoModel.ContactIdList = tagService.getChildTags();
+        toDoFactory.editToDo(toDoModel).success(function () {
+            $location.path('/toDos');
+        });
     };
 
     $scope.status = {
@@ -129,3 +112,4 @@ myApp.controller('AccordionDemoCtrl', function ($scope) {
         isFirstDisabled: false
     };
 });
+
