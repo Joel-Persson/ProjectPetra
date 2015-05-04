@@ -130,8 +130,8 @@
 
 <div ng-controller="editSubToDoController">
     <md-card ng-show="toDoModel.ChildToDos.length">
-        <!--<div ng-include src="'/Angular/HtmlTemplates/EditSubToDo.html'"></div>-->
-        <md-toolbar>
+        <div ng-include src="'/Angular/HtmlTemplates/EditSubToDo.html'"></div>
+        <!--<md-toolbar>
             <h1 class="md-toolbar-tools">
                 <span>Subtasks</span>
             </h1>
@@ -243,9 +243,6 @@
                                 <tagger ng-model="tags" options="contacts" disable-new placeholder="Assign"/>
                             </div>
                         </div>
-                        <!--<div ng-repeat="item in EditAssignments">
-                            {{item}}
-                        </div>-->
 
 
                         <div layout-align="start end" layout="row">
@@ -265,7 +262,7 @@
 
                 </accordion-group>
             </accordion>
-        </md-card-content>
+        </md-card-content>-->
 
     </md-card>
 </div>

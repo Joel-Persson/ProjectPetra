@@ -15,34 +15,36 @@
         return null;
     };
 
-    var formatTime = function (ToDoModel) {
-        if (ToDoModel.ParentToDo != null) {
-            ToDoModel.ParentToDo.Deadline = formatDate(ToDoModel.ParentToDo.Deadline);
-            ToDoModel.ParentToDo.StartDate = formatDate(ToDoModel.ParentToDo.StartDate);
-            ToDoModel.ParentToDo.EndDate = formatDate(ToDoModel.ParentToDo.EndDate);
-            if (ToDoModel.ParentToDo.Time == "days") {
-                ToDoModel.ParentToDo.Effort = ToDoModel.ParentToDo.Effort * 8;
+    var formatTime = function (inputModel) {
+
+        if (inputModel.ParentToDo != null) {
+
+            inputModel.ParentToDo.Deadline = formatDate(inputModel.ParentToDo.Deadline);
+            inputModel.ParentToDo.StartDate = formatDate(inputModel.ParentToDo.StartDate);
+            inputModel.ParentToDo.EndDate = formatDate(inputModel.ParentToDo.EndDate);
+
+            if (inputModel.ParentToDo.Time == "days") {
+                inputModel.ParentToDo.Effort = inputModel.ParentToDo.Effort * 8;
             }
 
-            for (var i = 0; i < ToDoModel.ChildToDos.length; i++) {
-                ToDoModel.ChildToDos[i].Deadline = formatDate(ToDoModel.ChildToDos[i].Deadline);
-                ToDoModel.ChildToDos[i].StartDate = formatDate(ToDoModel.ChildToDos[i].StartDate);
-                ToDoModel.ChildToDos[i].EndDate = formatDate(ToDoModel.ChildToDos[i].EndDate);
-                if (ToDoModel.ChildToDos[i].Time == "days") {
-                    ToDoModel.ChildToDos[i].Effort = ToDoModel.ChildToDos[i].Effort * 8;
+            for (var i = 0; i < inputModel.ChildToDos.length; i++) {
+                inputModel.ChildToDos[i].Deadline = formatDate(inputModel.ChildToDos[i].Deadline);
+                inputModel.ChildToDos[i].StartDate = formatDate(inputModel.ChildToDos[i].StartDate);
+                inputModel.ChildToDos[i].EndDate = formatDate(inputModel.ChildToDos[i].EndDate);
+                if (inputModel.ChildToDos[i].Time == "days") {
+                    inputModel.ChildToDos[i].Effort = inputModel.ChildToDos[i].Effort * 8;
                 }
             }
-        }
-        else {
-            ToDoModel.Deadline = formatDate(ToDoModel.Deadline);
-            ToDoModel.StartDate = formatDate(ToDoModel.StartDate);
-            ToDoModel.EndDate = formatDate(ToDoModel.EndDate);
-            if (ToDoModel.Time == "days") {
-                ToDoModel.Effort = ToDoModel.Effort * 8;
+        } else {
+            inputModel.Deadline = formatDate(inputModel.Deadline);
+            inputModel.StartDate = formatDate(inputModel.StartDate);
+            inputModel.EndDate = formatDate(inputModel.EndDate);
+            if (inputModel.Time == "days") {
+                inputModel.Effort = inputModel.Effort * 8;
             }
         }
 
-    }
+    };
 
     return {
         formatDate: formatDate,

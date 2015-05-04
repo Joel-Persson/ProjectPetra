@@ -3,6 +3,7 @@ myApp.controller('listAllToDosController', function ($scope, toDoFactory, $mdDia
     $scope.PageHeader = "Listing all Tasks";
     $scope.toDoList = [];
     $scope.ParentToDos = [];
+
     getTodos();
 
     function getTodos() {

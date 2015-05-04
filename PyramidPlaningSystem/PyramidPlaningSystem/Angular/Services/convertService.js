@@ -1,28 +1,28 @@
 ﻿myApp.service('convertService', function () {
 
-    var convertTodo = function (ToDoModel) {
-        var ToDo = {};
-        ToDo.Title = ToDoModel.Title;
-        ToDo.Description = ToDoModel.Description;
-        ToDo.Effort = ToDoModel.Effort;
-        ToDo.Deadline = ToDoModel.Deadline;
-        ToDo.EndDate = ToDoModel.EndDate;
-        ToDo.StartDate = ToDoModel.StartDate;
-        ToDo.Priority = ToDoModel.Priority;
-        return ToDo;
+    var convertTodo = function (inputModel) {
+        var toDo = {};
+        toDo.Title = inputModel.Title;
+        toDo.Description = inputModel.Description;
+        toDo.Effort = inputModel.Effort;
+        toDo.Deadline = inputModel.Deadline;
+        toDo.EndDate = inputModel.EndDate;
+        toDo.StartDate = inputModel.StartDate;
+        toDo.Priority = inputModel.Priority;
+        return toDo;
     };
 
-    var convertTimeVariablesToDateObject = function (toDoModel) {
-        toDoModel.ParentToDo.ToDo.Deadline = new Date(toDoModel.ParentToDo.ToDo.Deadline);
-        toDoModel.ParentToDo.ToDo.StartDate = new Date(toDoModel.ParentToDo.ToDo.StartDate);
-        toDoModel.ParentToDo.ToDo.EndDate = new Date(toDoModel.ParentToDo.ToDo.EndDate);
+    var convertTimeVariablesToDateObject = function (inputModel) {
+        inputModel.ParentToDo.ToDo.Deadline = new Date(inputModel.ParentToDo.ToDo.Deadline);
+        inputModel.ParentToDo.ToDo.StartDate = new Date(inputModel.ParentToDo.ToDo.StartDate);
+        inputModel.ParentToDo.ToDo.EndDate = new Date(inputModel.ParentToDo.ToDo.EndDate);
 
-        $.each(toDoModel.ChildToDos, function (i) {
-            toDoModel.ChildToDos[i].ToDo.Deadline = new Date(toDoModel.ChildToDos[i].ToDo.Deadline);
-            toDoModel.ChildToDos[i].ToDo.StartDate = new Date(toDoModel.ChildToDos[i].ToDo.StartDate);
-            toDoModel.ChildToDos[i].ToDo.EndDate = new Date(toDoModel.ChildToDos[i].ToDo.EndDate);
+        $.each(inputModel.ChildToDos, function (i) {
+            inputModel.ChildToDos[i].ToDo.Deadline = new Date(inputModel.ChildToDos[i].ToDo.Deadline);
+            inputModel.ChildToDos[i].ToDo.StartDate = new Date(inputModel.ChildToDos[i].ToDo.StartDate);
+            inputModel.ChildToDos[i].ToDo.EndDate = new Date(inputModel.ChildToDos[i].ToDo.EndDate);
         });
-        return toDoModel;
+        return inputModel;
     }
 
     return {

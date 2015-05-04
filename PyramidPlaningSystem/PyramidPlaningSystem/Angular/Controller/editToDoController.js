@@ -1,9 +1,10 @@
-﻿myApp.controller('editToDoController', function ($scope, $routeParams, toDoFactory, $location, $mdDialog, formatDateFactory, tagService, convertService, assignmentFactory) {
+﻿myApp.controller('editToDoController', function ($scope, $routeParams, toDoFactory, $location, $mdDialog, formatDateService, tagService, convertService, assignmentFactory) {
     $scope.PageHeader = "Edit Task";
     $scope.EditAssignments = [];
 
 
     getSingleToDo();
+
     function getSingleToDo() {
         toDoFactory.getSingleToDo($routeParams.Id).success(function (data) {
             $scope.toDoModel = convertService.convertTimeVariablesToDateObject(data);
@@ -25,7 +26,7 @@
 
 
     $scope.editToDo = function (toDoModel) {
-        formatDateFactory.formatTime(toDoModel.ToDo);
+        formatDateService.formatTime(toDoModel.ToDo);
         toDoModel.ContactIdList = tagService.getTags();
         toDoFactory.editToDo(toDoModel).success(function () {
             $location.path('/toDos');
@@ -36,7 +37,7 @@
 
     $scope.ShowAddSubToDo = function (ev) {
         $mdDialog.show({
-            controller: DialogController,
+            controller: dialogController,
             templateUrl: '/Angular/HtmlTemplates/addSubToDo.html',
             targetEvent: ev,
 
@@ -48,7 +49,7 @@
         });
     };
 
-    function DialogController($scope, $mdDialog) {
+    function dialogController($scope, $mdDialog) {
 
         $scope.cancel = function () {
             $mdDialog.cancel();
@@ -59,8 +60,7 @@
     };
 
     $scope.editAddSubToDo = function (toDoModel) {
-        formatDateFactory.formatTime(toDoModel);
-        //ska läggas till child todos assignments här...
+        formatDateService.formatTime(toDoModel);
         toDoFactory.addToDo(toDoModel).success(function () {
             $scope.success = "Yes";
         })
@@ -96,11 +96,11 @@
 
 });
 
-myApp.controller('editSubToDoController', function($scope, $routeParams, toDoFactory, $location, $mdDialog, formatDateFactory, tagService, convertService, assignmentFactory) {
+myApp.controller('editSubToDoController', function($scope, $routeParams, toDoFactory, $location, $mdDialog, formatDateService, tagService) {
     $scope.oneAtATime = true;
 
     $scope.editSubToDo = function (toDoModel) {
-        formatDateFactory.formatTime(toDoModel.ToDo);
+        formatDateService.formatTime(toDoModel.ToDo);
         toDoModel.ContactIdList = tagService.getChildTags();
         toDoFactory.editToDo(toDoModel).success(function () {
             $location.path('/toDos');

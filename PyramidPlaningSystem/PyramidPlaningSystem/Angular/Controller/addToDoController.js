@@ -2,29 +2,24 @@
 myApp.controller('addToDoController', function ($scope, toDoFactory, $mdDialog, $location, formatDateService, tagService, convertService) {
 
     $scope.PageHeader = "Add Task";
-    //$scope.EditAssignments = [];
     $scope.Time = "";
     $scope.ToDoModel = {
         ParentToDo: {},
         ChildToDos: []
     };
-    $scope.controllerTest = "Från edit till assignment";
 
-    $scope.add = function (ToDoModel) {
-        modifyModel(ToDoModel);
-        $.each(ToDoModel.ChildToDos, function (i) {
-            ToDoModel.ChildToDos[i].ToDo = convertService.convertTodo(ToDoModel.ChildToDos[i]);
+    $scope.add = function (toDoModel) {
+        modifyModel(toDoModel);
+        $.each(toDoModel.ChildToDos, function (i) {
+            toDoModel.ChildToDos[i].ToDo = convertService.convertTodo(toDoModel.ChildToDos[i]);
         });
-        toDoFactory.addToDo(ToDoModel).success(function () {
+        toDoFactory.addToDo(toDoModel).success(function () {
             $location.path('/toDos');
         })
             .error(function () {
                 $scope.success = "No";
             });
     };
-
-
-
 
     $scope.ShowAddSubToDo = function (ev) {
         $mdDialog.show({

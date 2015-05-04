@@ -17,18 +17,14 @@
             <md-tab label="Timeline">
 
                 <md-content class="md-padding">
-                    <section layout-align="start center" >
-                        
+                    <section layout-align="start center">
+
                         <div layout="row" layout-sm="column">
-                            <md-radio-group layout="row" >
+                            <md-radio-group layout="row">
                                 <md-radio-button value="one" ng-click="predicate = '-Deadline';">Newest</md-radio-button>
                                 <md-radio-button value="two" ng-click="predicate = 'Deadline';"> Oldest </md-radio-button>
                                 <md-radio-button value="three" ng-click="predicate = '';">No filter</md-radio-button>
                             </md-radio-group>
-
-                            <!--<md-checkbox  ng-click="predicate = '-Deadline'; reverse=false">Newest</md-checkbox>
-                                <md-checkbox  ng-click="predicate = 'Deadline'; reverse=false">Oldest</md-checkbox>
-                                <md-checkbox ng-click="predicate=''">No filter</md-checkbox>-->
 
                             <md-input-container>
                                 <label>Search:</label>
