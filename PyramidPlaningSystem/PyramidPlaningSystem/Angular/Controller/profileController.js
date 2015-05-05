@@ -43,13 +43,13 @@ myApp.controller('editContactController', function ($scope, contactFactory) {
 myApp.controller('commentController', function ($scope, commentFactory) {
     $scope.isCollapsed = true;
     var comment = {};
-    var comments = [];
+    $scope.comments = [];
 
     //getComments(toDo.ToDoId);
 
     $scope.getComments = function(id) {
         commentFactory.getCommentByToDoId(id).success(function (data) {
-            comments = data;
+            $scope.comments = data;
         });
     }
 

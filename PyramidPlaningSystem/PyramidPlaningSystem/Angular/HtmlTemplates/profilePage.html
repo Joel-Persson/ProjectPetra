@@ -64,11 +64,13 @@
                                 <timeline-content collapse="isCollapsed">
                                     <p>{{item.Description}}</p>
                                     <div ng-controller="commentController">
-                                        <md-button ng-click="isCollapsed = !isCollapsed; getComments(item.ToDoId)">
+                                        <md-button ng-click="getComments(item.ToDoId); isCollapsed = !isCollapsed">
                                             <span class="glyphicon glyphicon-comment" style="font-size: 20px; color: #4A1070"></span>
                                         </md-button>
                                         <div collapse="isCollapsed">
-                                            {{item.ToDoId}}
+                                            <div ng-repeat="items in comments">
+                                                {{items.Content}}
+                                            </div>
                                             <form name="commentForm" novalidate ng-submit="submitComment(comment, item)">
 
                                                 <div layout layout-sm="column">

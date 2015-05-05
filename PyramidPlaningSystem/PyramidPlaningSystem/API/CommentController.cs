@@ -64,9 +64,11 @@ namespace PyramidPlaningSystem.API
         {
             if (ModelState.IsValid)
             {
+                var toDo = db.ToDos.Find(comment.ToDo.ToDoId);
 
                 if (comment.CommentId == Guid.Empty)
                 {
+                    comment.ToDo = toDo;
                     comment.Date = DateTime.Now;
                     db.Comments.Add(comment);
                     db.SaveChanges();
