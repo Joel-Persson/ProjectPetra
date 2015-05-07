@@ -1,13 +1,137 @@
-﻿<div layout layout-align="start center" class="md-padding">
-    <h1 class="md-padding" style="color: #bdbdbd; margin-bottom: 10px; margin-left: 25px;">{{PageHeader}}</h1>
-</div>
-<a ng-href="#test">test</a>
+﻿<style>
+    * {
+        /*-moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;*/
+    }
 
-<md-content class="md-padding">
-    <md-card flex-md flex-gt-md>
-        <md-card-content>
+    [ng-drag] {
+        -moz-user-select: -moz-none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
 
-            <form name="toDoSubmit" ng-submit="add(ToDoModel)">
+    [ng-drag] {
+        /*width: 100px;*/
+        height: 100px;
+        background: rgba(255,0,0, 0.5);
+        color: white;
+        text-align: center;
+        padding-top: 40px;
+        display: block;
+        margin: 0 10px;
+        cursor: move;
+    }
+
+    ul.draggable-objects:after {
+        display: block;
+        content: "";
+        clear: both;
+    }
+
+    .draggable-objects li {
+        /*float: left;*/
+        display: block;
+        /*width: 120px;*/
+        height: 100px;
+    }
+
+    [ng-drag].drag-over {
+        border: solid 1px red;
+    }
+
+    [ng-drag].dragging {
+        opacity: 0.5;
+    }
+
+    [ng-drop] {
+        /*background: rgba(0,255,0, 0.5);*/
+        text-align: center;
+        /*width: 600px;*/
+        /*height: 200px;*/
+        /*padding-top: 90px;*/
+        display: block;
+        /*margin: 20px auto;*/
+        /*position: relative;*/
+    }
+
+        [ng-drop].drag-enter {
+            border: solid 5px red;
+        }
+
+        [ng-drop] span.title {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 20px;
+            margin-left: -100px;
+            margin-top: -10px;
+        }
+
+        [ng-drop] div {
+            position: relative;
+            z-index: 2;
+        }
+</style>
+<div class="container-fluid" ng-controller="testController">
+
+    <div class="row">
+
+        <div class="col-md-2 col-sm-2 col-xs-2" style="border: solid black 1px; height: 600px;">
+            <span class="title">Planed</span>
+            <div ng-repeat="obj in draggableObjects" ng-drag="true" ng-drag-data="obj" data-allow-transform="true">
+                {{obj.name}} +  {{obj.status}}
+                <button ng-click="removeItem(obj,'draggable')">Remove</button>
+                <button ng-prevent-drag ng-click="ShowAddSubToDo($event,obj,'draggable' )">
+                    Edit
+                </button>
+            </div>
+
+        </div>
+
+        <div class="col-md-2 col-sm-2 col-xs-2" style="border: solid black 1px; height: 600px;" ng-drop="true" ng-drop-success="onDropComplete1($data,$event)">
+            <span class="title">Ongoing</span>
+            <div ng-repeat="obj in droppedObjects1" ng-drag="true" ng-drag-data="obj" ng-drag-success="onDragSuccess1($data,$event)" ng-center-anchor="{{centerAnchor}}">
+                {{obj.name}} + {{obj.status}}
+                <button ng-prevent-drag ng-click="removeItem(obj,'dropped1')">
+                    Remove
+                </button>
+                <button ng-prevent-drag ng-click="ShowAddSubToDo($event,obj,'dropped1' )">
+                    Edit
+                </button>
+            </div>
+        </div>
+
+        <div class="col-md-2 col-sm-2 col-xs-2" style="border: solid black 1px; height: 600px;" ng-drop="true" ng-drop-success="onDropComplete2($data,$event)">
+            <span class="title">Done</span>
+            <div ng-repeat="obj in droppedObjects2" ng-drag="true" ng-drag-data="obj" ng-drag-success="onDragSuccess2($data,$event)" ng-center-anchor="{{centerAnchor}}">
+                {{obj.name}}  + {{obj.status}}
+                <button ng-prevent-drag ng-click="removeItem(obj,'dropped2')">
+                    Remove
+                </button>
+                <button ng-prevent-drag ng-click="ShowAddSubToDo($event,obj,'dropped2' )">
+                    Edit
+                </button>
+            </div>
+        </div>
+
+
+        <div class="col-md-2 col-sm-2 col-xs-2" style="border: solid black 1px; height: 600px;" ng-drop="true" ng-drop-success="onDropComplete2($data,$event)">
+            <!--<span class="title">Done</span>-->
+        </div>
+
+        <div class="col-md-4 col-sm-4 col-xs-4" style="border: solid black 1px; height: 600px;" ng-drop="true" ng-drop-success="onDropComplete2($data,$event)">
+
+
+
+
+
+
+            <!--<form name="toDoSubmit" ng-submit="add(ToDoModel)">
 
                 <div layout layout-sm="column">
 
@@ -101,7 +225,7 @@
                         <input type="date"
                                name="EndDate"
                                ng-model="ToDoModel.ParentToDo.EndDate"
-                               min="2015-01-01" 
+                               min="2015-01-01"
                                max="2050-01-01" />
                     </md-input-container>
                 </div>
@@ -119,40 +243,15 @@
                     <md-button class="md-primary md-hue-1 md-raised" type="submit" ng-disabled="toDoSubmit.$invalid">Submit</md-button>
                 </div>
 
+            </form>-->
+
+            <form ng-submit="addTask(task)">
+                <label>Name</label>
+                <input ng-model="task" type="text" />
+                <button type="submit">Submit</button>
             </form>
+        </div>
+    </div>
 
-
-            <div layout-align="end center" layout="row">
-                <md-button aria-label="addToDo" class="md-fab md-mini" ng-click="ShowAddSubToDo($event)">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <md-tooltip md-direction="left">
-                        Add subtask
-                    </md-tooltip>
-                </md-button>
-            </div>
-
-        </md-card-content>
-    </md-card>
-</md-content>
-
-
-<md-content class="md-padding" ng-show="ToDoModel.ChildToDos.length">
-
-    <md-card>
-        <md-toolbar>
-            <h1 class="md-toolbar-tools">
-                <span>Sub Tasks</span>
-            </h1>
-        </md-toolbar>
-        <md-card-content>
-
-            <md-list>
-                <md-item ng-repeat="subItem in ToDoModel.ChildToDos" subitems>
-                </md-item>
-            </md-list>
-        </md-card-content>
-    </md-card>
-</md-content>
-
-
+</div>
 

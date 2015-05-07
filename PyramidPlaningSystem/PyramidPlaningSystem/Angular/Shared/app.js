@@ -1,4 +1,4 @@
-﻿var myApp = angular.module("myApp", ['ngMaterial', 'ngAnimate', 'ngRoute', 'ngMessages', 'ui.bootstrap', 'tagger', 'angular-timeline']);
+﻿var myApp = angular.module("myApp", ['ngMaterial', 'ngAnimate', 'ngRoute', 'ngMessages', 'ui.bootstrap', 'tagger', 'angular-timeline', 'ngDraggable']);
 
 myApp.directive("subitems", function () {
     return {
