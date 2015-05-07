@@ -7,7 +7,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using PyramidPlaningSystem.Models;
-using PyramidPlaningSystem.ViewModels;
 
 namespace PyramidPlaningSystem.API
 {
@@ -34,22 +33,10 @@ namespace PyramidPlaningSystem.API
             return assignment;
         }
         [HttpGet]
-        public IEnumerable<AssignmentAndCommentsModel> GetUserAssignments(string id)
+        public IEnumerable<Assignment> GetUserAssignments(string id)
         {
             var assignments = db.Assignments.Where(x => x.User.Id == id).ToList();
-            var model = new List<AssignmentAndCommentsModel>();
-            foreach (var assignment in assignments)
-            {
-                var comments = db.Comments.Where(x => x.ToDo.ToDoId == assignment.Todo.ToDoId).ToList();
-                var AssignmentCommentModel = new AssignmentAndCommentsModel
-                {
-                    Assignment = assignment,
-                    Comments = comments
-                };
-                model.Add(AssignmentCommentModel);
-            }
-      
-            return model;
+            return assignments;
         }
 
 

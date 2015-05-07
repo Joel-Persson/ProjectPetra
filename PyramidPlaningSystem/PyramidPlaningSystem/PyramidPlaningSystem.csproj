@@ -303,7 +303,6 @@
     <Compile Include="Models\ToDo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\AssignmentAndCommentsModel.cs" />
     <Compile Include="ViewModels\ToDoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

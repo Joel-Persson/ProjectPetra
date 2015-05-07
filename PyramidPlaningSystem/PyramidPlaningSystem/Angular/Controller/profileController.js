@@ -20,13 +20,8 @@
 
     function getUserAssignments(userId) {
         assignmentFactory.getAssignmentsForUser(userId).success(function (data) {
-            $.each(data, function (i) {
-                var tempData = {
-                    "ToDo": data[i].Assignment.Todo,
-                    "Comments": data[i].Comments
-            };
-
-                $scope.Assignments.push(tempData);
+            $.each(data, function(i) {
+                $scope.Assignments.push(data[i].Todo);
             });
         });
     };
@@ -59,12 +54,10 @@ myApp.controller('commentController', function ($scope, commentFactory) {
     }
 
     $scope.submitComment = function (inputComment, item) {
-        comment.Content = inputComment;
-        comment.ToDo = item.ToDo;
+        comment.content = inputComment;
+        comment.ToDo = item;
         comment.Author = $scope.user;
         commentFactory.addComment(comment);
-        item.Comments.push(comment);
-        $scope.comment = "";
     };
 });
 
