@@ -51,26 +51,44 @@
 
                                     <timeline-title style="padding-top: 5px">
 
-                                        {{item.Title}}
+                                        {{item.ToDo.Title}}
 
                                     </timeline-title>
                                     <div collapse="isCollapsed">
                                         <p>
-                                            <small class="text-muted"><i class="glyphicon glyphicon-time"></i> Deadline: {{item.Deadline | date:'yyyy-MM-dd'}}</small>
+                                            <small class="text-muted"><i class="glyphicon glyphicon-time"></i> Deadline: {{item.ToDo.Deadline | date:'yyyy-MM-dd'}}</small>
                                         </p>
                                     </div>
                                 </timeline-heading>
 
                                 <timeline-content collapse="isCollapsed">
-                                    <p>{{item.Description}}</p>
+                                    <p>{{item.ToDo.Description}}</p>
                                     <div ng-controller="commentController">
-                                        <md-button ng-click="getComments(item.ToDoId); isCollapsed = !isCollapsed">
-                                            <span class="glyphicon glyphicon-comment" style="font-size: 20px; color: #4A1070"></span>
-                                        </md-button>
+                                        <div flex="95"></div>
+                                        <div layout="row" flex="5" layout-align="end center">
+                                            <md-button ng-click="isCollapsed = !isCollapsed">
+
+                                                <span id="lengthComment">({{ item.Comments.length}})</span>
+                                                <span class="glyphicon glyphicon-comment" id="commentIcon"></span>
+                                            </md-button>
+                                        </div>
                                         <div collapse="isCollapsed">
-                                            <div ng-repeat="items in comments">
-                                                {{items.Content}}
+                                            <div ng-repeat="comment in item.Comments">
+                                                <div class="bubble">
+                                                    <span layout="row" flex="5" layout-align="end center" id="commentAuthor">
+                                                        {{comment.Author}} @ {{comment.Date | date:'yyyy-MM-dd'}}
+                                                    </span>
+                                                    {{comment.Content}}
+                                                    
+                                                    <div layout="row" flex="5" layout-align="end center" ng-if="comment.Author == user">
+                                                        <md-button>
+                                                            <span class="glyphicon glyphicon-remove" id="commentIcon"></span>
+                                                        </md-button>
+                                                    </div>
+                                                </div>
+
                                             </div>
+
                                             <form name="commentForm" novalidate ng-submit="submitComment(comment, item)">
 
                                                 <div layout layout-sm="column">
